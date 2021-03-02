@@ -39,6 +39,12 @@ public class Accounts  implements java.io.Serializable {
        this.customers = customers;
        this.deliveryBoys = deliveryBoys;
     }
+
+    public Accounts(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+    
    
     public Integer getAcccountId() {
         return this.acccountId;
