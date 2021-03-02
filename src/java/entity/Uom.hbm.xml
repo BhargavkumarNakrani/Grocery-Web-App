@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-Mar-2021, 6:31:50 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Uom" table="uom" catalog="grocerywebapp" optimistic-lock="version">
+        <id name="uomId" type="int">
+            <column name="uom_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="uomName" type="string">
+            <column name="uom_name" length="50" not-null="true" />
+        </property>
+        <set name="productses" table="products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uom_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Products" />
+        </set>
+    </class>
+</hibernate-mapping>

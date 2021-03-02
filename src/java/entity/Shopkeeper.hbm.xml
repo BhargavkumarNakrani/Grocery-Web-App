@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-Mar-2021, 6:31:50 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Shopkeeper" table="shopkeeper" catalog="grocerywebapp" optimistic-lock="version">
+        <id name="SId" type="java.lang.Integer">
+            <column name="s_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="accounts" class="entity.Accounts" fetch="select">
+            <column name="acccount_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        <property name="shopName" type="string">
+            <column name="shop_name" length="100" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="100" not-null="true" />
+        </property>
+        <property name="phone" type="int">
+            <column name="phone" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" unique="true" />
+        </property>
+        <set name="orderDetailses" table="order_details" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="s_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.OrderDetails" />
+        </set>
+        <set name="productses" table="products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="s_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Products" />
+        </set>
+    </class>
+</hibernate-mapping>
