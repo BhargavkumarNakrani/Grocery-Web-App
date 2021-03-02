@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-Mar-2021, 6:31:50 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Accounts" table="accounts" catalog="grocerywebapp" optimistic-lock="version">
+        <id name="acccountId" type="java.lang.Integer">
+            <column name="acccount_id" />
+            <generator class="identity" />
+        </id>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="16" not-null="true" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="Active" not-null="true" />
+        </property>
+        <property name="role" type="string">
+            <column name="role" length="15" not-null="true" />
+        </property>
+        <set name="shopkeepers" table="shopkeeper" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acccount_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Shopkeeper" />
+        </set>
+        <set name="customers" table="customer" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acccount_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Customer" />
+        </set>
+        <set name="deliveryBoys" table="delivery_boy" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acccount_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.DeliveryBoy" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-Mar-2021, 6:31:50 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.DeliveryBoy" table="delivery_boy" catalog="grocerywebapp" optimistic-lock="version">
+        <id name="dbId" type="java.lang.Integer">
+            <column name="db_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="accounts" class="entity.Accounts" fetch="select">
+            <column name="acccount_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        <property name="phone" type="int">
+            <column name="phone" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="salary" type="int">
+            <column name="salary" not-null="true" />
+        </property>
+        <property name="hireDate" type="timestamp">
+            <column name="hire_date" length="19" not-null="true" />
+        </property>
+        <property name="orderTaken" type="java.lang.Integer">
+            <column name="order_taken" />
+        </property>
+        <set name="orderses" table="orders" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="db_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Orders" />
+        </set>
+    </class>
+</hibernate-mapping>
