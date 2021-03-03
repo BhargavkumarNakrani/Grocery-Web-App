@@ -13,18 +13,27 @@
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="shop.jsp">Shop</a>
 <!--                            <a class="dropdown-item" href="wishlist.jsp">Wishlist</a>
-                            <a class="dropdown-item" href="product-single.jsp">Single Product</a>-->
+                                <a class="dropdown-item" href="product-single.jsp">Single Product</a>-->
                             <a class="dropdown-item" href="cart.jsp">Cart</a>
                             <a class="dropdown-item" href="checkout.jsp">Checkout</a>
                         </div>
                     </li>
                     <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:14px"></i>[0]</a></li>
                     <%
-                        if(session.getAttribute("email") != null){
-                            out.print("<li class=\"nav-item\"><button onclick=\"window.location.href='logout.jsp'\" class=\"btn btn-primary\">Logout</button></li>");
-                        }
+                        if(session.getAttribute("email") != null){ %>
+                            <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:14px"></i>[0]</a></li>
+                            <li class="nav-item"><button onclick="window.location.href='logout.jsp'" class="btn btn-primary">Logout</button></li>
+                        <%} else{%>
+                            <li class="nav-item"><button class="btn btn-primary" onclick="window.location.href='login.jsp'">Login</button></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Sign Up</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="signup.jsp">For Customer</a>
+                                    <a class="dropdown-item" href="shop_emp_signup.jsp">For Shopkeeper/Employee</a>
+                                </div>
+                            </li>
+                        <%}
                     %>
                 </ul>
             </div>
