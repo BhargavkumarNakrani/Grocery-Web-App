@@ -19,7 +19,7 @@ public class AccountDAO {
     static Session session = null;
     
     public static Boolean ValidUser(String email, String password){
-        String hql = "from Accounts where email='"+email+"'"; //AND password = '"+password+"'";
+        String hql = "from Accounts where email='"+email+"' AND password = '"+password+"'";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         List<Accounts> users = query.list();
