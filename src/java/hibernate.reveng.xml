@@ -41,13 +41,13 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="grocerywebapp"/>
-  <table-filter match-name="order_details"/>
-  <table-filter match-name="products"/>
+  <table-filter match-name="delivery_boy"/>
+  <table-filter match-name="cart"/>
   <table-filter match-name="orders"/>
   <table-filter match-name="accounts"/>
+  <table-filter match-name="products"/>
   <table-filter match-name="shopkeeper"/>
-  <table-filter match-name="cart"/>
+  <table-filter match-name="order_details"/>
   <table-filter match-name="uom"/>
-  <table-filter match-name="delivery_boy"/>
   <table-filter match-name="customer"/>
 </hibernate-reverse-engineering>
