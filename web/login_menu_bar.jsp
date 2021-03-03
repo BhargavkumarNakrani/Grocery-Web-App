@@ -12,7 +12,6 @@
                     <li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:14px"></i>[0]</a></li>
                     <%
                         String uri = request.getRequestURI();
                         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
