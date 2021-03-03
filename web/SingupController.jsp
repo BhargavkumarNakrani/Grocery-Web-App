@@ -35,7 +35,7 @@
             if(role == "CUSTOMER"){
                 //Customer bean_fk = new Customer(bean,name, "", phone, email);
                 CustomerDAO.save(bean_fk);
-                session.setAttribute("successMessage", name+" your data added successfully");
+                session.setAttribute("successMessage", "Welcome "+name+ "you are member of VegeFoods");
                 response.sendRedirect("login.jsp");
             }
         }
