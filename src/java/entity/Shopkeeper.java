@@ -1,5 +1,5 @@
 package entity;
-// Generated 02-Mar-2021, 6:31:47 PM by Hibernate Tools 4.3.1
+// Generated 03-Mar-2021, 7:30:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -16,7 +16,7 @@ public class Shopkeeper  implements java.io.Serializable {
      private String name;
      private String shopName;
      private String address;
-     private int phone;
+     private long phone;
      private String email;
      private Set<OrderDetails> orderDetailses = new HashSet<OrderDetails>(0);
      private Set<Products> productses = new HashSet<Products>(0);
@@ -25,7 +25,7 @@ public class Shopkeeper  implements java.io.Serializable {
     }
 
 	
-    public Shopkeeper(Accounts accounts, String name, String shopName, String address, int phone, String email) {
+    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email) {
         this.accounts = accounts;
         this.name = name;
         this.shopName = shopName;
@@ -33,7 +33,7 @@ public class Shopkeeper  implements java.io.Serializable {
         this.phone = phone;
         this.email = email;
     }
-    public Shopkeeper(Accounts accounts, String name, String shopName, String address, int phone, String email, Set<OrderDetails> orderDetailses, Set<Products> productses) {
+    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email, Set<OrderDetails> orderDetailses, Set<Products> productses) {
        this.accounts = accounts;
        this.name = name;
        this.shopName = shopName;
@@ -79,11 +79,11 @@ public class Shopkeeper  implements java.io.Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    public int getPhone() {
+    public long getPhone() {
         return this.phone;
     }
     
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
     public String getEmail() {

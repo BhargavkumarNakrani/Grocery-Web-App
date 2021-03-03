@@ -9,6 +9,7 @@ import entity.Accounts;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -44,4 +45,16 @@ public class AccountDAO {
         session.close();
         return ROLE;
     }
+    
+    public static int save(Accounts bean)
+        {   
+            //bean.s
+            session = HibernateUtil.getSessionFactory().openSession();
+            Transaction t=session.beginTransaction();
+            int i = (int) session.save(bean);
+            t.commit();
+            session.close();
+           
+            return i;
+        }
 }

@@ -52,7 +52,7 @@
                   <div class="mb-4">
                   <h3>Signup to <strong>VEGEFOODS</strong></h3>
                   </div>
-                <form action="index.jsp" method="GET" autocomplete="off">   
+                <form action="SingupController.jsp" method="GET" autocomplete="off">   
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">

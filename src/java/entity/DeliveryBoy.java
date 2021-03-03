@@ -1,5 +1,5 @@
 package entity;
-// Generated 02-Mar-2021, 6:31:47 PM by Hibernate Tools 4.3.1
+// Generated 03-Mar-2021, 7:30:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,7 +15,7 @@ public class DeliveryBoy  implements java.io.Serializable {
      private Integer dbId;
      private Accounts accounts;
      private String name;
-     private int phone;
+     private long phone;
      private String email;
      private int salary;
      private Date hireDate;
@@ -26,7 +26,7 @@ public class DeliveryBoy  implements java.io.Serializable {
     }
 
 	
-    public DeliveryBoy(Accounts accounts, String name, int phone, String email, int salary, Date hireDate) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, int salary, Date hireDate) {
         this.accounts = accounts;
         this.name = name;
         this.phone = phone;
@@ -34,7 +34,7 @@ public class DeliveryBoy  implements java.io.Serializable {
         this.salary = salary;
         this.hireDate = hireDate;
     }
-    public DeliveryBoy(Accounts accounts, String name, int phone, String email, int salary, Date hireDate, Integer orderTaken, Set<Orders> orderses) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, int salary, Date hireDate, Integer orderTaken, Set<Orders> orderses) {
        this.accounts = accounts;
        this.name = name;
        this.phone = phone;
@@ -66,11 +66,11 @@ public class DeliveryBoy  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public int getPhone() {
+    public long getPhone() {
         return this.phone;
     }
     
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
     public String getEmail() {

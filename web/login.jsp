@@ -48,12 +48,22 @@
         <div class="col-md-6 contents">
             <%
                 String errorMessage = (String) session.getAttribute("errorMessage");
+                String successMessage = (String) session.getAttribute("successMessage");
+                
                 if (errorMessage!=null){ 
                     out.print("<div class=\"alert alert-danger alert-dismissible fade show\">");
                     out.print("<strong>"+ errorMessage +"</strong>");
                     out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
                     out.print("</div>");
-              }  %>
+                
+                }
+                if(successMessage != null){
+                    out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+                    out.print("<strong>"+ successMessage +"</strong>");
+                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+                    out.print("</div>");
+                }
+            %>
           <div class="row justify-content-center">
             <div class="col-md-12">
               <div class="form-block">

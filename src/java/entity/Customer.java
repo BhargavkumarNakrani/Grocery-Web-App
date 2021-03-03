@@ -1,5 +1,5 @@
 package entity;
-// Generated 02-Mar-2021, 6:31:47 PM by Hibernate Tools 4.3.1
+// Generated 03-Mar-2021, 7:30:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class Customer  implements java.io.Serializable {
      private Accounts accounts;
      private String name;
      private String address;
-     private int phone;
+     private long phone;
      private String email;
      private Set<Cart> carts = new HashSet<Cart>(0);
      private Set<Orders> orderses = new HashSet<Orders>(0);
@@ -24,14 +24,14 @@ public class Customer  implements java.io.Serializable {
     }
 
 	
-    public Customer(Accounts accounts, String name, String address, int phone, String email) {
+    public Customer(Accounts accounts, String name, String address, long phone, String email) {
         this.accounts = accounts;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
     }
-    public Customer(Accounts accounts, String name, String address, int phone, String email, Set<Cart> carts, Set<Orders> orderses) {
+    public Customer(Accounts accounts, String name, String address, long phone, String email, Set<Cart> carts, Set<Orders> orderses) {
        this.accounts = accounts;
        this.name = name;
        this.address = address;
@@ -69,11 +69,11 @@ public class Customer  implements java.io.Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    public int getPhone() {
+    public long getPhone() {
         return this.phone;
     }
     
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
     public String getEmail() {
