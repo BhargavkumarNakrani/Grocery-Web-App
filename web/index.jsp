@@ -106,41 +106,139 @@
     </section>
     <section class="ftco-section ftco-category ftco-no-pt">
         <div class="container">
+            <div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h2 class="mb-4">Shops Near By You</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-6 order-md-last align-items-stretch d-flex">
-                            <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url(images/category.jpg);">
-                                <div class="text text-center">
-                                    <h2>Vegetables</h2>
-                                    <p>Protect the health of every home</p>
-                                    <p><a href="#" class="btn btn-primary">Shop now</a></p>
-                                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(images/category-1.jpg);">
-                                <div class="text px-3 py-1">
-                                    <h2 class="mb-0"><a href="#">Fruits</a></h2>
-                                </div>
-                            </div>
-                            <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(images/category-2.jpg);">
-                                <div class="text px-3 py-1">
-                                    <h2 class="mb-0"><a href="#">Vegetables</a></h2>
-                                </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(images/category-3.jpg);">
-                        <div class="text px-3 py-1">
-                            <h2 class="mb-0"><a href="#">Juices</a></h2>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(images/category-4.jpg);">
-                        <div class="text px-3 py-1">
-                            <h2 class="mb-0"><a href="#">Dried</a></h2>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <div class="card" style="width:300px">
+                            <div class="img-prod">
+                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <div class="overlay"></div>
+                            </div>
+                            <div class="card-body text">
+                                <h3 class="card-title">Gel Ambe Provision Store</h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
+                                <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
                         </div>
                     </div>
                 </div>
