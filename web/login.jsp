@@ -110,6 +110,7 @@
     function alert_dismiss() {
         
         <% session.removeAttribute("errorMessage"); %>
+        <% session.removeAttribute("successMessage"); %>
                 
     }
 </script>
