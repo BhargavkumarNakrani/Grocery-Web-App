@@ -138,8 +138,7 @@
                                 <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
                                 <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Profile</a>
-                                <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="#" style="margin-top: 5px" class="btn btn-danger">Delete my Account</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -190,6 +189,8 @@
                                 <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
                                 <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Profile</a>
+                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a href="#" style="margin-top: 5px" class="btn btn-danger">Delete my Account</a>
                             </div>
                         </div>
                     </div>
