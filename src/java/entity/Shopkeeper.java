@@ -1,5 +1,5 @@
 package entity;
-// Generated 03-Mar-2021, 7:30:03 PM by Hibernate Tools 4.3.1
+// Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,6 +18,7 @@ public class Shopkeeper  implements java.io.Serializable {
      private String address;
      private long phone;
      private String email;
+     private byte[] image;
      private Set<OrderDetails> orderDetailses = new HashSet<OrderDetails>(0);
      private Set<Products> productses = new HashSet<Products>(0);
 
@@ -25,21 +26,23 @@ public class Shopkeeper  implements java.io.Serializable {
     }
 
 	
-    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email) {
+    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email, byte[] image) {
         this.accounts = accounts;
         this.name = name;
         this.shopName = shopName;
         this.address = address;
         this.phone = phone;
         this.email = email;
+        this.image = image;
     }
-    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email, Set<OrderDetails> orderDetailses, Set<Products> productses) {
+    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email, byte[] image, Set<OrderDetails> orderDetailses, Set<Products> productses) {
        this.accounts = accounts;
        this.name = name;
        this.shopName = shopName;
        this.address = address;
        this.phone = phone;
        this.email = email;
+       this.image = image;
        this.orderDetailses = orderDetailses;
        this.productses = productses;
     }
@@ -92,6 +95,13 @@ public class Shopkeeper  implements java.io.Serializable {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+    public byte[] getImage() {
+        return this.image;
+    }
+    
+    public void setImage(byte[] image) {
+        this.image = image;
     }
     public Set<OrderDetails> getOrderDetailses() {
         return this.orderDetailses;

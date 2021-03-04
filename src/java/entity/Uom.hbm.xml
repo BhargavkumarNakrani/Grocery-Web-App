@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 03-Mar-2021, 7:30:05 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Uom" table="uom" catalog="grocerywebapp" optimistic-lock="version">
         <id name="uomId" type="int">
@@ -13,7 +13,7 @@
         </property>
         <set name="productses" table="products" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="uom_id" not-null="true" />
+                <column name="uom_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.Products" />
         </set>

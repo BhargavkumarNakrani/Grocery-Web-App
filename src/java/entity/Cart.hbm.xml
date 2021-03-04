@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 03-Mar-2021, 7:30:05 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Cart" table="cart" catalog="grocerywebapp" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -9,10 +9,10 @@
             <generator class="identity" />
         </id>
         <many-to-one name="customer" class="entity.Customer" fetch="select">
-            <column name="c_id" not-null="true" />
+            <column name="c_id" not-null="true" unique="true" />
         </many-to-one>
         <many-to-one name="products" class="entity.Products" fetch="select">
-            <column name="p_id" not-null="true" />
+            <column name="p_id" not-null="true" unique="true" />
         </many-to-one>
         <property name="quantity" type="int">
             <column name="quantity" not-null="true" />

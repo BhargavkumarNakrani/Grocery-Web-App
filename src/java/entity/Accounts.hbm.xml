@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 03-Mar-2021, 7:30:05 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Accounts" table="accounts" catalog="grocerywebapp" optimistic-lock="version">
         <id name="acccountId" type="java.lang.Integer">
@@ -22,19 +22,19 @@
         </property>
         <set name="shopkeepers" table="shopkeeper" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="acccount_id" not-null="true" />
+                <column name="acccount_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.Shopkeeper" />
         </set>
         <set name="customers" table="customer" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="acccount_id" not-null="true" />
+                <column name="acccount_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.Customer" />
         </set>
         <set name="deliveryBoys" table="delivery_boy" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="acccount_id" not-null="true" />
+                <column name="acccount_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.DeliveryBoy" />
         </set>

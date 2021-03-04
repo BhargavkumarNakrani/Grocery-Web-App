@@ -1,7 +1,8 @@
 package entity;
-// Generated 03-Mar-2021, 7:30:03 PM by Hibernate Tools 4.3.1
+// Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,12 +40,6 @@ public class Accounts  implements java.io.Serializable {
        this.customers = customers;
        this.deliveryBoys = deliveryBoys;
     }
-   
-    public Accounts(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-    
    
     public Integer getAcccountId() {
         return this.acccountId;

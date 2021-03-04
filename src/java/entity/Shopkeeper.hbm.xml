@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 03-Mar-2021, 7:30:05 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Shopkeeper" table="shopkeeper" catalog="grocerywebapp" optimistic-lock="version">
         <id name="SId" type="java.lang.Integer">
@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="accounts" class="entity.Accounts" fetch="select">
-            <column name="acccount_id" not-null="true" />
+            <column name="acccount_id" not-null="true" unique="true" />
         </many-to-one>
         <property name="name" type="string">
             <column name="name" length="50" not-null="true" />
@@ -26,15 +26,18 @@
         <property name="email" type="string">
             <column name="email" length="50" not-null="true" unique="true" />
         </property>
+        <property name="image" type="binary">
+            <column name="image" not-null="true" />
+        </property>
         <set name="orderDetailses" table="order_details" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="s_id" not-null="true" />
+                <column name="s_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.OrderDetails" />
         </set>
         <set name="productses" table="products" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="s_id" not-null="true" />
+                <column name="s_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.Products" />
         </set>

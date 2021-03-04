@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="entity.Shopkeeper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
@@ -114,6 +117,15 @@
         </div>
         <div class="container">
             <div class="row">
+                <% 
+                    String role = (String)session.getAttribute("role");
+                    System.out.print(role);
+                    if(role == null){
+                    List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
+                        for(Shopkeeper obj : sk)
+                        {
+                %>
+                
                 <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
                     <div class="product">
                         <div class="card" style="width:100%">
@@ -122,14 +134,26 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title"><strong><strong>Gel Ambe Provision Store</strong></strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
+                                <h3 class="card-title"><strong><strong><%=obj.getShopName()%></strong></strong></h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
+                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Profile</a>
+                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a href="#" style="margin-top: 5px" class="btn btn-danger">Delete my Account</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <% 
+                    }
+                }
+                else if(role != null)
+                    if(role.equalsIgnoreCase("CUSTOMER")){
+                        List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
+                        for(Shopkeeper obj : sk)
+                        {
+                %>
+                
                 <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
                     <div class="product">
                         <div class="card" style="width:100%">
@@ -138,14 +162,22 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
+                                <h3 class="card-title"><strong><strong><%=obj.getShopName()%></strong></strong></h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
+                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Profile</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <% 
+                    }
+                } else if(role.equalsIgnoreCase("SHOPKEEPER")) {
+                    
+                    String email = (String)session.getAttribute("email");
+                    Shopkeeper obj = ShopkeeperDAO.viewSingle(email);
+                %>
+                
                 <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
                     <div class="product">
                         <div class="card" style="width:100%">
@@ -154,94 +186,18 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
+                                <h3 class="card-title"><strong><strong><%=obj.getShopName()%></strong></strong></h3><br>
+                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
+                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
+                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Profile</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
-                    <div class="product">
-                        <div class="card" style="width:100%">
-                            <div class="img-prod">
-                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
-                                <div class="overlay"></div>
-                            </div>
-                            <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
-                    <div class="product">
-                        <div class="card" style="width:100%">
-                            <div class="img-prod">
-                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
-                                <div class="overlay"></div>
-                            </div>
-                            <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
-                    <div class="product">
-                        <div class="card" style="width:100%">
-                            <div class="img-prod">
-                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
-                                <div class="overlay"></div>
-                            </div>
-                            <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
-                    <div class="product">
-                        <div class="card" style="width:100%">
-                            <div class="img-prod">
-                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
-                                <div class="overlay"></div>
-                            </div>
-                            <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
-                    <div class="product">
-                        <div class="card" style="width:100%">
-                            <div class="img-prod">
-                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
-                                <div class="overlay"></div>
-                            </div>
-                            <div class="card-body text">
-                                <h3 class="card-title"><strong>Gel Ambe Provision Store</strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;Address</li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;7546552655</li><br>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%
+                }%>
+              
+                     
             </div>
         </div>
     </section>
