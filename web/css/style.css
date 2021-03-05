@@ -61,7 +61,7 @@ sup{top:-.5em}
 a{color:#007bff;text-decoration:none;background-color:transparent}
 
 
-a:hover{color:#0056b3;text-decoration:underline}
+a:hover{color:#0056b3;text-decoration:underline;cursor: pointer!important;}
 
 
 a:not([href]):not([tabindex]){color:inherit;text-decoration:none}
