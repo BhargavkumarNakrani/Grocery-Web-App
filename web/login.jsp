@@ -20,13 +20,15 @@
     <link rel="stylesheet" href="css/jquery.timepicker.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
-
+    <style>
+        @media(max-width:991.98px){
+            .content{
+                    padding-top:2rem;
+            }
+        }
+    </style>
     <title>Login - Vegefoods</title>
   </head>
   <%

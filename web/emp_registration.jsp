@@ -21,19 +21,20 @@
     <link rel="stylesheet" href="css/jquery.timepicker.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
-
+    <style>
+        .content{
+            background-image: url(images/bg_1.jpg);
+            height: 695px;
+            margin-bottom: 0px!important;
+        }
+    </style>
     <title>Employee Registration - Vegefoods</title>
   </head>
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
-    <jsp:include page="login_menu_bar.jsp"/>
    
 <div class="content" style="background-image: url(images/bg_1.jpg);}">
     <div class="container">

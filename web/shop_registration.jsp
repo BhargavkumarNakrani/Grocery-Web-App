@@ -33,6 +33,12 @@
             height: 695px;
             margin-bottom: 0px!important;
         }
+        .content h3{
+            line-height:1.5;
+            font-weight:400;
+            color:#000;
+            margin-bottom: 2rem;
+        }
     </style>
     <title>Shop Registration - Vegefoods</title>
   </head>
