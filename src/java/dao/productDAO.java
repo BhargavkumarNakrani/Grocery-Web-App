@@ -5,7 +5,8 @@
  */
 package dao;
 
-import entity.Accounts;
+import static dao.ShopkeeperDAO.session;
+import entity.Products;
 import entity.Shopkeeper;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,35 +27,36 @@ import util.HibernateUtil;
  *
  * @author Dell
  */
-public class ShopkeeperDAO {
+public class productDAO {
     static Session session = null;
     
-    public static List<Shopkeeper> viewAll(){
-        String hql = "from Shopkeeper";
+    public static List<Products> viewAll(){
+        String hql = "from Products";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
-        List<Shopkeeper> shopkeeper = query.list();
+        List<Products> products = query.list();
         session.close();
-        return shopkeeper;
+        return products;
     }
     
-    public static Shopkeeper viewSingle(String email)
-    {
-        String hql = "from Shopkeeper where email='"+email+"'";
+    public static List<Products> viewByShop(int id){
+        String hql = "from Products where shopkeeper.SId = 4";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
-        List<Shopkeeper> shopkeeper = query.list();
+        List<Products> products = query.list();
         session.close();
-        Shopkeeper obj=null;
-        if(!shopkeeper.isEmpty())
-            obj = shopkeeper.get(0);
-        return obj;
+        for(Products product : products){
+            System.out.print(product.getName());
+            System.out.print(product.getImage());
+        }
+        return products;
     }
+    
     public static String viewImage(int id) throws SQLException, IOException{
         String databaseURL = "jdbc:mysql://localhost:3306/grocerywebapp?zeroDateTimeBehavior=CONVERT_TO_NULL";
         String user = "root";
         //String password = "pass";
-        String sql = "SELECT * FROM Shopkeeper WHERE s_id = ?";
+        String sql = "SELECT * FROM products WHERE p_id = ?";
         String base64Image = null;
          
         try (Connection connection = DriverManager.getConnection(databaseURL, user, null)) {
@@ -96,5 +98,5 @@ public class ShopkeeperDAO {
         return base64Image;
     }
     
-
+    
 }
