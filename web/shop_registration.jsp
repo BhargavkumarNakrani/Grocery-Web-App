@@ -34,7 +34,7 @@
             margin-bottom: 0px!important;
         }
     </style>
-    <title>Signup - Vegefood</title>
+    <title>Shop Registration - Vegefoods</title>
   </head>
 <body class="goto-here">
     
@@ -89,7 +89,7 @@
                                             Choose a file…
                                         </span>
                                     </span>
-                                    <span class="file-name" style="width:90px;">
+                                    <span class="file-name" style="width:90px;">No file Choosen
                                     </span>
                                 </label>
                             </div>
@@ -140,7 +140,7 @@
                     </div>
                     
                   <div class="mb-5"></div>
-                  <input type="submit" value="Sign Up" id="submit" class="btn btn-primary" style="width:100%">
+                  <input type="submit" value="Register" id="submit" class="btn btn-primary" style="width:100%">
 
                 </form>
               </div>

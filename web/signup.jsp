@@ -30,7 +30,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Signup - Vegefood</title>
+    <title>Signup - Vegefoods</title>
   </head>
   <%
       if(session.getAttribute("email")!=null){

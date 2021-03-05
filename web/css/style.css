@@ -157,7 +157,7 @@ template{display:none}
 [hidden]{display:none!important}
 
 
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin-bottom:2rem;font-family:inherit;font-weight:500;line-height:1.2;color:inherit}
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin-bottom:2rem!important;font-family:inherit;font-weight:500;line-height:1.2;color:inherit}
 
 
 h1,.h1{font-size:2.5rem}
@@ -166,7 +166,7 @@ h1,.h1{font-size:2.5rem}
 h2,.h2{font-size:2rem}
 
 
-h3,.h3{font-size:1.75rem}
+h3,.h3{font-size:1.75rem!important}
 
 
 h4,.h4{font-size:1.5rem}
@@ -2460,7 +2460,7 @@ a{-webkit-transition:.3s all ease;-o-transition:.3s all ease;transition:.3s all 
 /* a:hover,a:focus{text-decoration:none;color:#82ae46} */
 
 
-h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;font-family:poppins,Arial,sans-serif}
+h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5!important;font-weight:400!important;color:#000!important;font-family:poppins,Arial,sans-serif}
 .text-primary{color:#82ae46!important}
 .topper{font-size:11px;width:100%;display:block;text-transform:uppercase;letter-spacing:1px}
 @media(max-width:767.98px){.topper{margin-bottom:10px}
