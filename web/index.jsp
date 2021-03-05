@@ -187,7 +187,7 @@
                     <div class="product">
                         <div class="card" style="width:100%">
                             <div class="img-prod">
-                                <img class="card-img-top" src="images/product-1.jpg" alt="Card image" style="width:100%">
+                                <img class="card-img-top" src="data:image/jpg;base64,<%=ShopkeeperDAO.viewImage(obj.getSId())%>" alt="Card image" style="width:100%">
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
@@ -195,8 +195,7 @@
                                 <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
                                 <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See my Product</a>
-                                <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="#" style="margin-top: 5px" class="btn btn-danger">Delete my Account</a>
+                                <a href="shop_registration.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </div>
