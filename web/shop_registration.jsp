@@ -57,8 +57,9 @@
                   <div class="mb-4">
                   <h3>Shop Registration</h3>
                   </div>
-                <form action="#" method="GET" autocomplete="off">
+                <form action="SingupController.jsp" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
+                    <input type="hidden" name="id" value="<%=request.getParameter("id")%>" id="id">
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
