@@ -20,6 +20,7 @@ import java.util.Base64;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -28,6 +29,23 @@ import util.HibernateUtil;
  */
 public class ShopkeeperDAO {
     static Session session = null;
+    
+    public static void insert(Shopkeeper bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.save(bean);
+        t.commit();
+        session.close();
+    }
+    public static void update(Shopkeeper bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.update(bean);
+        t.commit();
+        session.close();
+    }
     
     public static List<Shopkeeper> viewAll(){
         String hql = "from Shopkeeper";
