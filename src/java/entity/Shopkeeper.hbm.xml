@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 06-Mar-2021, 9:12:16 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Shopkeeper" table="shopkeeper" catalog="grocerywebapp" optimistic-lock="version">
         <id name="SId" type="java.lang.Integer">

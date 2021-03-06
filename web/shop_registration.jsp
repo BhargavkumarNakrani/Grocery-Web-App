@@ -1,6 +1,41 @@
 
 
+<%@page import="dao.AccountDAO"%>
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="entity.Shopkeeper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Shopkeeper obj = new Shopkeeper();
+    int id = 0;
+    String StringID = request.getParameter("id");
+    String fname =""; 
+    String lname = "";
+    String email = "";
+    String password = "";
+    String sname = "";
+    long contact = 0;
+    String address = "";
+    String image = "";
+    int Aid = 0;
+    
+    if(StringID != null){
+        id = Integer.parseInt(StringID);
+        obj = ShopkeeperDAO.viewSinglebyID(id);
+        String name =  obj.getName();
+        String[] n = name.split(" ", 2);
+        fname = n[0];
+        lname = n[1];
+        email = obj.getEmail();
+        Aid = obj.getAccounts().getAcccountId();
+        password = AccountDAO.getPassword(Aid);
+        image = ShopkeeperDAO.viewImage(id);
+        sname = obj.getShopName();
+        contact = obj.getPhone();
+        address = obj.getAddress();
+        //out.println(image);
+    }
+   
+%>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -57,20 +92,23 @@
                   <div class="mb-4">
                   <h3>Shop Registration</h3>
                   </div>
-                <form action="#" method="GET" autocomplete="off">
+                <form action="SingupController.jsp" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
+                    <input type="hidden" name="id" value="<%=id%>" id="id">
+                    <input type="hidden" name="accountId" value="<%=Aid%>" id="id">
+                    <input type="hidden" name="image" value="<%=image%>" id="id">
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
                                 <label for="fname" class="fname">First Name</label>
-                                <input type="text" name="fname" class="form-control" id="fname" autocomplete="nope">
+                                <input type="text" value="<%=fname%>" name="fname" class="form-control" id="fname" autocomplete="nope">
                             </div>
                             <span id="fname_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" name="lname" class="form-control" id="lname" autocomplete="nope">
+                                <input type="text" name="lname" value="<%=lname%>" class="form-control" id="lname" autocomplete="nope">
                             </div>
                             <span id="lname_error_message" class="text-danger"></span>
                         </div>
@@ -79,14 +117,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="sname">Shop Name</label>
-                                <input type="text" name="sname" class="form-control" id="sname" autocomplete="nope">
+                                <input type="text" name="sname" value="<%=sname%>" class="form-control" id="sname" autocomplete="nope">
                             </div>
                             <span id="sname_error_message" class="text-danger"></span>
                         </div>
                         <div class="col" style="width:50%!important;">
                             <div class="file has-name">
                                 <label class="file-label">
-                                    <input class="file-input"  id="shopimg" type="file" name="shopimg">
+                                    <input class="file-input" id="shopimg" type="file" name="shopimg">
                                     <span class="file-cta">
                                         <span class="file-icon">
                                             <i class="fa fa-upload"></i>
@@ -106,14 +144,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" autocomplete="nope">
+                                <input type="email" name="email" value="<%=email%>" class="form-control" id="email" autocomplete="nope">
                             </div>
                             <span id="email_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="contact">Contact Number</label>
-                                <input type="number" name="contact" class="form-control" id="contact" >
+                                <input type="number" name="contact" value="<%=contact%>" class="form-control" id="contact" >
                             </div>
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
@@ -122,14 +160,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
-                                <input type="password" name="pswd" class="form-control" id="pswd" autocomplete="nope">
+                                <input type="password" name="pswd" value="<%=password%>" class="form-control" id="pswd" autocomplete="nope">
                             </div>
                             <span id="pswd_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="cpswd">Confirm Password</label>
-                                <input type="password" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
+                                <input type="password" name="cpswd" value="<%=password%>" class="form-control" id="cpswd" autocomplete="nope">
                             </div>
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
@@ -139,7 +177,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="Address">Shop Address</label>
-                                <input type="text" name="address" class="form-control" id="address" autocomplete="nope">
+                                <input type="text" name="address" value="<%=address%>" class="form-control" id="address" autocomplete="nope">
                             </div>
                             <span id="add_error_message" class="text-danger"></span>
                         </div>

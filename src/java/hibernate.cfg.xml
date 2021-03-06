@@ -44,16 +44,8 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/grocerywebapp?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <!--    <mapping resource="entity/Cart.hbm.xml"/>
-    <mapping resource="entity/Uom.hbm.xml"/>
-    <mapping resource="entity/Accounts.hbm.xml"/>
-    <mapping resource="entity/Shopkeeper.hbm.xml"/>
-    <mapping resource="entity/Products.hbm.xml"/>
-    <mapping resource="entity/Customer.hbm.xml"/>
-    <mapping resource="entity/OrderDetails.hbm.xml"/>
-    <mapping resource="entity/DeliveryBoy.hbm.xml"/>
-    <mapping resource="entity/Orders.hbm.xml"/>-->
     <mapping resource="entity/Cart.hbm.xml"/>
+    <mapping resource="entity/DeliveryBoyDetail.hbm.xml"/>
     <mapping resource="entity/Uom.hbm.xml"/>
     <mapping resource="entity/Accounts.hbm.xml"/>
     <mapping resource="entity/Shopkeeper.hbm.xml"/>

@@ -20,6 +20,7 @@ import java.util.Base64;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -28,6 +29,48 @@ import util.HibernateUtil;
  */
 public class ShopkeeperDAO {
     static Session session = null;
+    
+    public static void insert(Shopkeeper bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.save(bean);
+        t.commit();
+        session.close();
+    }
+    public static void update(Shopkeeper bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.update(bean);
+        t.commit();
+        session.close();
+    }
+    
+    public static void update(int id,String Name, String Sname, String Address, Long Phone,String Email )
+    {
+        String hql = "UPDATE Shopkeeper set " +
+          "name = :Name," +
+          "shopName = :Sname, " +
+          "address = :Address, " +
+          "phone = :Phone, " +
+          "email = :Email " +
+    
+          "where SId = :id";
+        //bean.setImage(viewImage(id));
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int updatedEntities = session.createQuery(hql)
+        .setString( "Name", Name )
+        .setString( "Sname", Sname )
+        .setString( "Address", Address )
+        .setLong( "Phone", Phone )
+        .setString( "Email", Email )
+        .setInteger("id", id)
+        .executeUpdate();
+        t.commit();
+        session.close();
+    }
     
     public static List<Shopkeeper> viewAll(){
         String hql = "from Shopkeeper";
@@ -41,6 +84,19 @@ public class ShopkeeperDAO {
     public static Shopkeeper viewSingle(String email)
     {
         String hql = "from Shopkeeper where email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Shopkeeper> shopkeeper = query.list();
+        session.close();
+        Shopkeeper obj=null;
+        if(!shopkeeper.isEmpty())
+            obj = shopkeeper.get(0);
+        return obj;
+    }
+    
+    public static Shopkeeper viewSinglebyID(int id)
+    {
+        String hql = "from Shopkeeper where SId='"+id+"'";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         List<Shopkeeper> shopkeeper = query.list();
