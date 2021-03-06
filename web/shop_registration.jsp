@@ -65,7 +65,7 @@
         .content{
             background-image: url(images/bg_1.jpg);
             padding-top:30px;
-            height: 695px;
+            height: 750px;
             margin-bottom: 0px!important;
         }
         .content h3{
@@ -92,6 +92,14 @@
                   <div class="mb-4">
                   <h3>Shop Registration</h3>
                   </div>
+                  <% if(id!=0){ %>
+                  <style>
+                      .content{height: 900px;}
+                  </style>
+                  <div class="mb-4">
+                      <img src="images/product-1.jpg" style="width:40%" class="img-fluid">
+                  </div>
+                  <%}%>
                 <form action="SingupController.jsp" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
                     <input type="hidden" name="id" value="<%=id%>" id="id">
@@ -129,11 +137,11 @@
                                         <span class="file-icon">
                                             <i class="fa fa-upload"></i>
                                         </span>
-                                        <span class="file-label">
+<!--                                        <span class="file-label">
                                             Choose a file…
-                                        </span>
+                                        </span>-->
                                     </span>
-                                    <span class="file-name" style="width:90px;">No file Choosen
+                                    <span class="file-name">No file Choosen
                                     </span>
                                 </label>
                             </div>
@@ -151,7 +159,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="contact">Contact Number</label>
-                                <input type="number" name="contact" value="<%=contact%>" class="form-control" id="contact" >
+                                <input type="number" name="contact" value="<%if(contact!=0){out.print(contact);}%>" class="form-control" id="contact" >
                             </div>
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
@@ -204,9 +212,13 @@
                 //get the file name
                 var path = $(this).val();
                 //replace the "Choose a file" label
-                var fileNameIndex = path.lastIndexOf('\\') + 1;
-                var fileName = path.substr(fileNameIndex);
-                $('.file-name').html(fileName);
+                if (path==null){
+                    $('.file-name').html("No file Choosen");
+                }else{
+                    var fileNameIndex = path.lastIndexOf('\\') + 1;
+                    var fileName = path.substr(fileNameIndex);
+                    $('.file-name').html(fileName);
+                }
             })
     </script>
   </body>

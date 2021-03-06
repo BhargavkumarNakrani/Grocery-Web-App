@@ -2,7 +2,7 @@
 * Copyright 2011-2018 The Bootstrap Authors
 * Copyright 2011-2018 Twitter, Inc.
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*/:root{--blue: #007bff;--indigo: #6610f2;--purple: #6f42c1;--pink: #e83e8c;--red: #dc3545;--orange: #fd7e14;--yellow: #ffc107;--green: #28a745;--teal: #20c997;--cyan: #17a2b8;--white: #fff;--gray: #6c757d;--gray-dark: #343a40;--primary: #007bff;--secondary: #6c757d;--success: #28a745;--info: #17a2b8;--warning: #ffc107;--danger: #dc3545;--light: #f8f9fa;--dark: #343a40;--breakpoint-xs: 0;--breakpoint-sm: 576px;--breakpoint-md: 768px;--breakpoint-lg: 992px;--breakpoint-xl: 1200px;--font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
-*,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box;-moz-box-sizing: border-box;}
+*,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box}
 
 
 html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
@@ -61,7 +61,7 @@ sup{top:-.5em}
 a{color:#007bff;text-decoration:none;background-color:transparent}
 
 
-a:hover{color:#0056b3;text-decoration:underline;cursor: pointer!important;}
+a:hover{color:#0056b3;text-decoration:underline}
 
 
 a:not([href]):not([tabindex]){color:inherit;text-decoration:none}
@@ -166,7 +166,7 @@ h1,.h1{font-size:2.5rem}
 h2,.h2{font-size:2rem}
 
 
-h3,.h3{font-size:1.75rem!important}
+h3,.h3{font-size:1.75rem}
 
 
 h4,.h4{font-size:1.5rem}
@@ -370,9 +370,6 @@ input[type=number] {
   opacity: .2; }
 
 
-.col{padding: 0px!important}
-@media(min-width:992px){.col{padding:0px 15px 0px 15px!important}
-}
 
 hr{margin-top:1rem;margin-bottom:1rem;border:0;border-top:1px solid rgba(0,0,0,.1)}
 small,.small{font-size:80%;font-weight:400}
@@ -1185,7 +1182,7 @@ input[type=submit].btn-block,input[type=reset].btn-block,input[type=button].btn-
 .navbar-dark .navbar-text{color:rgba(255,255,255,.5)}
 .navbar-dark .navbar-text a{color:#fff}
 .navbar-dark .navbar-text a:hover,.navbar-dark .navbar-text a:focus{color:#fff}
-.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;}
+.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}
 .card>hr{margin-right:0;margin-left:0}
 .card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}
 .card>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}
