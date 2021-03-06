@@ -1,5 +1,5 @@
 package entity;
-// Generated 06-Mar-2021, 9:12:15 AM by Hibernate Tools 4.3.1
+// Generated 06-Mar-2021, 8:41:49 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,7 +17,7 @@ public class DeliveryBoy  implements java.io.Serializable {
      private String name;
      private long phone;
      private String email;
-     private int salary;
+     private String address;
      private Date hireDate;
      private Integer orderTaken;
      private Set<Orders> orderses = new HashSet<Orders>(0);
@@ -27,20 +27,20 @@ public class DeliveryBoy  implements java.io.Serializable {
     }
 
 	
-    public DeliveryBoy(Accounts accounts, String name, long phone, String email, int salary, Date hireDate) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, String address, Date hireDate) {
         this.accounts = accounts;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.salary = salary;
+        this.address = address;
         this.hireDate = hireDate;
     }
-    public DeliveryBoy(Accounts accounts, String name, long phone, String email, int salary, Date hireDate, Integer orderTaken, Set<Orders> orderses, Set<DeliveryBoyDetail> deliveryBoyDetails) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, String address, Date hireDate, Integer orderTaken, Set<Orders> orderses, Set<DeliveryBoyDetail> deliveryBoyDetails) {
        this.accounts = accounts;
        this.name = name;
        this.phone = phone;
        this.email = email;
-       this.salary = salary;
+       this.address = address;
        this.hireDate = hireDate;
        this.orderTaken = orderTaken;
        this.orderses = orderses;
@@ -82,12 +82,12 @@ public class DeliveryBoy  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    public int getSalary() {
-        return this.salary;
+    public String getAddress() {
+        return this.address;
     }
     
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setAddress(String address) {
+        this.address = address;
     }
     public Date getHireDate() {
         return this.hireDate;

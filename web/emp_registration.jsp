@@ -46,8 +46,10 @@
                   <div class="mb-4">
                   <h3>Employee Registration</h3>
                   </div>
-                <form action="SingupController.jsp" method="GET" autocomplete="off">   
+                <form action="SingupController.jsp" method="POST" autocomplete="off">   
                     <div class="row mb-3">
+                        <input type="hidden" name="role" value="DELIVERYBOY"/>
+                        <input type="hidden" name="id" value="0"/>
                         <div class="col">
                             <div class="form-group">
                                 <label for="fname" class="fname">First Name</label>
