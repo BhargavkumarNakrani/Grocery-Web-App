@@ -47,6 +47,31 @@ public class ShopkeeperDAO {
         session.close();
     }
     
+    public static void update(int id,String Name, String Sname, String Address, Long Phone,String Email )
+    {
+        String hql = "UPDATE Shopkeeper set " +
+          "name = :Name," +
+          "shopName = :Sname, " +
+          "address = :Address, " +
+          "phone = :Phone, " +
+          "email = :Email " +
+    
+          "where SId = :id";
+        //bean.setImage(viewImage(id));
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int updatedEntities = session.createQuery(hql)
+        .setString( "Name", Name )
+        .setString( "Sname", Sname )
+        .setString( "Address", Address )
+        .setLong( "Phone", Phone )
+        .setString( "Email", Email )
+        .setInteger("id", id)
+        .executeUpdate();
+        t.commit();
+        session.close();
+    }
+    
     public static List<Shopkeeper> viewAll(){
         String hql = "from Shopkeeper";
         session = HibernateUtil.getSessionFactory().openSession();

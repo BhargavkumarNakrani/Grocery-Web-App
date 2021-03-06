@@ -24,7 +24,15 @@ public class Shopkeeper  implements java.io.Serializable {
 
     public Shopkeeper() {
     }
-
+    public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email) {
+        this.accounts = accounts;
+        this.name = name;
+        this.shopName = shopName;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        //this.image = image;
+    }
 	
     public Shopkeeper(Accounts accounts, String name, String shopName, String address, long phone, String email, byte[] image) {
         this.accounts = accounts;

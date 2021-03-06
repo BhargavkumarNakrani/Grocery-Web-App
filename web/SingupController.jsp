@@ -31,6 +31,8 @@
         String sname = request.getParameter("sname");
         String address = request.getParameter("address");
         String aId = request.getParameter("accountId");
+        String oldImage = request.getParameter("image");;
+        byte[] img;
         int accountId = 0;
         if(aId != null){
             accountId = Integer.valueOf(aId);          
@@ -47,9 +49,9 @@
              
             // obtains input stream of the upload file
             inputStream = image.getInputStream();
-            
         }
-         byte[] img = IOUtils.toByteArray(inputStream);
+        img = IOUtils.toByteArray(inputStream);
+         
         //byte[] img = inputStream.readAllBytes();
         
         long phone = Long.parseLong(Sphone);
@@ -64,7 +66,7 @@
             bean_customer = new Customer(bean,name, "No Address", phone, email);
         else if(role.equalsIgnoreCase("DELEVERYBOY")){}
         else if(role.equalsIgnoreCase("SHOPKEEPER"))
-            bean_shopkeeper = new Shopkeeper(bean, name, sname, address, phone, email, img);
+            bean_shopkeeper = new Shopkeeper(bean, name, sname, address, phone, email,img);
                 
 //        AccountDAO.save(bean);
 //        if(role == "CUSTOMER"){
@@ -97,7 +99,11 @@
                 bean.setAcccountId(accountId);
                 AccountDAO.update(bean);
                 bean_shopkeeper.setSId(id);
-                ShopkeeperDAO.update(bean_shopkeeper);
+                if(image.getSize() > 0){
+                    ShopkeeperDAO.update(bean_shopkeeper);
+                } else {
+                    ShopkeeperDAO.update(id,name, sname, address, phone, email);
+                }
                 response.sendRedirect("index.jsp");
             }
             }

@@ -32,6 +32,7 @@
         sname = obj.getShopName();
         contact = obj.getPhone();
         address = obj.getAddress();
+        //out.println(image);
     }
    
 %>
@@ -95,6 +96,7 @@
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
                     <input type="hidden" name="id" value="<%=id%>" id="id">
                     <input type="hidden" name="accountId" value="<%=Aid%>" id="id">
+                    <input type="hidden" name="image" value="<%=image%>" id="id">
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
@@ -122,7 +124,7 @@
                         <div class="col" style="width:50%!important;">
                             <div class="file has-name">
                                 <label class="file-label">
-                                    <input class="file-input" value=""<%=image%>  id="shopimg" type="file" name="shopimg">
+                                    <input class="file-input" id="shopimg" type="file" name="shopimg">
                                     <span class="file-cta">
                                         <span class="file-icon">
                                             <i class="fa fa-upload"></i>
