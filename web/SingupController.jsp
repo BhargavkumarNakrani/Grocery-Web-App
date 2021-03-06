@@ -22,16 +22,19 @@
         String role = "CUSTOMER";
         String String_Sid = request.getParameter("id");
         int id=0;
-//        if(String_Sid != null)
-//            id = Integer.valueOf(String_Sid);
+        if(String_Sid != null)
+            id = Integer.valueOf(String_Sid);
         String name =request.getParameter("fname") +" "+ request.getParameter("lname");
         String pass = request.getParameter("pswd");
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").toLowerCase();
         String Sphone = request.getParameter("contact");
         String sname = request.getParameter("sname");
         String address = request.getParameter("address");
-                         
-        
+        String aId = request.getParameter("accountId");
+        int accountId = 0;
+        if(aId != null){
+            accountId = Integer.valueOf(aId);          
+        }
         InputStream inputStream = null; // input stream of the upload fil
         
         Part image = request.getPart("shopimg");
@@ -69,24 +72,37 @@
 //            CustomerDAO.save(bean_fk);
 //        }
             //out.print("Added Successfully");
-        
-        if(AccountDAO.save(bean) > 0){
-            if(role.equalsIgnoreCase("CUSTOMER")){
-                //Customer bean_fk = new Customer(bean,name, "", phone, email);
-                CustomerDAO.save(bean_customer);
-                session.setAttribute("successMessage", "Welcome "+name+ ".<br>You are now member of VegeFoods.");
-                response.sendRedirect("login.jsp");
-            }
-            else if(role.equalsIgnoreCase("SHOPKEEPER")){
-                if(id!=0){
-                    bean_shopkeeper.setSId(id);
-                    ShopkeeperDAO.update(bean_shopkeeper);
-                } else {
-                    ShopkeeperDAO.insert(bean_shopkeeper);
+        if(id==0){
+            if(AccountDAO.save(bean) > 0){
+                if(role.equalsIgnoreCase("CUSTOMER")){
+                    //Customer bean_fk = new Customer(bean,name, "", phone, email);
+                    CustomerDAO.save(bean_customer);
+                    session.setAttribute("successMessage", "Welcome "+name+ ".<br>You are now member of VegeFoods.");
+                    response.sendRedirect("login.jsp");
                 }
-                response.sendRedirect("index.jsp");
+                else if(role.equalsIgnoreCase("SHOPKEEPER")){
+                    if(id!=0){
+                        bean_shopkeeper.setSId(id);
+                        ShopkeeperDAO.update(bean_shopkeeper);
+                    } else {
+                        ShopkeeperDAO.insert(bean_shopkeeper);
+                    }
+                    response.sendRedirect("index.jsp");
+                }
             }
         }
+        else {
+            out.print("Hello");
+            if(role.equalsIgnoreCase("SHOPKEEPER") && accountId != 0){
+                bean.setAcccountId(accountId);
+                AccountDAO.update(bean);
+                bean_shopkeeper.setSId(id);
+                ShopkeeperDAO.update(bean_shopkeeper);
+                response.sendRedirect("index.jsp");
+            }
+            }
+            
+            
         
     %>
 </html>

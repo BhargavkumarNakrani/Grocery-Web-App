@@ -68,6 +68,19 @@ public class ShopkeeperDAO {
             obj = shopkeeper.get(0);
         return obj;
     }
+    
+    public static Shopkeeper viewSinglebyID(int id)
+    {
+        String hql = "from Shopkeeper where SId='"+id+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Shopkeeper> shopkeeper = query.list();
+        session.close();
+        Shopkeeper obj=null;
+        if(!shopkeeper.isEmpty())
+            obj = shopkeeper.get(0);
+        return obj;
+    }
     public static String viewImage(int id) throws SQLException, IOException{
         String databaseURL = "jdbc:mysql://localhost:3306/grocerywebapp?zeroDateTimeBehavior=CONVERT_TO_NULL";
         String user = "root";

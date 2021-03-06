@@ -57,4 +57,27 @@ public class AccountDAO {
            
             return i;
         }
+    public static String getPassword(int id){
+        //String hql = "from Accounts where email='"+email+"'";
+        String hql = "select password from Accounts where acccountId ='"+id+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setMaxResults(1);
+        List users = query.list();
+        //users.get(0);
+        String password = (String) users.get(0);
+        System.out.println(users.get(0));
+        session.close();
+        return password;
+    }
+    
+    public static void update(Accounts bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.update(bean);
+        t.commit();
+        session.close();
+        //return 1;
+    }
 }
