@@ -1,5 +1,5 @@
 package entity;
-// Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1
+// Generated 06-Mar-2021, 9:12:15 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,6 +21,7 @@ public class DeliveryBoy  implements java.io.Serializable {
      private Date hireDate;
      private Integer orderTaken;
      private Set<Orders> orderses = new HashSet<Orders>(0);
+     private Set<DeliveryBoyDetail> deliveryBoyDetails = new HashSet<DeliveryBoyDetail>(0);
 
     public DeliveryBoy() {
     }
@@ -34,7 +35,7 @@ public class DeliveryBoy  implements java.io.Serializable {
         this.salary = salary;
         this.hireDate = hireDate;
     }
-    public DeliveryBoy(Accounts accounts, String name, long phone, String email, int salary, Date hireDate, Integer orderTaken, Set<Orders> orderses) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, int salary, Date hireDate, Integer orderTaken, Set<Orders> orderses, Set<DeliveryBoyDetail> deliveryBoyDetails) {
        this.accounts = accounts;
        this.name = name;
        this.phone = phone;
@@ -43,6 +44,7 @@ public class DeliveryBoy  implements java.io.Serializable {
        this.hireDate = hireDate;
        this.orderTaken = orderTaken;
        this.orderses = orderses;
+       this.deliveryBoyDetails = deliveryBoyDetails;
     }
    
     public Integer getDbId() {
@@ -107,6 +109,13 @@ public class DeliveryBoy  implements java.io.Serializable {
     
     public void setOrderses(Set<Orders> orderses) {
         this.orderses = orderses;
+    }
+    public Set<DeliveryBoyDetail> getDeliveryBoyDetails() {
+        return this.deliveryBoyDetails;
+    }
+    
+    public void setDeliveryBoyDetails(Set<DeliveryBoyDetail> deliveryBoyDetails) {
+        this.deliveryBoyDetails = deliveryBoyDetails;
     }
 
 

@@ -1,5 +1,5 @@
 package entity;
-// Generated 04-Mar-2021, 6:59:21 PM by Hibernate Tools 4.3.1
+// Generated 06-Mar-2021, 9:12:15 AM by Hibernate Tools 4.3.1
 
 
 import java.io.Serializable;
@@ -62,7 +62,7 @@ public class Accounts  implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isActive() {
+    public Serializable getActive() {
         return this.active;
     }
     
