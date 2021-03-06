@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="dao.DeliveryBoyDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="org.apache.commons.io.IOUtils"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
@@ -14,6 +15,7 @@
 <%@page import="entity.Customer"%>
 <%@page import="dao.AccountDAO"%>
 <%@page import="entity.Accounts"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,16 +33,21 @@
         String sname = request.getParameter("sname");
         String address = request.getParameter("address");
         String aId = request.getParameter("accountId");
-        String oldImage = request.getParameter("image");;
+        long phone = Long.parseLong(Sphone);
+        if(request.getParameter("role") != null){
+            role = request.getParameter("role");
+        }
         byte[] img;
         int accountId = 0;
         if(aId != null){
             accountId = Integer.valueOf(aId);          
         }
+        
+        Part image = null;
+        if(role.equalsIgnoreCase("SHOPKEEPER"))
+            image = request.getPart("shopimg");
+        
         InputStream inputStream = null; // input stream of the upload fil
-        
-        Part image = request.getPart("shopimg");
-        
          if (image != null) {
             // prints out some information for debugging
             System.out.println(image.getName());
@@ -54,17 +61,18 @@
          
         //byte[] img = inputStream.readAllBytes();
         
-        long phone = Long.parseLong(Sphone);
-        if(request.getParameter("role") != null){
-            role = request.getParameter("role");
-        }
+        
         Customer bean_customer = new Customer();
         Shopkeeper bean_shopkeeper = new Shopkeeper();
-        DeliveryBoy bean_DeliveryBoy = new DeliveryBoy();
+        DeliveryBoy bean_deliveryboy = new DeliveryBoy();
         Accounts bean = new Accounts(email, pass,false, role);
         if(role.equalsIgnoreCase("CUSTOMER"))
             bean_customer = new Customer(bean,name, "No Address", phone, email);
-        else if(role.equalsIgnoreCase("DELEVERYBOY")){}
+        else if(role.equalsIgnoreCase("DELIVERYBOY")){
+            if(address==null) {address="No Address";}
+            Date date = new java.util.Date();
+            bean_deliveryboy = new DeliveryBoy(bean, name, phone, email,address,date);
+        }
         else if(role.equalsIgnoreCase("SHOPKEEPER"))
             bean_shopkeeper = new Shopkeeper(bean, name, sname, address, phone, email,img);
                 
@@ -83,13 +91,14 @@
                     response.sendRedirect("login.jsp");
                 }
                 else if(role.equalsIgnoreCase("SHOPKEEPER")){
-                    if(id!=0){
-                        bean_shopkeeper.setSId(id);
-                        ShopkeeperDAO.update(bean_shopkeeper);
-                    } else {
-                        ShopkeeperDAO.insert(bean_shopkeeper);
-                    }
+                    ShopkeeperDAO.insert(bean_shopkeeper);
                     response.sendRedirect("index.jsp");
+                }
+                else if(role.equalsIgnoreCase("DELIVERYBOY")){
+                    out.println(bean.getAcccountId());// bean_DeliveryBoy.getAccounts().getAcccountId();
+                    DeliveryBoyDAO.insert(bean_deliveryboy);
+                    response.sendRedirect("index.jsp");
+                    out.print("Inserted Deliveryboy");
                 }
             }
         }
@@ -106,7 +115,15 @@
                 }
                 response.sendRedirect("index.jsp");
             }
+            else if(role.equalsIgnoreCase("DELIVERYBOY")){
+//                bean.setAcccountId(accountId);
+//                AccountDAO.update(bean);
+//                bean_shopkeeper.setSId(id);
+//                DeliveryBoyDAO.update(bean_DeliveryBoy);
+//                
+//                response.sendRedirect("index.jsp");
             }
+        }
             
             
         
