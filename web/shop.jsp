@@ -1,4 +1,3 @@
-<%@page import="dao.productDAO"%>
 <html lang="en">
 
 <head>
@@ -398,32 +397,20 @@
 </div>
 </div>
 </div>
-
-<%
-    int i = (int) productDAO.getCount();
-    int pages = i/12;
-    String s_page = request.getParameter("page");
-    int p = 1;
-    if(s_page != null)
-        p = Integer.parseInt(s_page);
-%>
 <div class="row mt-5">
-    <div class="col text-center">
-        <div class="block-27">
-            <ul>
-            <% if(p > 1) { %>
-                <li><a href="<%="?page="+(p-1)%>">&lt;</a></li>
-            <% } %>
-            <%for(i = 0; i<pages; i++){ %>
-                <li <% if(p==(i+1)){%> class="active" <%}%>><a href="?page=<%=i+1%>"><%=i+1%></a></li>
-            <% }
-            if(p < pages) {
-            %>
-                <li><a href="<%="?page="+(p+1)%>">&gt;</a></li>
-            <% }%>
-            </ul>
-        </div>
-    </div>
+<div class="col text-center">
+<div class="block-27">
+<ul>
+<li><a href="#">&lt;</a></li>
+<li class="active"><span>1</span></li>
+<li><a href="#">2</a></li>
+<li><a href="#">3</a></li>
+<li><a href="#">4</a></li>
+<li><a href="#">5</a></li>
+<li><a href="#">&gt;</a></li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </section>
