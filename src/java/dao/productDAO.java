@@ -125,7 +125,6 @@ public class productDAO {
             obj = products.get(0);
         }
         return obj;
-        
     }
     
 }
