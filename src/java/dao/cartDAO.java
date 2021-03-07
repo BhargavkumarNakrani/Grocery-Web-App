@@ -25,5 +25,6 @@ public class cartDAO {
         List<Cart> cart = query.list();
         session.close();
         return cart;
+        
     }
 }

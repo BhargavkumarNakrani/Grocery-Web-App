@@ -7,6 +7,7 @@
     String email = (String) session.getAttribute("email");
     List<Cart> cart = cartDAO.viewCart(email);
     System.out.print(cart.get(0).getPrice());
+    
 %>
 
 
