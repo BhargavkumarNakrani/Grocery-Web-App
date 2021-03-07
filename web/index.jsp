@@ -153,7 +153,7 @@
                     }
                 }
                 else if(role != null)
-                    if(role.equalsIgnoreCase("CUSTOMER")){
+                    if(role.equalsIgnoreCase("CUSTOMER") || role.equalsIgnoreCase("DELIVERYBOY")){
                         List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
                         for(Shopkeeper obj : sk)
                         {
