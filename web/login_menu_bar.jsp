@@ -18,13 +18,7 @@
                         
                         if(pageName.contains("login")){%>
                     
-                    <li class="nav-item dropdown">
-                        <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Sign Up</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="signup.jsp">For Customer</a>
-                            <a class="dropdown-item" href="shop_emp_signup.jsp">For Shopkeeper/Employee</a>
-                        </div>
-                    </li>
+                    <li class="nav-item"><button class="btn btn-primary" onclick="window.location.href='signup.jsp'">Sign Up</button></li>
                     
                         <% }else{
                                 if (pageName.contains("signup")){ %>
