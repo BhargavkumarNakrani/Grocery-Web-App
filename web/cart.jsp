@@ -1,3 +1,16 @@
+<%@page import="dao.productDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.cartDAO"%>
+<%@page import="entity.Cart"%>
+<%
+    int CId = 4;
+    String email = (String) session.getAttribute("email");
+    List<Cart> cart = cartDAO.viewCart(email);
+    System.out.print(cart.get(0).getPrice());
+%>
+
+
+
 <html lang="en">
 
 <head>
@@ -59,15 +72,19 @@
 <th>Total</th>
 </tr>
 </thead>
+<%
+    for(Cart c : cart)
+    {
+%>
 <tbody>
 <tr class="text-center">
 <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-<td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
+<td class="image-prod"><div class="img"><img class="card-img-top" src="data:image/jpg;base64,<%=productDAO.viewImage(c.getProducts().getPId())%>"  alt="Card image" style="width:100%"></div></td>
 <td class="product-name">
-<h3>Bell Pepper</h3>
-<p>Far far away, behind the word mountains, far from the countries</p>
+    <h3><%=productDAO.viewById(c.getId()).getName()%></h3>
+
 </td>
-<td class="price">$4.90</td>
+<td class="price"><%=c.getPrice()%></td>
 <td class="quantity">
 <div class="input-group d-flex">
 <span class="input-group-btn mr-2">
@@ -75,7 +92,7 @@
 <i class="ion-ios-remove"></i>
 </button>
 </span>
-<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="5">
+    <input type="text" id="quantity" name="quantity" class="form-control input-number" value="<%=c.getQuantity()%>" min="1">
 <span class="input-group-btn ml-2">
 <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
 <i class="ion-ios-add"></i>
@@ -83,34 +100,10 @@
 </span>
 </div>
 </td>
-<td class="total">$4.90</td>
-</tr>
-<tr class="text-center">
-<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-<td class="image-prod"><div class="img" style="background-image:url(images/product-4.jpg);"></div></td>
-<td class="product-name">
-<h3>Bell Pepper</h3>
-<p>Far far away, behind the word mountains, far from the countries</p>
-</td>
-<td class="price">$15.70</td>
-<td class="quantity">
-<div class="input-group d-flex">
-<span class="input-group-btn mr-2">
-<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" disabled>
-<i class="ion-ios-remove"></i>
-</button>
-</span>
-<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="5">
-<span class="input-group-btn ml-2">
-<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-<i class="ion-ios-add"></i>
-</button>
-</span>
-</div>
-</td>
-<td class="total">$15.70</td>
+<td class="total"><%=c.getPrice()*c.getQuantity()%></td>
 </tr>
 </tbody>
+<% }%>
 </table>
 </div>
 </div>
