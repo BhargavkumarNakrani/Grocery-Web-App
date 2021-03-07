@@ -81,7 +81,7 @@
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
@@ -98,6 +98,15 @@
                         </div>
                     </div>
                     
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input type="text" name="address" value="" class="form-control" id="address" autocomplete="nope">
+                            </div>
+                            <span id="add_error_message" class="text-danger"></span>
+                        </div>
+                    </div>
                   <div class="mb-5"></div>
                   <input type="submit" value="Register" id="submit" class="btn btn-primary" style="width:100%">
 
