@@ -105,5 +105,13 @@ public class productDAO {
         return base64Image;
     }
     
+    public static long getCount(){
+        String hql = "SELECT count(*) from Products";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }    
     
 }
