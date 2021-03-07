@@ -42,7 +42,7 @@ public class productDAO {
     }
     
     public static List<Products> viewByShop(int id){
-        String hql = "from Products where shopkeeper.SId = 4";
+        String hql = "from Products where shopkeeper.SId = "+id;
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         List<Products> products = query.list();
@@ -113,5 +113,18 @@ public class productDAO {
         session.close();
         return i;
     }    
+    
+    public static Products viewById(int id){
+        String hql = "from Products where PId = "+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Products> products = query.list();
+        session.close();
+        Products obj = null;
+        if(!products.isEmpty()){
+            obj = products.get(0);
+        }
+        return obj;
+    }
     
 }
