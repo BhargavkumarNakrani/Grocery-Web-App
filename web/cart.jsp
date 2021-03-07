@@ -6,7 +6,7 @@
     int CId = 4;
     String email = (String) session.getAttribute("email");
     List<Cart> cart = cartDAO.viewCart(email);
-    System.out.print(cart.get(0).getPrice());
+    //System.out.print(cart.get(0).getPrice());
 %>
 
 
@@ -78,7 +78,7 @@
 %>
 <tbody>
 <tr class="text-center">
-<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+    <td class="product-remove"><a href="deleteCartItem.jsp?id=<%=c.getId()%>"><span class="ion-ios-close"></span></a></td>
 <td class="image-prod"><div class="img"><img class="card-img-top" src="data:image/jpg;base64,<%=productDAO.viewImage(c.getProducts().getPId())%>"  alt="Card image" style="width:100%"></div></td>
 <td class="product-name">
     <h3><%=productDAO.viewById(c.getId()).getName()%></h3>
