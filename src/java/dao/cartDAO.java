@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import entity.Cart;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -30,8 +31,10 @@ public class cartDAO {
     public static void delete(int id){
         String hql = "delete from Cart where id ="+id;
         session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
         Query query = session.createQuery(hql);
         query.executeUpdate();
+        t.commit();
         session.close();
         //return i;
     }
