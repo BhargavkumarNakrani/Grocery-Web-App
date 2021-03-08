@@ -26,7 +26,7 @@
 	else 
 	{
             session.setAttribute("errorMessage", "Incorrect Email or Password");
-            response.sendRedirect("login.jsp?"+query);
+            response.sendRedirect("login.jsp?return_to="+query);
         }
 	%>
 	
