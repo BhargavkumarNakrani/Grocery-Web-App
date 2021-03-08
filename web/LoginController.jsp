@@ -5,6 +5,7 @@
 	<%@page  import="dao.AccountDAO"%>
      <%
         String Return_to;
+        String query = request.getParameter("return_to");
         if(request.getParameter("return_to")!=null){
             Return_to = request.getParameter("return_to");
         }else{
@@ -25,7 +26,7 @@
 	else 
 	{
             session.setAttribute("errorMessage", "Incorrect Email or Password");
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login.jsp?"+query);
         }
 	%>
 	
