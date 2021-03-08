@@ -4,7 +4,12 @@
 	
 	<%@page  import="dao.AccountDAO"%>
      <%
-	
+        String Return_to;
+        if(request.getParameter("return_to")!=null){
+            Return_to = request.getParameter("return_to");
+        }else{
+            Return_to = "index.jsp";
+        }
 	String EMAIL=request.getParameter("email").toLowerCase();
 	String PASSWORD=request.getParameter("pswd");
 	Boolean isValid = AccountDAO.ValidUser(EMAIL, PASSWORD);
@@ -14,7 +19,7 @@
             String role = AccountDAO.getRole(EMAIL);
             session.setAttribute("email",EMAIL);
             session.setAttribute("role",role);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect(Return_to);
             
 	}
 	else 
