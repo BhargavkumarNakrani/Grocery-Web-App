@@ -8,6 +8,8 @@ package dao;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import static dao.AccountDAO.session;
 import entity.Customer;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -31,4 +33,16 @@ public class CustomerDAO {
             //return inserted;
             return i;
         }
+    public static Customer viewById(int id){
+        String hql = "from Customer where CId = "+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Customer> products = query.list();
+        session.close();
+        Customer obj = null;
+        if(!products.isEmpty()){
+            obj = products.get(0);
+        }
+        return obj;
+    }
 }
