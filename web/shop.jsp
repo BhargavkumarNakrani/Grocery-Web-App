@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Products"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.productDAO"%>
@@ -15,11 +16,16 @@
     int Start = (p*12)-12;
   
     String role = (String) session.getAttribute("role");
-    List<Products> products = null;
+    List<Products> products = new ArrayList<Products>();
     
     String StringID = request.getParameter("id");
     int shop_id = 0;
-    if(!role.equalsIgnoreCase("SHOPKEEPER")){
+    if(role == null){
+        String uri = request.getRequestURI();
+        String pageName = uri.substring(uri.lastIndexOf("/") + 1);
+        response.sendRedirect("login.jsp?return_to=" + pageName);
+    }
+    else if(!role.equalsIgnoreCase("SHOPKEEPER")){
         if(StringID != null){
             shop_id = Integer.parseInt(StringID);
             products = productDAO.viewByShopId(shop_id, Start);
@@ -61,7 +67,7 @@
       if(session.getAttribute("email")==null){
           String uri = request.getRequestURI();
           String pageName = uri.substring(uri.lastIndexOf("/") + 1);
-          response.sendRedirect("login.jsp?return_to=" + pageName);
+          //response.sendRedirect("login.jsp?return_to=" + pageName);
       }
   %>
 <body class="goto-here">
