@@ -49,6 +49,7 @@
         <!-- </div> -->
         <div class="col-md-6 contents">
             <%
+                String Return_to = request.getParameter("return_to");
                 String errorMessage = (String) session.getAttribute("errorMessage");
                 String successMessage = (String) session.getAttribute("successMessage");
                 
@@ -73,6 +74,9 @@
                   <h3>Login to <strong>VEGEFOODS</strong></h3>
                 </div>
                 <form action="LoginController.jsp" method="post" autocomplete="off">
+                    <% if (Return_to!=null){%>
+                    <input type="hidden" name="return_to" value="<%=Return_to%>">
+                    <%}%>
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
