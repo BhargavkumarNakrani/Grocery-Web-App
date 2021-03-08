@@ -2671,8 +2671,11 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;fo
 .product .text p.price span.price-sale{color:#82ae46}
 .product .text .pricing{width:100%;-moz-transition:all .3s ease;-o-transition:all .3s ease;-webkit-transition:all .3s ease;-ms-transition:all .3s ease;transition:all .3s ease}
 .product .text .bottom-area{position:absolute;bottom:15px;left:0;right:0;opacity:0;-moz-transition:all .3s ease;-o-transition:all .3s ease;-webkit-transition:all .3s ease;-ms-transition:all .3s ease;transition:all .3s ease}
+.action .bottom-area{bottom:15px;left:0;right:0;opacity:1;-moz-transition:all .3s ease;-o-transition:all .3s ease;-webkit-transition:all .3s ease;-ms-transition:all .3s ease;transition:all .3s ease}
 .product .text .bottom-area a{width:100%;background:#fff;width:40px;height:40px;margin:0 auto;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;border-radius:50%}
+.action .bottom-area a{width:100%;background:#f1f1f1;width:40px;height:40px;margin:0 auto;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;border-radius:50%}
 .product .text .bottom-area a:hover{ color:white!important;transform:rotate(360deg);background:#82ae46;}
+.action .bottom-area a:hover{ color:white!important;transform:rotate(360deg);background:#82ae46;}
 .product .text .bottom-area .m-auto{margin:0 auto}
 .product:hover{-webkit-box-shadow:0 7px 15px -5px rgba(0,0,0,.07);-moz-box-shadow:0 7px 15px -5px rgba(0,0,0,.07);box-shadow:0 7px 15px -5px rgba(0,0,0,.07)}
 .product:hover .pricing{opacity:0}
@@ -2721,7 +2724,9 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;fo
 .table tbody tr td.quantity{width:20%}
 .table tbody tr td.image-prod .img{display:block;width:100px;height:100px;margin:0 auto}
 .table tbody tr td.product-name{width:30%}
+.table tbody tr td.emp{width:0%}
 .table tbody tr td.product-name h3{font-size:16px}
+.table tbody tr td.emp h3{font-size:16px;margin-bottom:0px}
 .table tbody tr td.total,.table tbody tr td.price{color:#000}
 .cart-wrap .btn-primary{display:inline-block}
 .cart-total{width:100%;display:block;border:1px solid rgba(0,0,0,.05);padding:20px}
