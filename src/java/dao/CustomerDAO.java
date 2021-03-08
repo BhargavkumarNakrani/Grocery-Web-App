@@ -45,4 +45,31 @@ public class CustomerDAO {
         }
         return obj;
     }
+    
+    public static Customer viewByEmail(String email){
+        String hql = "from Customer where email = '"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Customer> products = query.list();
+        session.close();
+        Customer obj = null;
+        if(!products.isEmpty()){
+            obj = products.get(0);
+        }
+        return obj;
+    }
+    
+    public static int getId(String email){
+        //String hql = "from Accounts where email='"+email+"'";
+        String hql = "select CId from Customer where email ='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setMaxResults(1);
+        List users = query.list();
+        //users.get(0);
+        int Id = (int) users.get(0);
+        System.out.println(users.get(0));
+        session.close();
+        return Id;
+    }
 }
