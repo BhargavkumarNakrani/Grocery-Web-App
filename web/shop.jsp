@@ -87,10 +87,10 @@
             </div>
         </div>
     </div><%
-    String cartAdded = (String) session.getAttribute("cartAdded");
-    if(cartAdded != null){
+    String cartMessage = (String) session.getAttribute("cartMessage");
+    if(cartMessage != null){
                     out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
-                    out.print("<strong>"+ cartAdded +"</strong><a href=\"cart.jsp\">this</a>");
+                    out.print("<strong>"+ cartMessage +"</strong><a href=\"cart.jsp\">this</a>");
                     out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
                     out.print("</div>");
     }
@@ -217,7 +217,7 @@
 <script>
     function alert_dismiss() {
         
-        <% session.removeAttribute("cartAdded"); %>
+        <% session.removeAttribute("cartMessage"); %>
                  
     }
 </script>
