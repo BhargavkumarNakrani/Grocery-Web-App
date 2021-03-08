@@ -19,6 +19,16 @@ import util.HibernateUtil;
 public class cartDAO {
     static Session session = null;
     
+    public static int save(Cart bean)
+    {   
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int i = (int) session.save(bean);
+        t.commit();
+        session.close(); 
+        return i;
+    }
+    
     public static List<Cart> viewCart(String email){
         String hql = "from Cart where customer.email='"+email+"'";
         session = HibernateUtil.getSessionFactory().openSession();
@@ -55,5 +65,24 @@ public class cartDAO {
         session.close();
         return i;
     }
+    
+    public static long checkProductInCart(int PId, String email){
+        String hql = "select count(*) from Cart where products.PId="+PId+" and customer.email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+   
+    public static long CartItem(String email){
+        String hql = "select count(*) from Cart where customer.email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
     
 }
