@@ -26,7 +26,10 @@
         products = productDAO.viewById(PId);
         cart = new Cart(customer,products,quantity,products.getPrice(),quantity*products.getPrice());
         if(cartDAO.save(cart)>0){
-            session.setAttribute("cartAdded", products.getName()+" added to cart please check into cart ");
+            session.setAttribute("cartMessage", products.getName()+" added to cart please check into cart ");
+            response.sendRedirect("shop.jsp");
+        } else {
+            session.setAttribute("cartMessage", products.getName()+" product is already into cart please check ");
             response.sendRedirect("shop.jsp");
         }
     }
