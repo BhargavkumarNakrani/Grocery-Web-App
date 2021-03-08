@@ -84,5 +84,23 @@ public class cartDAO {
         return i;
     }
     
+    public static long cartTotal(String email){
+        String hql = "select SUM(amount) from Cart where customer.email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
+    public static void updateQuntity(int id, int i){
+        String hql = "update Cart set quantity = "+i+", amount = price*"+i+" where id="+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        Query query = session.createQuery(hql);
+        query.executeUpdate();
+        t.commit();
+        session.close();
+    }
     
 }
