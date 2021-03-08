@@ -1,4 +1,6 @@
+<%@page import="dao.cartDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String email = (String) session.getAttribute("email");%>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">Vegefoods</a>
@@ -21,7 +23,7 @@
                     <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
                     <%
-                        if(session.getAttribute("email") != null){ %>
+                        if(email != null){ %>
                             <% if(session.getAttribute("role").equals("SHOPKEEPER")) {  %>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Register</a>
@@ -32,7 +34,7 @@
                                 </li>
                             </li>
                             <% }else{ %>
-                            <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:14px"></i>[0]</a></li>
+                            <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:14px"></i>[<%=cartDAO.CartItem(email)%>]</a></li>
                             <%}%>
                             <li class="nav-item"><button onclick="window.location.href='logout.jsp'" class="btn btn-primary">Logout</button></li>
                         <%} else{%>
