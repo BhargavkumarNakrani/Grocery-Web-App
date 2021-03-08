@@ -1,3 +1,4 @@
+<%@page import="dao.cartDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Products"%>
 <%@page import="java.util.List"%>
@@ -9,12 +10,14 @@
     int pages = i / 12;
     String s_page = request.getParameter("page");
     int p = 1;
+    String email = (String) session.getAttribute("email");
     
     if (s_page != null) {
         p = Integer.parseInt(s_page);            
     }
     int Start = (p*12)-12;
-  
+    //long InCart= cartDAO.checkProductInCart(1, "pansuriya@gmail.com");
+    //out.print(in);
     String role = (String) session.getAttribute("role");
     List<Products> products = new ArrayList<Products>();
     
@@ -35,7 +38,6 @@
         }
     }
     else {
-       String email = (String)session.getAttribute("email");
        products = productDAO.viewByShopEmail(email,Start);
     }
     
@@ -84,7 +86,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><%
+    String cartAdded = (String) session.getAttribute("cartAdded");
+    if(cartAdded != null){
+                    out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+                    out.print("<strong>"+ cartAdded +"</strong><a href=\"cart.jsp\">this</a>");
+                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+                    out.print("</div>");
+    }
+    %>
     <section class="ftco-section">
         <div class="container">
 <!--            <div class="row justify-content-center">
@@ -122,9 +132,11 @@
                                     <a href="?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
-                                        <a href="?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0) {%>
+                                        <a href="addToCart.jsp?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fa fa-shopping-cart"></i></span>
                                     </a>
+                                    <% }%>
                                 </div>
                             </div>
                             <% } else if(role.equalsIgnoreCase("SHOPKEEPER")){                          
@@ -201,3 +213,12 @@
 </body>
 
 </html>
+
+<script>
+    function alert_dismiss() {
+        
+        <% session.removeAttribute("cartAdded"); %>
+                 
+    }
+</script>
+<script src="js/jquery-3.3.1.min.js"></script>
