@@ -1,4 +1,39 @@
+<%@page import="entity.Products"%>
+<%@page import="java.util.List"%>
 <%@page import="dao.productDAO"%>
+
+<%
+    
+    int i = (int) productDAO.getCount();
+    int pages = i / 12;
+    String s_page = request.getParameter("page");
+    int p = 1;
+    
+    if (s_page != null) {
+        p = Integer.parseInt(s_page);            
+    }
+    int Start = (p*12)-12;
+  
+    String role = (String) session.getAttribute("role");
+    List<Products> products = null;
+    
+    String StringID = request.getParameter("id");
+    int shop_id = 0;
+    if(!role.equalsIgnoreCase("SHOPKEEPER")){
+        if(StringID != null){
+            shop_id = Integer.parseInt(StringID);
+            products = productDAO.viewByShopId(shop_id, Start);
+        }
+        else {
+            products = productDAO.viewAll(Start);
+        }
+    }
+    else {
+       String email = (String)session.getAttribute("email");
+       products = productDAO.viewByShopEmail(email,Start);
+    }
+    
+%>
 <html lang="en">
 
 <head>
@@ -58,70 +93,56 @@
                 </div>
             </div>-->
             <div class="row">
-                <div class="col-md-6 col-lg-3 ftco-animate">
+<%
+    for(Products product : products) {
+%>
+                <div class="col-md-6 col-lg-3 ftco-animate" id="delete">
                     <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>">
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Bell Pepper</a></h3>
+                            <h3><a href="#"><%=product.getName()%></a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
-                                    <p class="price"><span>$80.00</span></p>
+                                    <p class="price"><span><%=product.getPrice()%></span></p>
                                 </div>
                             </div>
+                            <%
+                            if(role.equalsIgnoreCase("CUSTOMER") || role.equalsIgnoreCase("DELIVERYBOY")){
+                            %>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <a href="?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <a href="?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fa fa-shopping-cart"></i></span>
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Strawberry</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
+                            <% } else if(role.equalsIgnoreCase("SHOPKEEPER")){                          
+                            %>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <a href="?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fas fa-pencil-alt"></i></span>
                                     </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a href="deleteProduct?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fas fa-trash-alt"></i></span>
                                     </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                    <a href="?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
                                 </div>
                             </div>
+                            <% }%>
                         </div>
                     </div>
                 </div>
+                        <% }%>
             </div>
 
-            <%
-                int i = (int) productDAO.getCount();
-                int pages = i / 12;
-                String s_page = request.getParameter("page");
-                int p = 1;
-                if (s_page != null) {
-                    p = Integer.parseInt(s_page);
-                }
-            %>
             <div class="row mt-5">
                 <div class="col text-center">
                     <div class="block-27">
@@ -130,7 +151,7 @@
                             <li><a href="<%="?page=" + (p - 1)%>">&lt;</a></li>
                                 <% } %>
                                 <%for (i = 0; i < pages; i++) { %>
-                            <li <% if (p == (i + 1)) {%> class="active" <%}%>><a href="?page=<%=i + 1%>"><%=i + 1%></a></li>
+                            <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?page=<%=i + 1%>"><%=i + 1%></a></li>
                                 <% }
                                     if (p < pages) {
                                 %>

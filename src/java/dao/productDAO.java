@@ -5,9 +5,7 @@
  */
 package dao;
 
-import static dao.ShopkeeperDAO.session;
 import entity.Products;
-import entity.Shopkeeper;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +34,17 @@ public class productDAO {
         String hql = "from Products";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static List<Products> viewAll(int Start){
+        String hql = "from Products";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
         List<Products> products = query.list();
         session.close();
         return products;
@@ -125,6 +134,47 @@ public class productDAO {
             obj = products.get(0);
         }
         return obj;
+    }
+    
+    public static List<Products> viewByShopId(int id) {
+        String hql = "from Products where shopkeeper.SId = "+id+"";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    public static List<Products> viewByShopId(int id, int Start) {
+        String hql = "from Products where shopkeeper.SId = "+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static List<Products> viewByShopEmail(String email, int Start) {
+        String hql = "from Products where shopkeeper.email = '"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static int deleteById(int id){
+        String hql = "delete from Products where PId ="+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        int i = query.executeUpdate();
+        session.close();
+        if(i>0)
+            cartDAO.deleteByProduct(id);
+        return i;
     }
     
 }

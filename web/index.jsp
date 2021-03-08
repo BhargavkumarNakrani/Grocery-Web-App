@@ -123,7 +123,7 @@
                 <% 
                     String role = (String)session.getAttribute("role");
                     System.out.print(role);
-                    String p = productDAO.viewImage(3);
+                    //String p = productDAO.viewImage(3);
                     //for(Products p : products){
                   
                     if(role == null){

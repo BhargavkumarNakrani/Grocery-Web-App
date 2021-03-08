@@ -26,4 +26,31 @@ public class cartDAO {
         session.close();
         return cart;
     }
+    
+    public static void delete(int id){
+        String hql = "delete from Cart where id ="+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.executeUpdate();
+        session.close();
+        //return i;
+    }
+    
+    public static Long checkEmail(int id, String email){
+        String hql = "select count(*) from Cart where id="+id+" and customer.email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    public static int deleteByProduct(int PId){
+        String hql = "delete from Cart where product.PId="+PId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        int i = query.executeUpdate();
+        session.close();
+        return i;
+    }
+    
 }
