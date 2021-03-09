@@ -15,8 +15,9 @@
 <% 
     String SproductId = request.getParameter("productId");
     String email = (String)session.getAttribute("email");
-    int quantity = 1;
-    if(SproductId!=null && email!=null){
+    String Squantity = request.getParameter("quantity");
+    int quantity = Squantity!=null ? Integer.parseInt(Squantity):1;
+    if(SproductId!=null && email!=null && quantity > 0){
         //int CId = CustomerDAO.getId(email);
         int PId = Integer.parseInt(SproductId);
         Cart cart = new Cart();
@@ -25,12 +26,21 @@
         customer = CustomerDAO.viewByEmail(email);
         products = productDAO.viewById(PId);
         cart = new Cart(customer,products,quantity,products.getPrice(),quantity*products.getPrice());
-        if(cartDAO.save(cart)>0){
-            session.setAttribute("cartMessage", products.getName()+" added to cart please check into cart ");
-            response.sendRedirect("shop.jsp");
+        if(cartDAO.checkCartByProductId(PId, email) < 1 ){
+            cartDAO.save(cart);
+            if(Squantity==null) {
+                session.setAttribute("cartMessage", products.getName()+" added to cart please check into cart ");
+                response.sendRedirect("shop.jsp");
+            } else {
+                response.sendRedirect("cart.jsp");
+            }
         } else {
             session.setAttribute("cartMessage", products.getName()+" product is already into cart please check ");
-            response.sendRedirect("shop.jsp");
+            if(Squantity!=null){
+                response.sendRedirect("shop.jsp");    
+            } else{
+                response.sendRedirect("cart.jsp"); 
+            }
         }
-    }
+    }  
 %>
