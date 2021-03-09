@@ -106,7 +106,7 @@
                                 </div>
                                 </div>-->
                                 <div class="w-100"></div>
-                                <% if(cartDAO.checkCartByProductId(PId, email) < 0 ){ %>
+                                <% if(cartDAO.checkCartByProductId(PId, email) <= 0 ){ %>
                                     <div class="input-group col-md-6 d-flex mb-3">
                                     <span class="input-group-btn mr-2">
                                         <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" >
@@ -120,7 +120,7 @@
                                         </button>
                                     </span>
                                 </div>                               
-                            <% } else { %>
+                            <% } else{ %>
                             <div class="col-md-6 d-flex mb-3">
                                 <p><i>Product already into the cart</i></p>
                             </div>
