@@ -68,7 +68,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body cart">
-                        <div class="col-sm-12 empty-cart-cls text-center"> <img src="images/empty-shopping-cart.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <div class="col-sm-12 empty-cart-cls text-center"> <img src="images/empty-cart.png" width="300" height="300" class="img-fluid mb-5 mt-5 mr-3">
                             <h3><strong>Your Cart is Empty</strong></h3>
                             <a href="shop.jsp" class="btn btn-primary mb-5" style="padding: 10px 10px"data-abc="true">continue shopping</a>
                         </div>
