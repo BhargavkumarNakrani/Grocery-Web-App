@@ -64,12 +64,7 @@ public class productDAO {
     }
     
     public static String viewImage(int id) throws SQLException, IOException{
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(productDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String databaseURL = "jdbc:mysql://localhost:3306/grocerywebapp?zeroDateTimeBehavior=CONVERT_TO_NULL";
+        String databaseURL = "jdbc:mysql://localhost:3306/grocerywebapp";
         String user = "root";
         //String password = "pass";
         String sql = "SELECT * FROM products WHERE p_id = ?";

@@ -107,7 +107,7 @@ public class ShopkeeperDAO {
         return obj;
     }
     public static String viewImage(int id) throws SQLException, IOException{
-        String databaseURL = "jdbc:mysql://localhost:3306/grocerywebapp?zeroDateTimeBehavior=CONVERT_TO_NULL";
+        String databaseURL = "jdbc:mysql://localhost:3306/grocerywebapp";
         String user = "root";
         //String password = "pass";
         String sql = "SELECT * FROM Shopkeeper WHERE s_id = ?";
