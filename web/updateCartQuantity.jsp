@@ -15,6 +15,6 @@
         int id = Integer.parseInt(s_id);
         int quantity = Integer.parseInt(s_quantity);
         cartDAO.updateQuntity(id, quantity);
-        response.sendRedirect("cart.jsp");
+        response.sendRedirect("cart.jsp#cart-table");
     }
 %>
