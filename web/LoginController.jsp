@@ -6,8 +6,8 @@
      <%
         String Return_to;
         String query = request.getParameter("return_to");
-        if(request.getParameter("return_to")!=null){
-            Return_to = request.getParameter("return_to");
+        if(query!=null){
+            Return_to = query;
         }else{
             Return_to = "index.jsp";
         }
@@ -26,7 +26,11 @@
 	else 
 	{
             session.setAttribute("errorMessage", "Incorrect Email or Password");
-            response.sendRedirect("login.jsp?return_to="+query);
+            if(query!=null){
+                response.sendRedirect("login.jsp?return_to="+query);
+            }else{
+                response.sendRedirect("login.jsp");
+            }
         }
 	%>
 	

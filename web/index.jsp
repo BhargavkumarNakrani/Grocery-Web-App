@@ -140,11 +140,11 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title"><strong><strong><%=obj.getShopName()%></strong></strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
-                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Profile</a>
-                                
+                                <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
+                                <h6  class="shop-add"><%=obj.getAddress()%></h6>
+                                <h6  class="phone"><%=obj.getPhone()%></h6>
+                                <div class="flexible"></div>
+                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Shop Product</a>
                             </div>
                         </div>
                     </div>
@@ -167,9 +167,10 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title"><strong><strong><%=obj.getShopName()%></strong></strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
+                                <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
+                                <h6  class="shop-add"><%=obj.getAddress()%></h6>
+                                <h6  class="phone"><%=obj.getPhone()%></h6>
+                                <div class="flexible"></div>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Shop Product</a>
                             </div>
                         </div>
@@ -191,11 +192,11 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title"><strong><strong><%=obj.getShopName()%></strong></strong></h3><br>
-                                <i class="fa fa-map-marker"style="font-size:20px;margin-bottom:10px"></i>&nbsp;<%=obj.getAddress()%></li><br>
-                                <i class="fa fa-phone"style="font-size:20px;margin-bottom:20px"></i>&nbsp;<%=obj.getPhone()%></li><br>
-                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See my Product</a>
-                                <a href="shop_registration.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">Edit</a>
+                                <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
+                                <h6  class="shop-add"><%=obj.getAddress()%></h6>
+                                <h6  class="phone"><%=obj.getPhone()%></h6>
+                                <div class="flexible"></div>
+                                <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Shop Product</a>
                             </div>
                         </div>
                     </div>
