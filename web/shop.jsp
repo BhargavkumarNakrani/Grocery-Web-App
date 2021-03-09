@@ -121,7 +121,7 @@
                             <h3><a href="#"><%=product.getName()%></a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
-                                    <p class="price"><span><%=product.getPrice()%></span></p>
+                                    <p class="price"><span>&#8360; <%=product.getPrice()%> </span></p>
                                 </div>
                             </div>
                             <%
