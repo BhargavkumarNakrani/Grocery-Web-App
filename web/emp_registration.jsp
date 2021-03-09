@@ -36,7 +36,7 @@
     
     <jsp:include page="top_bar.html"/>
    
-<div class="content" style="background-image: url(images/bg_1.jpg);}">
+<div class="content" style="background-image: url(images/bg.jpg);}">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 contents">

@@ -23,7 +23,7 @@
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
-    <jsp:include page="menu_bar.html"/>
+    <jsp:include page="menu_bar.jsp"/>
 
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
 <div class="container">

@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .content{
-            background-image: url(images/bg_1.jpg);
+            background-image: url(images/bg.jpg);
             padding-top:30px;
             height: 750px;
             margin-bottom: 0px!important;
