@@ -1,4 +1,41 @@
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="dao.AccountDAO"%>
+<%@page import="dao.DeliveryBoyDAO"%>
+<%@page import="entity.DeliveryBoy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String email = "";//(String) session.getAttribute("email");
+    //String role = (String) session.getAttribute("role");
+    DeliveryBoy obj = new DeliveryBoy();
+    int id = 0;
+    String StringID = request.getParameter("id");
+    String fname =""; 
+    String lname = "";
+    String password = "";
+    String sname = "";
+    long contact = 0;
+    String address = "";
+    String image = "";
+    int Aid = 0;
+    
+    if(StringID != null && email != null){
+        id = Integer.parseInt(StringID);
+        obj = DeliveryBoyDAO.viewSinglebyID(id);
+        String name =  obj.getName();
+        String[] n = name.split(" ", 2);
+        fname = n[0];
+        lname = n[1];
+        email = obj.getEmail();
+        Aid = obj.getAccounts().getAcccountId();
+        password = AccountDAO.getPassword(Aid);
+        //image = ShopkeeperDAO.viewImage(id);
+        //sname = obj.getShopName();
+        contact = obj.getPhone();
+        address = obj.getAddress();
+        //role = obj.
+        //out.println(image);
+    }
+%>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -48,19 +85,20 @@
                   </div>
                 <form action="SingupController.jsp" method="POST" autocomplete="off">   
                     <div class="row mb-3">
-                        <input type="hidden" name="role" value="DELIVERYBOY"/>
-                        <input type="hidden" name="id" value="0"/>
+                        <input type="hidden" name="role" value="DELIVERYBOY" id="role">
+                    <input type="hidden" name="id" value="<%=id%>" id="id">
+                    <input type="hidden" name="accountId" value="<%=Aid%>" id="id">
                         <div class="col">
                             <div class="form-group">
                                 <label for="fname" class="fname">First Name</label>
-                                <input type="text" name="fname" class="form-control" id="fname" autocomplete="nope">
+                                <input type="text" name="fname" value="<%=fname%>" class="form-control" id="fname" autocomplete="nope">
                             </div>
                             <span id="fname_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" name="lname" class="form-control" id="lname" autocomplete="nope">
+                                <input type="text" name="lname" value="<%=lname%>" class="form-control" id="lname" autocomplete="nope">
                             </div>
                             <span id="lname_error_message" class="text-danger"></span>
                         </div>
@@ -69,14 +107,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" autocomplete="nope">
+                                <input type="email" name="email" value="<%=email%>" class="form-control" id="email" autocomplete="nope">
                             </div>
                             <span id="email_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="contact">Contact Number</label>
-                                <input type="number" name="contact" class="form-control" id="contact" >
+                                <input type="number" value="<% if(contact != 0) out.print(contact); %>" name="contact" class="form-control" id="contact" >
                             </div>
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
@@ -85,14 +123,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
-                                <input type="password" name="pswd" class="form-control" id="pswd" autocomplete="nope">
+                                <input type="password" name="pswd"  value="<%=password %>" class="form-control" id="pswd" autocomplete="nope">
                             </div>
                             <span id="pswd_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="cpswd">Confirm Password</label>
-                                <input type="password" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
+                                <input type="password" name="cpswd"  value="<%=password %>" class="form-control" id="cpswd" autocomplete="nope">
                             </div>
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
@@ -102,7 +140,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="Address">Address</label>
-                                <input type="text" name="address" value="" class="form-control" id="address" autocomplete="nope">
+                                <input type="text" name="address"  value="<%=address %>" class="form-control" id="address" autocomplete="nope">
                             </div>
                             <span id="add_error_message" class="text-danger"></span>
                         </div>
