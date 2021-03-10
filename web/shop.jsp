@@ -157,7 +157,7 @@
                                     <a href="deleteProduct?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fas fa-trash-alt"></i></span>
                                     </a>
-                                    <a href="?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
+                                    <a href="product-single.jsp?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
                                 </div>
