@@ -5,8 +5,9 @@
  */
 package dao;
 
-import static dao.ShopkeeperDAO.session;
 import entity.DeliveryBoy;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -35,5 +36,42 @@ public class DeliveryBoyDAO {
         t.commit();
         session.close();
     }
+    
+    public static DeliveryBoy ViewSingle(String email){
+        String hql = "from DeliveryBoy where email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<DeliveryBoy> deliveryBoy = query.list();
+        session.close();
+        DeliveryBoy obj=null;
+        if(!deliveryBoy.isEmpty())
+            obj = deliveryBoy.get(0);
+        return obj;
+    }
+    
+    public static DeliveryBoy viewSinglebyID(int Id){
+        String hql = "from DeliveryBoy where dbId="+Id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<DeliveryBoy> deliveryBoy = query.list();
+        session.close();
+        DeliveryBoy obj=null;
+        if(!deliveryBoy.isEmpty())
+            obj = deliveryBoy.get(0);
+        return obj;
+    }
+    
+    public static int viewOrderTaken(int Id){
+        String hql = "select orderTaken from DeliveryBoy where dbId="+Id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        int i = (int) query.uniqueResult();
+        //int I = (int)i;
+        session.close();
+        return i;
+    }
+    
+    
     
 }
