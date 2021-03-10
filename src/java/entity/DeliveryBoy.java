@@ -18,7 +18,7 @@ public class DeliveryBoy  implements java.io.Serializable {
      private long phone;
      private String email;
      private String address;
-     private Date hireDate;
+     //private Date hireDate;
      private Integer orderTaken;
      private Set<Orders> orderses = new HashSet<Orders>(0);
      private Set<DeliveryBoyDetail> deliveryBoyDetails = new HashSet<DeliveryBoyDetail>(0);
@@ -27,21 +27,21 @@ public class DeliveryBoy  implements java.io.Serializable {
     }
 
 	
-    public DeliveryBoy(Accounts accounts, String name, long phone, String email, String address, Date hireDate) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, String address) {
         this.accounts = accounts;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.hireDate = hireDate;
+        //this.hireDate = hireDate;
     }
-    public DeliveryBoy(Accounts accounts, String name, long phone, String email, String address, Date hireDate, Integer orderTaken, Set<Orders> orderses, Set<DeliveryBoyDetail> deliveryBoyDetails) {
+    public DeliveryBoy(Accounts accounts, String name, long phone, String email, String address, Integer orderTaken, Set<Orders> orderses, Set<DeliveryBoyDetail> deliveryBoyDetails) {
        this.accounts = accounts;
        this.name = name;
        this.phone = phone;
        this.email = email;
        this.address = address;
-       this.hireDate = hireDate;
+       //this.hireDate = hireDate;
        this.orderTaken = orderTaken;
        this.orderses = orderses;
        this.deliveryBoyDetails = deliveryBoyDetails;
@@ -89,13 +89,13 @@ public class DeliveryBoy  implements java.io.Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    public Date getHireDate() {
-        return this.hireDate;
-    }
-    
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
-    }
+//    public Date getHireDate() {
+//        return this.hireDate;
+//    }
+//    
+//    public void setHireDate(Date hireDate) {
+//        this.hireDate = hireDate;
+//    }
     public Integer getOrderTaken() {
         return this.orderTaken;
     }
