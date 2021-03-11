@@ -114,7 +114,23 @@ button,input{overflow:visible}
 
 button,select{text-transform:none}
 
+select{width: 100%;background: transparent;border-bottom: 1px solid black;border-top:0px;border-left: 0px;border-right: 0px;padding: 10px 0px;}
 
+.file-label{padding:9px 0px;}
+
+select:focus{outline:0;}
+
+select:hover{cursor: pointer;}
+
+.upload-file,.file-cta,.file-name{padding-left:0px;border: none; border-bottom: 1px solid black;border-radius: 0px;background: transparent;}
+
+.file-cta,.file-name{background: transparent!important;border-bottom: 1px solid black!important;}
+
+.file-label:hover , .file-cta:hover{background: transparent!important;}
+
+.file-hover{border-bottom: 2px solid rgb(249, 10, 10)!important;}
+
+.right-file{border-bottom: 1px solid #82ae41!important;}
 button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button}
 
 
