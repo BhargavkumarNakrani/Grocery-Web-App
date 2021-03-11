@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -164,12 +165,59 @@ public class productDAO {
     public static int deleteById(int id){
         String hql = "delete from Products where PId ="+id;
         session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
         Query query = session.createQuery(hql);
         int i = query.executeUpdate();
+        t.commit();
         session.close();
         if(i>0)
             cartDAO.deleteByProduct(id);
         return i;
     }
     
+     public static void save(Products bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.save(bean);
+        t.commit();
+        session.close();
+    }
+     
+    public static void update(Products bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.update(bean);
+        t.commit();
+        session.close();
+    }
+    
+    public static void update(int id,int CategotyId, int SId,int uomId,String pname,int quantity ,int price)
+    {
+        String hql = "UPDATE Products set " +
+          "category.categoryId = :CategotyId," +
+          "shopkeeper.SId = :SId, " +
+          "uom.uomId = :uomId, " +
+          "name = :pname, " +
+          "quantity = :quantity, " +
+          "price = :price " +
+    
+          "where id = :id";
+        //bean.setImage(viewImage(id));
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int updatedEntities = session.createQuery(hql)
+        .setInteger("CategotyId", CategotyId )
+        .setInteger("SId", SId )
+        .setInteger("uomId", uomId )
+        .setString( "pname", pname )
+        .setInteger("quantity", quantity )
+        .setInteger("price", price )
+        .setInteger("id", id)
+        .executeUpdate();
+        t.commit();
+        session.close();
+    }
+   
 }
