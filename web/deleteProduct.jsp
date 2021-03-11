@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="dao.cartDAO"%>
 <%@page import="dao.productDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +15,10 @@
            String s_id = request.getParameter("productId");
            if(s_id!=null){
                int id = Integer.parseInt(s_id);
+               int i =cartDAO.deleteByProduct(id);
                 productDAO.deleteById(id);
+                session.setAttribute("deleteProduct", "Product delete successfully");
+                response.sendRedirect("shop.jsp");
            }
        }
 %>
