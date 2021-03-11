@@ -132,16 +132,17 @@
                         <div class="col" style="width:50%!important;">
                             <div class="file has-name">
                                 <label class="file-label">
-                                    <input class="file-input" id="shopimg" type="file" name="shopimg">
-                                    <span class="file-cta">
+                                    <input class="file-input" id="shopimg" accept="image/*" type="file" name="shopimg">
+                                    
+                                    <span class="file-cta upload-file">
                                         <span class="file-icon">
                                             <i class="fa fa-upload"></i>
                                         </span>
-<!--                                        <span class="file-label">
-                                            Choose a file…
-                                        </span>-->
+                                        <span class="file-label">
+                                            Shop Image
+                                        </span>
                                     </span>
-                                    <span class="file-name">No file Choosen
+                                    <span class="file-name upload-file">No file Choosen
                                     </span>
                                 </label>
                             </div>
