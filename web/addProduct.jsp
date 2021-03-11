@@ -1,4 +1,17 @@
+<%@page import="dao.categoryDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.uomDAO"%>
+<%@page import="entity.Uom"%>
+<%@page import="entity.Category"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+    String email = (String)session.getAttribute("email");
+    //List<Uom> obj = new ArrayList<Uom>();
+    List<Uom> obj = uomDAO.view();
+    List<Category> categorys = categoryDAO.viewAll();
+   
+%>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -25,7 +38,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .content{
-            background-image: url(images/bg_1.jpg);
+            background-image: url(images/bg.jpg);
             height: 695px;
             margin-bottom: 0px!important;
         }
@@ -61,9 +74,9 @@
                           <img src="images/product-1.jpg"  style="width:40%;" class="img-fluid">
                       </div>-->
                   <% //}%>
-                <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
+                <form action="saveProduct.jsp" method="post" autocomplete="off" enctype="multipart/form-data">
 <!--                    <input type="hidden" name="role" value="SHOPKEEPER" id="role">
-                <input type="hidden" name="id" value="<%//=id%>" id="id">
+                    <input type="hidden" name="id" value="<%//=id%>" id="id">
                     <input type="hidden" name="accountId" value="<%//=Aid%>" id="id">
                     <input type="hidden" name="image" value="<%//=image%>" id="id">-->
                     <div class="row mb-3">
@@ -78,10 +91,12 @@
                             <div class="form-group">
                                 <select name="category" id="category">
                                     <option value="category">Category</option>
-                                    <option value="">ABC</option>
-                                    <option value="">DEF</option>
-                                    <option value="">GHI</option>
-                                    <option value="">JKL</option>
+                                    <% 
+                                    for(Category category : categorys) { %>
+                                    <option value="<%=category.getCategoryId()%>"><%=category.getName() %></option>
+                                    <% }
+                                    %>
+                                    
                                 </select>
                             </div>
                             <span id="category_error_message" class="text-danger"></span>
@@ -120,10 +135,11 @@
                             <div class="form-group">
                                 <select name="uom" id="uom">
                                     <option value="uom">Unit Of Measurement</option>
-                                    <option value="">ABC</option>
-                                    <option value="">DEF</option>
-                                    <option value="">GHI</option>
-                                    <option value="">JKL</option>
+                                    <% 
+                                    for(Uom uom : obj) { %>
+                                    <option value="<%=uom.getUomId() %>"><%=uom.getUomName()%></option>
+                                    <% }
+                                    %>
                                 </select>
                             </div>
                             <span id="uom_error_message" class="text-danger"></span>
