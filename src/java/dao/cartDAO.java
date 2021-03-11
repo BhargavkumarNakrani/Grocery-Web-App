@@ -58,10 +58,12 @@ public class cartDAO {
         return i;
     }
     public static int deleteByProduct(int PId){
-        String hql = "delete from Cart where product.PId="+PId;
+        String hql = "delete from Cart where products.PId="+PId;
         session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
         Query query = session.createQuery(hql);
         int i = query.executeUpdate();
+        t.commit();
         session.close();
         return i;
     }
