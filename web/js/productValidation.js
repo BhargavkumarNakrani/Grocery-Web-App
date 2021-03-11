@@ -30,8 +30,8 @@ $("document").ready(function() {
         $("#uom").change(function() {
             check_uom();
          });
-        $("#pname").focusout(function() {
-            check_pname();
+        $("#price").focusout(function() {
+            check_price();
          });
         
         function check_pname() {
@@ -86,7 +86,7 @@ $("document").ready(function() {
                 if($('div').is(".preview")){
                     error_productimg = false;
                 }else{
-                    lblError.html("Upload Image Files.");
+                    lblError.html("Upload Image File.");
                     lblError.show();
                     $('.upload-file').addClass("file-hover");
                     error_productimg = true;
@@ -99,6 +99,7 @@ $("document").ready(function() {
                     $('.upload-file').addClass("file-hover");
                     error_productimg = true;
                 }else{
+                    lblError.hide();
                     var fileNameIndex = fileUpload.val().lastIndexOf('\\') + 1;
                     var fileName = fileUpload.val().substr(fileNameIndex);
                     $('.file-name').html(fileName);
