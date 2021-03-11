@@ -3,17 +3,17 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 11-Mar-2021, 7:23:47 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="entity.Uom" table="uom" catalog="grocerywebapp" optimistic-lock="version">
-        <id name="uomId" type="int">
-            <column name="uom_id" />
-            <generator class="assigned" />
+    <class name="entity.Category" table="category" catalog="grocerywebapp" optimistic-lock="version">
+        <id name="categoryId" type="java.lang.Integer">
+            <column name="category_id" />
+            <generator class="identity" />
         </id>
-        <property name="uomName" type="string">
-            <column name="uom_name" length="50" not-null="true" />
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true" />
         </property>
         <set name="productses" table="products" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="uom_id" not-null="true" unique="true" />
+                <column name="category_id" not-null="true" unique="true" />
             </key>
             <one-to-many class="entity.Products" />
         </set>

@@ -1,5 +1,5 @@
 package entity;
-// Generated 06-Mar-2021, 8:41:49 PM by Hibernate Tools 4.3.1
+// Generated 11-Mar-2021, 7:23:46 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Products  implements java.io.Serializable {
 
 
      private Integer PId;
+     private Category category;
      private Shopkeeper shopkeeper;
      private Uom uom;
      private String name;
@@ -25,7 +26,8 @@ public class Products  implements java.io.Serializable {
     }
 
 	
-    public Products(Shopkeeper shopkeeper, Uom uom, String name, int quantity, int price, byte[] image) {
+    public Products(Category category, Shopkeeper shopkeeper, Uom uom, String name, int quantity, int price, byte[] image) {
+        this.category = category;
         this.shopkeeper = shopkeeper;
         this.uom = uom;
         this.name = name;
@@ -33,7 +35,8 @@ public class Products  implements java.io.Serializable {
         this.price = price;
         this.image = image;
     }
-    public Products(Shopkeeper shopkeeper, Uom uom, String name, int quantity, int price, byte[] image, Set<OrderDetails> orderDetailses, Set<Cart> carts) {
+    public Products(Category category, Shopkeeper shopkeeper, Uom uom, String name, int quantity, int price, byte[] image, Set<OrderDetails> orderDetailses, Set<Cart> carts) {
+       this.category = category;
        this.shopkeeper = shopkeeper;
        this.uom = uom;
        this.name = name;
@@ -50,6 +53,13 @@ public class Products  implements java.io.Serializable {
     
     public void setPId(Integer PId) {
         this.PId = PId;
+    }
+    public Category getCategory() {
+        return this.category;
+    }
+    
+    public void setCategory(Category category) {
+        this.category = category;
     }
     public Shopkeeper getShopkeeper() {
         return this.shopkeeper;
