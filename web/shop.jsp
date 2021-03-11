@@ -77,7 +77,7 @@
     <jsp:include page="top_bar.html"/>
     <jsp:include page="menu_bar.jsp"/>
     
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('images/bg.jpg');">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
@@ -88,12 +88,20 @@
         </div>
     </div><%
     String cartMessage = (String) session.getAttribute("cartMessage");
+    String productSingle = (String) session.getAttribute("product-single");
     if(cartMessage != null){
                     out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
                     out.print("<strong>"+ cartMessage +"</strong><a href=\"cart.jsp\">this</a>");
                     out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
                     out.print("</div>");
     }
+    if(productSingle != null){
+                    out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+                    out.print("<strong>"+ productSingle +"</strong>");
+                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+                    out.print("</div>");
+    }
+    
     %>
     <section class="ftco-section">
         <div class="container">
@@ -129,7 +137,7 @@
                             %>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <a href="product-single.jsp?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
                                     <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0) {%>
@@ -149,7 +157,7 @@
                                     <a href="deleteProduct?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fas fa-trash-alt"></i></span>
                                     </a>
-                                    <a href="?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
+                                    <a href="product-single.jsp?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
                                 </div>
@@ -217,7 +225,9 @@
 <script>
     function alert_dismiss() {
         
-        <% session.removeAttribute("cartMessage"); %>
+        <% session.removeAttribute("cartMessage"); 
+            session.removeAttribute("product-single");
+        %>
                  
     }
 </script>

@@ -23,9 +23,9 @@
         <property name="address" type="string">
             <column name="address" length="100" not-null="true" />
         </property>
-        <property name="hireDate" type="timestamp">
+<!--        <property name="hireDate" type="timestamp">
             <column name="hire_date" length="19" not-null="true" />
-        </property>
+        </property>-->
         <property name="orderTaken" type="java.lang.Integer">
             <column name="order_taken" />
         </property>

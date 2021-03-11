@@ -49,7 +49,7 @@ public class cartDAO {
         //return i;
     }
     
-    public static Long checkEmail(int id, String email){
+    public static long checkEmail(int id, String email){
         String hql = "select count(*) from Cart where id="+id+" and customer.email='"+email+"'";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
@@ -101,6 +101,16 @@ public class cartDAO {
         query.executeUpdate();
         t.commit();
         session.close();
+    }
+    
+    public static long checkCartByProductId(int PId, String email){
+        String hql = "select count(*) from Cart where products.PId="+PId+" and customer.email='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        System.out.print(i);
+        session.close();
+        return i;
     }
     
 }

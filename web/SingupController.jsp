@@ -71,7 +71,7 @@
         else if(role.equalsIgnoreCase("DELIVERYBOY")){
             if(address==null) {address="No Address";}
             Date date = new java.util.Date();
-            bean_deliveryboy = new DeliveryBoy(bean, name, phone, email,address,date);
+            bean_deliveryboy = new DeliveryBoy(bean, name, phone, email,address);
         }
         else if(role.equalsIgnoreCase("SHOPKEEPER"))
             bean_shopkeeper = new Shopkeeper(bean, name, sname, address, phone, email,img);
@@ -96,6 +96,7 @@
                 }
                 else if(role.equalsIgnoreCase("DELIVERYBOY")){
                     out.println(bean.getAcccountId());// bean_DeliveryBoy.getAccounts().getAcccountId();
+                    bean_deliveryboy.setOrderTaken(0);
                     DeliveryBoyDAO.insert(bean_deliveryboy);
                     response.sendRedirect("index.jsp");
                     out.print("Inserted Deliveryboy");
@@ -115,13 +116,14 @@
                 }
                 response.sendRedirect("index.jsp");
             }
-            else if(role.equalsIgnoreCase("DELIVERYBOY")){
-//                bean.setAcccountId(accountId);
-//                AccountDAO.update(bean);
-//                bean_shopkeeper.setSId(id);
-//                DeliveryBoyDAO.update(bean_DeliveryBoy);
-//                
-//                response.sendRedirect("index.jsp");
+            else if(role.equalsIgnoreCase("DELIVERYBOY") && accountId != 0){
+                bean.setAcccountId(accountId);
+                AccountDAO.update(bean);
+                bean_deliveryboy.setDbId(id);
+                bean_deliveryboy.setOrderTaken(DeliveryBoyDAO.viewOrderTaken(id));
+                DeliveryBoyDAO.update(bean_deliveryboy);
+                
+                response.sendRedirect("index.jsp");
             }
         }
             
