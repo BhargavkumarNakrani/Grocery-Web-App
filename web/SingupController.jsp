@@ -97,6 +97,8 @@
                 else if(role.equalsIgnoreCase("DELIVERYBOY")){
                     out.println(bean.getAcccountId());// bean_DeliveryBoy.getAccounts().getAcccountId();
                     bean_deliveryboy.setOrderTaken(0);
+                    Date date = new java.util.Date();
+                    bean_deliveryboy.setHireDate(date);
                     DeliveryBoyDAO.insert(bean_deliveryboy);
                     response.sendRedirect("index.jsp");
                     out.print("Inserted Deliveryboy");
