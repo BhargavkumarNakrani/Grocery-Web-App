@@ -50,7 +50,7 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
     .ftco-section{padding:4em 0;}
-    .table tbody tr td{cursor: pointer;padding:25px 10px;}
+    .table tbody tr td{padding:25px 10px;}
 </style>
 </head>
 <body>
@@ -125,7 +125,7 @@
                                                 <td>Cell</td>
                                                 <td>Cell</td>
                                                 <td>Cell</td>
-                                                <td>500</td>
+                                                <td rowspan="2">500</td>
                                             </tr>
                                             <tr>
                                                 <td>Cell</td>
@@ -172,7 +172,7 @@
                                                 <td>Cell</td>
                                                 <td>Cell</td>
                                                 <td>Cell</td>
-                                                <td>500</td>
+                                                <td rowspan="2">500</td>
                                             </tr>
                                             <tr>
                                                 <td>Cell</td>
