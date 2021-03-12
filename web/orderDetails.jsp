@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
     .ftco-section{padding:4em 0;}
-    .table
+    .table tbody tr td{cursor: pointer;padding:25px 10px;}
 </style>
 </head>
 <body>
@@ -32,7 +32,7 @@
     
     <section class="ftco-section ftco-cart">
         <div class="container">
-            <div class="row mb-4 justify-content-start">
+            <div class="row mb-5 justify-content-start">
                 <div class="col-lg-6 cart-wrap ftco-animate fadeInUp ftco-animated">
                     <div class="cart-total mb-3">
                         <h3>Order Details</h3>
@@ -60,70 +60,154 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 ftco-animate">
-                    <div class="cart-list">
-                        <table class="table">
-                            <thead class="thead-primary">
-                                <tr class="text-center">
-                                    <th>Sr No.</th>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-center accordion-toggle" colspan="6" data-toggle="collapse" data-target="#demo1">
-                                    <td class="sr"><h5>1</h5></td>
-                                    <td class="product-name">
-                                        <h3>Bell Pepper</h3>
-                                        <p>from: Shop Name</p>
-                                    </td>
-                                    <td class="price">$4.90</td>
-                                    <td class="price">
-                                        <h5>2</h5>
-                                    </td>
-                                    <td class="total">$4.90</td>
-                                </tr>
-                                <tr class="p">
-                                    <td colspan="6" class="hiddenRow">
-                                        <div class="accordian-body collapse p-3" id="demo1">
-                                            <p>No : <span>1</span></p>
-                                            <p>Date : <span>12 Jan 2018</span> </p>
-                                            <p>Description : <span>Good</span> </p>
-                                            <p>Credit : <span>$150.00</span> </p>
-                                            <p>Debit : <span></span></p>
-                                            <p>Balance : <span>$150.00</span></p>
-                                        </div> 
-                                    </td> 
-                                </tr>
-                                <tr class="text-center accordion-toggle" colspan="6" data-toggle="collapse" data-target="#demo2">
-                                    <td class="sr"><h5>2</h5></td>
-                                    <td class="product-name">
-                                        <h3>Bell Pepper</h3>
-                                        <p>from: shop Name-2</p>
-                                    </td>
-                                    <td class="price">$15.70</td>
-                                    <td class="price">
-                                        <h5>2</h5>
-                                    </td>
-                                    <td class="total">$15.70</td>
-                                </tr>
-                                <tr class="p">
-                                    <td colspan="6" class="hiddenRow">
-                                        <div class="accordian-body collapse p-3" id="demo2">
-                                            <p>No : <span>1</span></p>
-                                            <p>Date : <span>12 Jan 2018</span> </p>
-                                            <p>Description : <span>Good</span> </p>
-                                            <p>Credit : <span>$150.00</span> </p>
-                                            <p>Debit : <span></span></p>
-                                            <p>Balance : <span>$150.00</span></p>
-                                        </div> 
-                                    </td> 
-                                </tr>
-                            </tbody>
-                        </table>
+            <div id="accordion">
+                <div class="card mb-2">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Shop Name-1
+                            <i class="fa fa-plus float-right m-1"></i>
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="col-md-12 ftco-animate">
+                                <div class="cart-list">
+                                    <table class="table table-hover">
+                                        <thead class="thead-primary">
+                                            <tr class="text-center">
+                                                <th>Sr No.</th>
+                                                <th>Product Name</th>
+                                                <th>price</th>
+                                                <th>quantity</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>500</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <a class="btn btn-link collapsed float-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Shop Name-2
+                            <i class="fa fa-plus float-right m-1"></i>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="col-md-12 ftco-animate">
+                                <div class="cart-list">
+                                    <table class="table table-hover">
+                                        <thead class="thead-primary">
+                                            <tr class="text-center">
+                                                <th>Sr No.</th>
+                                                <th>Product Name</th>
+                                                <th>price</th>
+                                                <th>quantity</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>500</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Shop Name-3
+                            <i class="fa fa-plus float-right m-1"></i>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="col-md-12 ftco-animate">
+                                <div class="cart-list">
+                                    <table class="table table-hover">
+                                        <thead class="thead-primary">
+                                            <tr class="text-center">
+                                                <th>Sr No.</th>
+                                                <th>Product Name</th>
+                                                <th>price</th>
+                                                <th>quantity</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td rowspan="3">500</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                                <td>Cell</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,9 +256,8 @@
 <script src="js/main.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
-    $('.accordion-toggle').click(function(){
-	$('.hiddenRow').hide();
-	$(this).next('tr').find('.hiddenRow').show();
+    $('[data-toggle="collapse"]').click(function () {
+        $(this).find('i').toggleClass('fas fa-plus fas fa-minus'); 
     });
 </script>
 </body>

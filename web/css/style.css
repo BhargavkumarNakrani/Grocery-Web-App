@@ -2759,6 +2759,9 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;fo
     background-color: #eeeeee;
     font-size: 13px;
 }
+#accordion  .table .thead-primary tr th{background-color:#82ae46;padding:10px 5px;}
+#accordion .table tbody tr td{padding:10px 5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+#accordion .card-header a{width:100%;text-align:left;}
 .cart-wrap .btn-primary{display:inline-block}
 .cart-total{width:100%;display:block;border:1px solid rgba(0,0,0,.05);padding:20px}
 .cart-total h3{font-size:16px;margin-bottom:20px}
