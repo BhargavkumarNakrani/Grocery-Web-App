@@ -69,7 +69,7 @@
                         </p>
                         <p class="d-flex">
                             <span>Customer Name</span>
-                            <span><%=CustomerDAO.viewById(order.getCustomer().getCId()).getName() %></span>
+                            <span><% if(OId != 0 ) out.print(CustomerDAO.viewById(order.getCustomer().getCId()).getName()); %></span>
                         </p>
                         <p class="d-flex">
                             <span>Shipping Address</span>
