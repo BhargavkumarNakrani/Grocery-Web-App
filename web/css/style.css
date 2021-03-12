@@ -2746,10 +2746,19 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;fo
 .table tbody tr td.quantity{width:20%}
 .table tbody tr td.image-prod .img{display:block;width:100px;height:100px;margin:0 auto}
 .table tbody tr td.product-name{width:30%}
+.table tbody tr td.sr{width:10%}
+.table tbody tr td h5,.table tbody tr td h3{margin-bottom:5px;}
 .table tbody tr td.emp{width:0%}
 .table tbody tr td.product-name h3{font-size:16px}
 .table tbody tr td.emp h3{font-size:16px;margin-bottom:0px}
 .table tbody tr td.total,.table tbody tr td.price{color:#000}
+.cart-wrap .cart-total span{display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin-right:15px}
+.cart-wrap .cart-total span:hover{overflow:visible;white-space: break-spaces;}
+.hiddenRow {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+}
 .cart-wrap .btn-primary{display:inline-block}
 .cart-total{width:100%;display:block;border:1px solid rgba(0,0,0,.05);padding:20px}
 .cart-total h3{font-size:16px;margin-bottom:20px}
