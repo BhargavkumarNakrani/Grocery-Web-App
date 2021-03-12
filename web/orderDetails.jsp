@@ -1,4 +1,31 @@
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="entity.Shopkeeper"%>
+<%@page import="dao.CustomerDAO"%>
+<%@page import="dao.ordersDAO"%>
+<%@page import="entity.Orders"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="entity.OrderDetails"%>
+<%@page import="dao.orderDetailDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String SOId = request.getParameter("o_id");
+    int OId = 0;
+    List<OrderDetails> orderList = new ArrayList<OrderDetails>();
+    //List<Shopkeeper> shop = new ArrayList<Shopkeeper>();
+    List<OrderDetails> shopId = new ArrayList<OrderDetails>();
+    Orders order = new Orders();
+    if(SOId != null){
+        OId = Integer.parseInt(SOId);
+        orderList = orderDetailDAO.viewByOrderId(OId);
+        order =  ordersDAO.viewByOrderId(OId);
+        shopId = orderDetailDAO.viewShopName(OId);
+        //shop = ShopkeeperDAO.viewSinglebyID();
+    } else {
+        session.setAttribute("OrderSelect", "Please select order first");
+        //response.sendRedirect("Order.jsp");
+    }
+%>
 <html lang="en">
 
 <head>
@@ -38,25 +65,30 @@
                         <h3>Order Details</h3>
                         <p class="d-flex">
                             <span>Order ID</span>
-                            <span>12345</span>
+                            <span><%=order.getOId() %></span>
                         </p>
                         <p class="d-flex">
                             <span>Customer Name</span>
-                            <span>XYZ</span>
+                            <span><% if(OId != 0 ) out.print(CustomerDAO.viewById(order.getCustomer().getCId()).getName()); %></span>
                         </p>
                         <p class="d-flex">
                             <span>Shipping Address</span>
-                            <span>PQR</span>
+                            <span><%=order.getAddress() %></span>
                         </p>
                         <h3>Shop Details</h3>
+                        <% 
+                        for(Object obj : shopId)
+                        { 
+                            int o = Integer.parseInt(obj.toString());
+                            Shopkeeper shop= ShopkeeperDAO.viewSinglebyID(o);
+                            %>
                         <p class="d-flex">
-                            <span>Shop-1</span>
-                            <span>ABCD</span>
+                            <span><%=shop.getShopName()%></span>
+                            <span><%=shop.getAddress() %></span>
                         </p>
-                        <p class="d-flex">
-                            <span>Shop-2</span>
-                            <span>EFGH</span>
-                        </p>
+                        <% }
+                        %>
+                        
                     </div>
                 </div>
             </div>
