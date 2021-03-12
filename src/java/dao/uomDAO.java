@@ -7,6 +7,7 @@ package dao;
 
 import org.hibernate.Session;
 import entity.Uom;
+import java.util.List;
 import org.hibernate.Query;
 import util.HibernateUtil;
 /**
@@ -24,4 +25,25 @@ public class uomDAO {
             session.close();
             return i;
         }
+        
+        public static List<Uom> view(){
+            String hql = "from Uom";
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.createQuery(hql);
+            List<Uom> uom = query.list();
+            session.close();
+            return uom;
+        }
+        public static Uom viewSinglebyId(int id)
+    {
+        String hql = "from Uom where uomId='"+id+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Uom> uom = query.list();
+        session.close();
+        Uom obj=null;
+        if(!uom.isEmpty())
+            obj = uom.get(0);
+        return obj;
+    }
 }

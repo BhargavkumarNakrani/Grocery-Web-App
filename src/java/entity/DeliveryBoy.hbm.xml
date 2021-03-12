@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06-Mar-2021, 8:41:53 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 11-Mar-2021, 7:23:47 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.DeliveryBoy" table="delivery_boy" catalog="grocerywebapp" optimistic-lock="version">
         <id name="dbId" type="java.lang.Integer">
@@ -23,11 +23,11 @@
         <property name="address" type="string">
             <column name="address" length="100" not-null="true" />
         </property>
-<!--        <property name="hireDate" type="timestamp">
+        <property name="hireDate" type="timestamp">
             <column name="hire_date" length="19" not-null="true" />
-        </property>-->
-        <property name="orderTaken" type="java.lang.Integer">
-            <column name="order_taken" />
+        </property>
+        <property name="orderTaken" type="int">
+            <column name="order_taken" not-null="true" />
         </property>
         <set name="orderses" table="orders" inverse="true" lazy="true" fetch="select">
             <key>

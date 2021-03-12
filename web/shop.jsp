@@ -89,6 +89,7 @@
     </div><%
     String cartMessage = (String) session.getAttribute("cartMessage");
     String productSingle = (String) session.getAttribute("product-single");
+    String deleteProduct = (String) session.getAttribute("deleteProduct");
     if(cartMessage != null){
                     out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
                     out.print("<strong>"+ cartMessage +"</strong><a href=\"cart.jsp\">this</a>");
@@ -96,8 +97,15 @@
                     out.print("</div>");
     }
     if(productSingle != null){
-                    out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+                    out.print("<div class=\"alert alert-info alert-dismissible fade show\">");
                     out.print("<strong>"+ productSingle +"</strong>");
+                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+                    out.print("</div>");
+    }
+    
+    if(deleteProduct != null){
+                    out.print("<div class=\"alert alert-danger alert-dismissible fade show\">");
+                    out.print("<strong>"+ deleteProduct +"</strong>");
                     out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
                     out.print("</div>");
     }
@@ -154,7 +162,7 @@
                                     <a href="?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fas fa-pencil-alt"></i></span>
                                     </a>
-                                    <a href="deleteProduct?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a href="deleteProduct.jsp?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fas fa-trash-alt"></i></span>
                                     </a>
                                     <a href="product-single.jsp?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
@@ -227,6 +235,7 @@
         
         <% session.removeAttribute("cartMessage"); 
             session.removeAttribute("product-single");
+            session.removeAttribute("deleteProduct");
         %>
                  
     }

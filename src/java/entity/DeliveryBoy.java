@@ -1,5 +1,5 @@
 package entity;
-// Generated 06-Mar-2021, 8:41:49 PM by Hibernate Tools 4.3.1
+// Generated 11-Mar-2021, 7:23:46 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -18,7 +18,7 @@ public class DeliveryBoy  implements java.io.Serializable {
      private long phone;
      private String email;
      private String address;
-     //private Date hireDate;
+     private Date hireDate;
      private Integer orderTaken;
      private Set<Orders> orderses = new HashSet<Orders>(0);
      private Set<DeliveryBoyDetail> deliveryBoyDetails = new HashSet<DeliveryBoyDetail>(0);
@@ -89,13 +89,13 @@ public class DeliveryBoy  implements java.io.Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-//    public Date getHireDate() {
-//        return this.hireDate;
-//    }
-//    
-//    public void setHireDate(Date hireDate) {
-//        this.hireDate = hireDate;
-//    }
+    public Date getHireDate() {
+        return this.hireDate;
+    }
+    
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
     public Integer getOrderTaken() {
         return this.orderTaken;
     }

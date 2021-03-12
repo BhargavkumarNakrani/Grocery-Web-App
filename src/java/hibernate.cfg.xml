@@ -51,6 +51,7 @@ Contributor(s):
     <mapping resource="entity/Shopkeeper.hbm.xml"/>
     <mapping resource="entity/Products.hbm.xml"/>
     <mapping resource="entity/Customer.hbm.xml"/>
+    <mapping resource="entity/Category.hbm.xml"/>
     <mapping resource="entity/OrderDetails.hbm.xml"/>
     <mapping resource="entity/DeliveryBoy.hbm.xml"/>
     <mapping resource="entity/Orders.hbm.xml"/>

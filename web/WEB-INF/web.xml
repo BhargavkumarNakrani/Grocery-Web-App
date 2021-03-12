@@ -18,4 +18,18 @@
                 <servlet-name>SingupController</servlet-name>
                 <url-pattern>/SingupController.jsp</url-pattern>
     </servlet-mapping>
+    <servlet>   
+           <servlet-name>saveProduct</servlet-name>
+           <jsp-file>/saveProduct.jsp</jsp-file>
+           <multipart-config>
+               <location>/temp</location>
+               <max-file-size>20848820</max-file-size>
+               <max-request-size>418018841</max-request-size>
+               <file-size-threshold>1048576</file-size-threshold>
+           </multipart-config>
+    </servlet>
+    <servlet-mapping>
+                <servlet-name>saveProduct</servlet-name>
+                <url-pattern>/saveProduct.jsp</url-pattern>
+    </servlet-mapping>
 </web-app>
