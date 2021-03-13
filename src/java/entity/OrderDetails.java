@@ -79,9 +79,9 @@ public class OrderDetails  implements java.io.Serializable {
         this.quantity = quantity;
     }
 
-
-
-
+  
+    
+    
 }
 
 
