@@ -38,6 +38,9 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+    .mouse{z-index: 1;}
+</style>
 </head>
 <%
       if(session.getAttribute("email")==null){
@@ -50,17 +53,6 @@
     <jsp:include page="top_bar.html"/>
     <jsp:include page="menu_bar.jsp"/>
 
-
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg.jpg');">
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-center justify-content-center">
-                <div class="col-md-9 ftco-animate text-center">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.jsp">Home</a></span> <span>Cart</span></p>
-                    <h1 class="mb-0 bread">My Cart</h1>
-                </div>
-            </div>
-        </div>
-    </div>
     <% if(cart.isEmpty()){ %>
     
     <div class="container-fluid mt-100 mt-5">

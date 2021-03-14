@@ -34,16 +34,6 @@
     <jsp:include page="menu_bar.jsp"/>
 
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg.jpg');">
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-center justify-content-center">
-                <div class="col-md-9 ftco-animate text-center">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.jsp">Home</a></span> <span>Employees Details</span></p>
-                    <h1 class="mb-0 bread">Employees Details</h1>
-                </div>
-            </div>
-        </div>
-    </div>
     <section class="ftco-section ftco-cart">
         <div class="container">
             <div class="row">
