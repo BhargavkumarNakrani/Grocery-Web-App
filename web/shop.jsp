@@ -64,6 +64,7 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="https://kit.fontawesome.com/d628db03e1.js" crossorigin="anonymous"></script>
+<style>.mouse{z-index: -1;}</style>
 </head>
 <%
       if(session.getAttribute("email")==null){
@@ -77,25 +78,16 @@
     <jsp:include page="top_bar.html"/>
     <jsp:include page="menu_bar.jsp"/>
     
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg.jpg');">
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-center justify-content-center">
-                <div class="col-md-9 ftco-animate text-center">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.jsp">Home</a></span> <span>Products</span></p>
-                    <h1 class="mb-0 bread">Products</h1>
-                </div>
-            </div>
-        </div>
-    </div><%
+    <%
     String cartMessage = (String) session.getAttribute("cartMessage");
     String productSingle = (String) session.getAttribute("product-single");
     String deleteProduct = (String) session.getAttribute("deleteProduct");
-    if(cartMessage != null){
-                    out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
-                    out.print("<strong>"+ cartMessage +"</strong><a href=\"cart.jsp\">this</a>");
-                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
-                    out.print("</div>");
-    }
+    //if(cartMessage != null){
+    //                out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+    //                out.print("<strong>"+ cartMessage +"</strong><a href=\"cart.jsp\">this</a>");
+    //                out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+    //                out.print("</div>");
+    //}
     if(productSingle != null){
                     out.print("<div class=\"alert alert-info alert-dismissible fade show\">");
                     out.print("<strong>"+ productSingle +"</strong>");
@@ -134,7 +126,7 @@
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#"><%=product.getName()%></a></h3>
+                            <h3><a id="pname"><%=product.getName()%></a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span>&#8360; <%=product.getPrice()%> </span></p>
@@ -149,7 +141,7 @@
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
                                     <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0) {%>
-                                        <a href="addToCart.jsp?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a href="addToCart.jsp?productId=<%=product.getPId()%>" class="cart-add buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fa fa-shopping-cart"></i></span>
                                     </a>
                                     <% }%>
@@ -172,6 +164,7 @@
                             </div>
                             <% }%>
                         </div>
+                        <div id="snackbar"><%out.print(product.getName()+" added to cart.");%></div>
                     </div>
                 </div>
                         <% }%>
@@ -239,5 +232,30 @@
         %>
                  
     }
+</script>
+<script>
+    $(document).ready(function () {
+    $('.cart-add').on('click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var snackbar = $(this).parentsUntil('.product').next("#snackbar");
+        $.ajax({
+            url: href,
+            data: $(this).serialize(),
+
+            success: function (data) {
+                snackbar.prev('.text').nextUntil('.cart-add').remove();
+                snackbar.addClass('show');
+                setTimeout(function(){
+                    snackbar.removeClass('show');
+                },5000);
+            },
+
+            error: function (jxhr, text, error) {
+                alert(error);
+            }
+        });
+    });
+});
 </script>
 <script src="js/jquery-3.3.1.min.js"></script>
