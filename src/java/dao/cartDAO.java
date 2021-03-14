@@ -92,7 +92,7 @@ public class cartDAO {
         Query query = session.createQuery(hql);
         long i = (long) query.uniqueResult();
         session.close();
-        return i;
+        return i>=0 ? i : 0;
     }
     
     public static void updateQuntity(int id, int i){
