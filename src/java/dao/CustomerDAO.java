@@ -72,4 +72,14 @@ public class CustomerDAO {
         session.close();
         return Id;
     }
+    
+    public static int updateAddress(String address, String email){
+        String hql = "UPDATE Products set address="+address+" where email="+email;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int updatedEntities = session.createQuery(hql).executeUpdate();
+        t.commit();
+        session.close();
+        return updatedEntities;
+    }
 }
