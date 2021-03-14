@@ -40,4 +40,13 @@ public class orderDetailDAO {
         session.close();
         return orderDetails;
     }
+    
+    public static List<OrderDetails> viewByShopAndOId(int OId, int shop_id){
+        String hql = "from OrderDetails where orders.OId= "+OId+" and shopkeeper.SId="+shop_id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<OrderDetails> orderDetails = query.list();
+        session.close();
+        return orderDetails;
+    }
 }

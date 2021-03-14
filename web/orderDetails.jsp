@@ -1,3 +1,4 @@
+<%@page import="dao.productDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="entity.Shopkeeper"%>
 <%@page import="dao.CustomerDAO"%>
@@ -9,21 +10,38 @@
 <%@page import="dao.orderDetailDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    String role = (String)session.getAttribute("role");
+    String email = (String)session.getAttribute("email");
+//    if(role != "SHOPKEEPER" || role != "DELIVERYBOY"){
+//        response.sendRedirect("contact.jsp");
+//    }
     String SOId = request.getParameter("o_id");
     int OId = 0;
     List<OrderDetails> orderList = new ArrayList<OrderDetails>();
     //List<Shopkeeper> shop = new ArrayList<Shopkeeper>();
     List<OrderDetails> shopId = new ArrayList<OrderDetails>();
     Orders order = new Orders();
-    if(SOId != null){
+    
+    if(email == null){
+        role ="";
+    }
+    
+    if((SOId != null && role != "CUSTOMER") && (role.equals("SHOPKEEPER") || role.equals("DELIVERYBOY")) && (email != null)){
         OId = Integer.parseInt(SOId);
         orderList = orderDetailDAO.viewByOrderId(OId);
         order =  ordersDAO.viewByOrderId(OId);
         shopId = orderDetailDAO.viewShopName(OId);
         //shop = ShopkeeperDAO.viewSinglebyID();
     } else {
-        session.setAttribute("OrderSelect", "Please select order first");
-        //response.sendRedirect("Order.jsp");
+        if(SOId == null) {
+            session.setAttribute("OrderSelect", "Please select order first");
+            response.sendRedirect("index.jsp");
+        } else if(email == null){
+            response.sendRedirect("login.jsp");
+        }
+        else if(role != "SHOPKEEPER" || role != "DELIVERYBOY"){
+            response.sendRedirect("contact.jsp?"+role);
+        }
     }
 %>
 <html lang="en">
@@ -93,17 +111,24 @@
                 </div>
             </div>
             <div id="accordion">
+                <%
+                 int Subtotal = 0;
+                 for(Object obj : shopId)
+                { 
+                    int shop_id = Integer.parseInt(obj.toString());
+                    Shopkeeper shop= ShopkeeperDAO.viewSinglebyID(shop_id);
+                %>
                 <div class="card mb-2">
-                    <div class="card-header" id="headingOne">
+                    <div class="card-header" id="heading<%=shop_id %>">
                         <h5 class="mb-0">
-                            <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                Shop Name-1
+                            <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=shop_id %>" aria-expanded="false" aria-controls="collapse<%=shop_id %>">
+                                <%=shop.getShopName() %>
                             <i class="fa fa-plus float-right m-1"></i>
                             </a>
                         </h5>
                     </div>
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div id="collapse<%=shop_id %>" class="collapse" aria-labelledby="heading<%=shop_id %>" data-parent="#accordion">
                         <div class="card-body">
                             <div class="col-md-12 ftco-animate">
                                 <div class="cart-list">
@@ -115,25 +140,29 @@
                                                 <th>price</th>
                                                 <th>quantity</th>
                                                 <th>Amount</th>
-                                                <th>Price</th>
+                                                <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%
+                                               orderList = orderDetailDAO.viewByShopAndOId(OId,shop_id);
+                                               int i=0;
+                                               int total = 0;
+                                               for(OrderDetails ol : orderList) {
+                                                   total = ol.getAmount()+total;
+                                               
+                                            %>
                                             <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td rowspan="2">500</td>
+                                                <td><%=++i %></td>
+                                                <td><%=productDAO.viewById(ol.getProducts().getPId()).getName() %></td>
+                                                <td><%=ol.getPrice() %></td>
+                                                <td><%=ol.getQuantity() %></td>
+                                                <td><%=ol.getAmount() %></td>
+                                                <% if(ol.equals(orderList.get(orderList.size()-1))) {
+                                                   Subtotal = Subtotal+total; %>
+                                                <td rowspan="<%=orderList.size() %>"><%=total %></td>
                                             </tr>
-                                            <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                            </tr>
+                                            <% }  }%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -141,107 +170,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-2">
-                    <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <a class="btn btn-link collapsed float-left" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Shop Name-2
-                            <i class="fa fa-plus float-right m-1"></i>
-                            </a>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="col-md-12 ftco-animate">
-                                <div class="cart-list">
-                                    <table class="table table-hover">
-                                        <thead class="thead-primary">
-                                            <tr class="text-center">
-                                                <th>Sr No.</th>
-                                                <th>Product Name</th>
-                                                <th>price</th>
-                                                <th>quantity</th>
-                                                <th>Amount</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td rowspan="2">500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Shop Name-3
-                            <i class="fa fa-plus float-right m-1"></i>
-                            </a>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="col-md-12 ftco-animate">
-                                <div class="cart-list">
-                                    <table class="table table-hover">
-                                        <thead class="thead-primary">
-                                            <tr class="text-center">
-                                                <th>Sr No.</th>
-                                                <th>Product Name</th>
-                                                <th>price</th>
-                                                <th>quantity</th>
-                                                <th>Amount</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td rowspan="3">500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                                <td>Cell</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%
+                    }
+                    int Delivery = 0;
+                    int Total = 0;
+                    int Discount = 0;
+                    Delivery = Subtotal > 99 ? 0 : 10;
+                    Discount = Delivery == 10 ? 0 : 10;
+                    Total = (int) Subtotal + Delivery;
+                   
+                %>
             </div>
             <div class="row justify-content-end">
                 <div class="col-lg-4 mt-5 cart-wrap ftco-animate fadeInUp ftco-animated">
@@ -249,7 +187,7 @@
                         <h3>Totals</h3>
                         <p class="d-flex">
                             <span>Subtotal</span>
-                            <span>Rs. 190</span>
+                            <span>Rs. <%=Subtotal %></span>
                         </p>
                         <p class="d-flex">
                             <span>Delivery</span>
@@ -257,12 +195,12 @@
                         </p>
                         <p class="d-flex">
                             <span>Discount</span>
-                            <span>Rs. -10</span>
+                            <span>Rs. -<%=Discount %></span>
                         </p>
                         <hr>
                         <p class="d-flex total-price">
                             <span>Total</span>
-                            <span>Rs. 190</span>
+                            <span>Rs. <%=Total %></span>
                         </p>
                     </div>
                 </div>
