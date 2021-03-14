@@ -41,13 +41,13 @@
     
     if(email != null){
         cart = cartDAO.viewCart(email);
-        
         long subTotal = cartDAO.cartTotal(email);
         int Delivery = subTotal > 99 ? 0 : 10;
         int Total = (int) subTotal + Delivery;
         
         Date orderDate = new java.util.Date();
         
+        CustomerDAO.updateAddress(address, email);
         customer_bean = CustomerDAO.viewByEmail(email);
         order_bean = new Orders(customer_bean, Total, orderDate, 0, address);
         int o_id = ordersDAO.save(order_bean);
