@@ -72,6 +72,15 @@ public class DeliveryBoyDAO {
         return i;
     }
     
+    public static int updateDBorderTaken(String email){
+        String hql = "UPDATE DeliveryBoy set orderTaken=orderTaken+1 where email ='"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int updatedEntities = session.createQuery(hql).executeUpdate();
+        t.commit();
+        session.close();
+        return updatedEntities;
+    }
     
     
 }

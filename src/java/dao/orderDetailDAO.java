@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -19,6 +20,15 @@ import util.HibernateUtil;
  */
 public class orderDetailDAO {
     static Session session = null;
+    
+    public static int save(OrderDetails bean){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        int i = (int) session.save(bean);
+        t.commit();
+        session.close();
+        return i;
+    }
     
     public static List<OrderDetails> viewByOrderId(int id){
         String hql = "from OrderDetails where orders.OId= "+id;

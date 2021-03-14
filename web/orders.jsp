@@ -1,7 +1,42 @@
+<%@page import="dao.DeliveryBoyDAO"%>
+<%@page import="entity.DeliveryBoy"%>
+<%@page import="dao.CustomerDAO"%>
+<%@page import="entity.Customer"%>
+<%@page import="dao.ordersDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Orders"%>
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String email = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
+    
+    if(role == null) {
+        //throw new AuthenticationException("");
+        response.sendRedirect("login.jsp");
+        role = "";
+    } else if(role.equals("CUSTOMER")){
+        throw new AuthenticationException(); 
+    }
+    
+    List<Orders> orders = new ArrayList<Orders>();
+    
+    if(email != null) {
+        orders = ordersDAO.viewAll();
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+    String OrderAssign = (String) session.getAttribute("OrderAssign");
+    if(OrderAssign != null){
+                    out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+                    out.print("<strong>"+ OrderAssign +"</strong>");
+                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+                    out.print("</div>");
+    }
+%>
     <!-- Mirrored from preview.colorlib.com/theme/vegefoods/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 18 Feb 2021 10:05:08 GMT -->
     <head>
         <title>Orders - Vegefoods</title>
@@ -46,31 +81,64 @@
                                         <th>Amount</th>
                                         <th>Date</th>
                                         <th>Status</th>
-                                        <th>Delivery Boy Name</th>
+                                        <% if(role.equals("SHOPKEEPER")) {%>
+                                        <th>Delivery Boy Name</th> <% } else { %>
+                                        <th>Action</th>
+                                        <% }%>
+                                        
                                     </tr>
                                 </thead>
+                                <%
+                                for(Orders obj : orders)
+                                {
+                                    Customer customer = CustomerDAO.viewById(obj.getCustomer().getCId());
+                                    DeliveryBoy db = new DeliveryBoy();
+                                    if(!ordersDAO.checkDB(obj.getOId())) {
+                                        db = DeliveryBoyDAO.viewSinglebyID(obj.getDeliveryBoy().getDbId());
+                                    }
+                                %>
                                 <tbody>
                                     <tr class="text-center">
-                                        <td>123</td>
-                                        <td>Mahesh Kukadiya</td>
-                                        <td>789465130</td>
-                                        <td>111,ABC shopping Center,Kamrej, Surat</td>
-                                        <td>500</td>
-                                        <td>12/02/2021</td>
-                                        <td>Delivered</td>
-                                        <td>Vishal Patel</td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>123</td>
-                                        <td>Mahesh Kukadiya</td>
-                                        <td>789465130</td>
-                                        <td>111,ABC shopping Center,Kamrej, Surat</td>
-                                        <td>500</td>
-                                        <td>12/02/2021</td>
-                                        <td>Delivered</td>
-                                        <td>Vishal Patel</td>
+                                        <td><%=obj.getOId() %></td>
+                                        <td><%=customer.getName() %></td>
+                                        <td><%=customer.getPhone() %></td>
+                                        <td><%=obj.getAddress() %></td>
+                                        <td><%=obj.getAmount() %></td>
+                                        <td><%=obj.getOrderDate() %></td>
+                                        <td><%
+                                            if(obj.getStatus()==0){
+                                                out.print("Pending");
+                                            } else if(obj.getStatus()==1){
+                                                out.print("Assign");
+                                            }
+                                            %>
+                                        </td>
+                                        <% if(role.equals("DELIVERYBOY")) {%>
+                                        <td><%
+                                                if(ordersDAO.checkDB(obj.getOId()) && role.equals("DELIVERYBOY")){
+                                                    %>
+                                                    <button><a href="updateOrders.jsp?Oid=<%=obj.getOId() %>">Take order</a></button>
+                                            <%
+                                                } else if(ordersDAO.checkDB(obj.getOId(),email)){ %>
+                                                <a href="?<%=obj.getOId() %>">view</a>
+                                                <% } else{
+                                                    out.print("This order taken by</br> "+db.getName());
+                                                }
+                                            %>
+                                        </td>
+                                        <% } else { %>
+                                        <td><%
+                                                if(ordersDAO.checkDB(obj.getOId()) && role.equals("SHOPKEER")){
+                                                    out.print(db.getName());
+                                                }
+                                            %>
+                                            
+                                        </td>
+                                        <% }%>
+                                        
                                     </tr>
                                 </tbody>
+                                <% }%>
                             </table>
                         </div>
                     </div>
@@ -108,3 +176,13 @@
         </script>
     </body>
 </html>
+
+<script>
+    function alert_dismiss() {
+        
+        <%  session.removeAttribute("OrderAssign"); 
+         %>
+                 
+    }
+</script>
+<script src="js/jquery-3.3.1.min.js"></script>
