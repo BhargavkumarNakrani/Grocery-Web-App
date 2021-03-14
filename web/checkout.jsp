@@ -51,6 +51,9 @@
             String uri = request.getRequestURI();
             String pageName = uri.substring(uri.lastIndexOf("/") + 1);
             response.sendRedirect("login.jsp?return_to=" + pageName);
+        } else if(cartDAO.CartItem(email)==0) {
+            session.setAttribute("product-single", "Add a product to cart");
+            response.sendRedirect("shop.jsp");
         }
     %>
     <body class="goto-here">
@@ -169,7 +172,8 @@
                     int Total = 0;
                     int Discount = 0;
                     if (email != null) {
-                        subTotal = cartDAO.cartTotal(email);
+                        if(cartDAO.CartItem(email)!=0)
+                            subTotal = cartDAO.cartTotal(email);
                         Delivery = subTotal > 99 ? 0 : 10;
                         Discount = Delivery == 10 ? 0 : 10;
                         Total = (int) subTotal + Delivery;
