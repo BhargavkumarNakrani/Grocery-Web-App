@@ -90,6 +90,14 @@
                             <span><% if(OId != 0 ) out.print(CustomerDAO.viewById(order.getCustomer().getCId()).getName()); %></span>
                         </p>
                         <p class="d-flex">
+                            <span>Customer Address</span>
+                            <span><% if(OId != 0 ) out.print(CustomerDAO.viewById(order.getCustomer().getCId()).getAddress()); %></span>
+                        </p>
+                        <p class="d-flex">
+                            <span>Customer Phone</span>
+                            <span><% if(OId != 0 ) out.print(CustomerDAO.viewById(order.getCustomer().getCId()).getPhone()); %></span>
+                        </p>
+                        <p class="d-flex">
                             <span>Shipping Address</span>
                             <span><%=order.getAddress() %></span>
                         </p>
