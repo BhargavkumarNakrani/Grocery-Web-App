@@ -2,18 +2,13 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Page Not Found</title>
-
-	<link href="https://fonts.googleapis.com/css?family=Nunito:400,700" rel="stylesheet">
-
-
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
-
-
+    <title>Access Denied - Vegefoods</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&amp;display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
