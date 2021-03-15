@@ -26,7 +26,7 @@
                                 </li>
                             </li>
                             <% }else{ %>
-                            <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:14px"></i>[<%=cartDAO.CartItem(email)%>]</a></li>
+                            <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:20px"></i><div class="cart-item"><%=cartDAO.CartItem(email)%></div></a></li>
                             <%}%>
                             <li class="nav-item"><button onclick="window.location.href='logout.jsp'" class="btn btn-primary">Logout</button></li>
                         <%} else{%>
