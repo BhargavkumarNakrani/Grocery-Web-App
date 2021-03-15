@@ -122,7 +122,7 @@
 %>
                 <div class="col-md-6 col-lg-3 ftco-animate" id="delete">
                     <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>">
+                        <a class="img-prod"><img class="img-fluid" src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>">
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
@@ -241,10 +241,9 @@
         var snackbar = $(this).parentsUntil('.product').next("#snackbar");
         $.ajax({
             url: href,
-            data: $(this).serialize(),
 
-            success: function (data) {
-                snackbar.prev('.text').nextUntil('.cart-add').remove();
+            success: function () {
+                snackbar.prev('.text').find('a.cart-add').remove();
                 snackbar.addClass('show');
                 setTimeout(function(){
                     snackbar.removeClass('show');
