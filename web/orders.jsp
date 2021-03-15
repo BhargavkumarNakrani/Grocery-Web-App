@@ -128,8 +128,8 @@
                                         </td>
                                         <% } else { %>
                                         <td><%
-                                                if(ordersDAO.checkDB(obj.getOId()) && role.equals("SHOPKEER")){
-                                                    out.print(db.getName());
+                                                if(!ordersDAO.checkDB(obj.getOId()) && role.equals("SHOPKEEPER")){
+                                                    out.print("This order taken by "+db.getName()+"</br><a href=\"orderDetails.jsp?o_id="+obj.getOId()+"\">View</a>");
                                                 }
                                             %>
                                             
