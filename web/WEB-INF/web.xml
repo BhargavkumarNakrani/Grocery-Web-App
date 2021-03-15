@@ -37,6 +37,6 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/403-error.jsp</location>
+        <location>/404-error.jsp</location>
     </error-page>
 </web-app>
