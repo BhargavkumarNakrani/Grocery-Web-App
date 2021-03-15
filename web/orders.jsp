@@ -120,7 +120,7 @@
                                                     <button><a href="updateOrders.jsp?Oid=<%=obj.getOId() %>">Take order</a></button>
                                             <%
                                                 } else if(ordersDAO.checkDB(obj.getOId(),email)){ %>
-                                                <a href="?<%=obj.getOId() %>">view</a>
+                                                <a href="orderDetails.jsp?o_id=<%=obj.getOId() %>">view</a>
                                                 <% } else{
                                                     out.print("This order taken by</br> "+db.getName());
                                                 }

@@ -151,7 +151,7 @@
                     }
                 }
                 else if(role != null)
-                    if(role.equalsIgnoreCase("CUSTOMER") || role.equalsIgnoreCase("DELIVERYBOY")){
+                    if(role.equalsIgnoreCase("CUSTOMER")){
                         List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
                         for(Shopkeeper obj : sk)
                         {
@@ -200,7 +200,11 @@
                     </div>
                 </div>
                 <%
-                }%>
+                }
+                if(role.equals("DELIVERYBOY") ){
+                    response.sendRedirect("orders.jsp");
+                }
+                %>
               
                      
             </div>
