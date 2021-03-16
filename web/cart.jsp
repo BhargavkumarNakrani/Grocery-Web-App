@@ -1,3 +1,4 @@
+<%@page import="dao.ShopkeeperDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.productDAO"%>
 <%@page import="java.util.List"%>
@@ -95,7 +96,7 @@
                                     <td class="image-prod"><div class="img"><img class="card-img-top" src="data:image/jpg;base64,<%=productDAO.viewImage(c.getProducts().getPId())%>"  alt="Card image" style="width:100%"></div></td>
                                     <td class="product-name">
                                         <h3><%=productDAO.viewById(c.getProducts().getPId()).getName()%></h3>
-
+                                        <h3>from - <%=ShopkeeperDAO.viewSinglebyID(productDAO.viewById(c.getProducts().getPId()).getShopkeeper().getSId()).getShopName()%></h3>
                                     </td>
                                     <td class="price"><%=c.getPrice()%></td>
                                     <td class="quantity">
