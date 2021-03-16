@@ -1,3 +1,4 @@
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.productDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="entity.Shopkeeper"%>
@@ -35,12 +36,12 @@
     } else {
         if(SOId == null) {
             session.setAttribute("OrderSelect", "Please select order first");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("orders.jsp");
         } else if(email == null){
             response.sendRedirect("login.jsp");
         }
         else if(role != "SHOPKEEPER" || role != "DELIVERYBOY"){
-            response.sendRedirect("contact.jsp?"+role);
+            throw new AuthenticationException(); 
         }
     }
 %>
@@ -169,8 +170,9 @@
                                                 <% if(ol.equals(orderList.get(orderList.size()-1))) {
                                                    Subtotal = Subtotal+total; %>
                                                 <td rowspan="<%=orderList.size() %>"><%=total %></td>
+                                                <% }%>
                                             </tr>
-                                            <% }  }%>
+                                            <% }%>
                                         </tbody>
                                     </table>
                                 </div>
