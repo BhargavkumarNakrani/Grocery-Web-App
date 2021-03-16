@@ -1,4 +1,35 @@
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="dao.productDAO"%>
+<%@page import="dao.orderDetailDAO"%>
+<%@page import="entity.OrderDetails"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Orders"%>
+<%@page import="dao.ordersDAO"%>
+<%@page import="dao.CustomerDAO"%>
+<%@page import="entity.Customer"%>
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String role = (String) session.getAttribute("role");
+    String email = (String) session.getAttribute("email");
+    Customer customer = new Customer();
+    List<Orders> orders = new ArrayList<Orders>();
+    if(email == null) {
+        role = "";
+        email = "";
+        String uri = request.getRequestURI();
+        String pageName = uri.substring(uri.lastIndexOf("/") + 1);
+        response.sendRedirect("login.jsp?return_to=" + pageName);
+    } else if(role.equals("SHOPKEEPER") && role.equals("DELIVERYBOY")){
+        throw new AuthenticationException(); 
+    } else if(role.equals("CUSTOMER")){
+        customer = CustomerDAO.viewByEmail(email);
+        orders=ordersDAO.viewByCustomerId(customer.getCId());
+    }
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,18 +65,22 @@
         <section class="ftco-section ftco-cart mb-5">
             <div class="container">
                 <div id="accordion">
+                    <%
+                    SimpleDateFormat formatter = new SimpleDateFormat("E,dd MMMM yyyy (hh:mm a)");  
+                    for(Orders order : orders){
+                    %>
                     <div class="card mb-2">
                         <div class="card-header" id="heading3">
                             <h5 class="mb-0">
-                                <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    <div style="width:50%;margin-right: 20px">Order ID : 123456789</div> 
-                                    <div style="width:50%;margin-right: 25px">Order Date : 12/02/2021</div>
+                                <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=order.getOId() %>" aria-expanded="false" aria-controls="collapse3">
+                                    <div style="width:50%;margin-right: 20px">Order ID : <%=order.getOId() %></div> 
+                                    <div style="width:50%;margin-right: 25px">Order Date : <%=formatter.format(order.getOrderDate()) %></div>
                                     <i class="fa fa-plus float-right m-1"></i>
                                 </a>
                             </h5>
                         </div>
 
-                        <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+                        <div id="collapse<%=order.getOId() %>" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
                                     <div class="cart-list">
@@ -61,16 +96,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                            <%
+                                            List<OrderDetails> OrdersDetail = orderDetailDAO.viewByOrderId(order.getOId());
+                                            int total = 0;
+                                            for(OrderDetails obj : OrdersDetail) {
+                                                total = obj.getAmount()+total;
+                                            %>
                                                 <tr class="text-center">
-                                                    <td>1</td>
-                                                    <td class="product-name"><h3>Lijjat Papad</h3><h3>from - Shree Gel Ambe Provision Store</h3></td>
-                                                    <td>500</td>
-                                                    <td>2</td>
-                                                    <td>1000</td>
-                                                    <td>2000</td>
+                                                    <td><%=obj.getId() %></td>
+                                                    <td class="product-name"><h3><%=productDAO.viewById(obj.getProducts().getPId()).getName() %></h3><h3>by <%=ShopkeeperDAO.viewSinglebyID(obj.getShopkeeper().getSId()).getShopName() %></h3></td>
+                                                    <td><%=obj.getPrice() %></td>
+                                                    <td><%=obj.getQuantity() %></td>
+                                                    <td><%=obj.getAmount() %></td>
+                                                    <% if(obj.equals(OrdersDetail.get(OrdersDetail.size()-1))) { %>
+                                                    <td rowspan="<%=OrdersDetail.size() %>"><%=total %></td>
+                                                <% }%>
+                                                   
                                                 </tr>
-
+                                            <% }%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -78,60 +121,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card mb-2">
-                        <div class="card-header" id="heading4">
-                            <h5 class="mb-0">
-                                <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                    <div style="width:50%;margin-right: 20px">Order ID : 123456789</div> 
-                                    <div style="width:50%;margin-right: 25px">Order Date : 12/02/2021</div>
-                                    <i class="fa fa-plus float-right m-1"></i>
-                                </a>
-                            </h5>
-                        </div>
-
-                        <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
-                                    <div class="cart-list">
-                                        <table class="table table-hover">
-                                            <thead class="thead-primary">
-                                                <tr class="text-center">
-                                                    <th>Sr No.</th>
-                                                    <th>Product Name</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr class="text-center">
-                                                    <td>1</td>
-                                                    <td class="product-name"><h3>Lijjat Papad</h3><h3>from - Shree Gel Ambe Provision Store</h3></td>
-                                                    <td>500</td>
-                                                    <td>2</td>
-                                                    <td>1000</td>
-                                                    <td>2000</td>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td>1</td>
-                                                    <td class="product-name"><h3>Lijjat Papad</h3><h3>from - Shree Gel Ambe Provision Store</h3></td>
-                                                    <td>500</td>
-                                                    <td>2</td>
-                                                    <td>1000</td>
-                                                    <td>2000</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <% }%>
                 </div>
             </div>
         </section>
