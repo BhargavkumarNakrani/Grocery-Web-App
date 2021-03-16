@@ -230,13 +230,17 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
-    $('[data-toggle="collapse"]').click(function () {
-        $(this).find('i').toggleClass('fas fa-plus fas fa-minus'); 
-    });
+    $('a.btn-link').click(function () {
+                $(this).find('i').toggleClass('fa-plus fa-minus');
+                $(this).closest('div.card').siblings().each(function(){
+                    if($(this).find('i.fa').hasClass('fa-minus')){
+                        $(this).find('i.fa').toggleClass('fa-minus fa-plus');
+                    }
+                });
+            });
 </script>
 </body>
 </html>
