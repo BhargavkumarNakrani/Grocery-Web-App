@@ -31,6 +31,14 @@ public class ordersDAO {
         }
         return obj;
     }
+    public static List<Orders> viewByCustomerId(int CId){
+        String hql = "from Orders where customer.CId= "+CId+ " ORDER BY orderDate DESC";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Orders> order = query.list();
+        session.close();
+        return order;
+    }
     
     public static int save(Orders bean){
         session = HibernateUtil.getSessionFactory().openSession();
