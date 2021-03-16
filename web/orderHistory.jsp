@@ -24,8 +24,7 @@
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
-            td{color:black;}
-            .table tbody tr td{padding:25px 10px;}
+            .table tbody tr td,.table tbody tr td h3{color:black;font-size: 15px!important;}
         </style>
     </head>
     <body class="goto-here">
@@ -34,42 +33,106 @@
         
         <section class="ftco-section ftco-cart mb-5">
             <div class="container">
-<!--            <div class="row">
-                    <div class="col-md-12 ftco-animate">
-                        <div class="cart-list">
-                            <table class="table">
-                                <thead class="thead-primary">
-                                    <tr class="text-center">
-                                        <th>Sr No.</th>
-                                        <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Lijjat Papad</td>
-                                        <td>500</td>
-                                        <td>2</td>
-                                        <td>1000</td>
-                                        <td>2000</td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Lijjat Papad</td>
-                                        <td>500</td>
-                                        <td>2</td>
-                                        <td>1000</td>
-                                        <td>2000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <div id="accordion">
+                    <div class="card mb-2">
+                        <div class="card-header" id="heading3">
+                            <h5 class="mb-0">
+                                <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                    <div style="width:50%;margin-right: 20px">Order ID : 123456789</div> 
+                                    <div style="width:50%;margin-right: 25px">Order Date : 12/02/2021</div>
+                                    <i class="fa fa-plus float-right m-1"></i>
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                                    <div class="cart-list">
+                                        <table class="table table-hover">
+                                            <thead class="thead-primary">
+                                                <tr class="text-center">
+                                                    <th>Sr No.</th>
+                                                    <th>Product Name</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr class="text-center">
+                                                    <td>1</td>
+                                                    <td class="product-name"><h3>Lijjat Papad</h3><h3>from - Shree Gel Ambe Provision Store</h3></td>
+                                                    <td>500</td>
+                                                    <td>2</td>
+                                                    <td>1000</td>
+                                                    <td>2000</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>-->
+
+                    <div class="card mb-2">
+                        <div class="card-header" id="heading4">
+                            <h5 class="mb-0">
+                                <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                    <div style="width:50%;margin-right: 20px">Order ID : 123456789</div> 
+                                    <div style="width:50%;margin-right: 25px">Order Date : 12/02/2021</div>
+                                    <i class="fa fa-plus float-right m-1"></i>
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                                    <div class="cart-list">
+                                        <table class="table table-hover">
+                                            <thead class="thead-primary">
+                                                <tr class="text-center">
+                                                    <th>Sr No.</th>
+                                                    <th>Product Name</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr class="text-center">
+                                                    <td>1</td>
+                                                    <td class="product-name"><h3>Lijjat Papad</h3><h3>from - Shree Gel Ambe Provision Store</h3></td>
+                                                    <td>500</td>
+                                                    <td>2</td>
+                                                    <td>1000</td>
+                                                    <td>2000</td>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td>1</td>
+                                                    <td class="product-name"><h3>Lijjat Papad</h3><h3>from - Shree Gel Ambe Provision Store</h3></td>
+                                                    <td>500</td>
+                                                    <td>2</td>
+                                                    <td>1000</td>
+                                                    <td>2000</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
         <jsp:include page="footer.html"/>
@@ -90,7 +153,11 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
-
+        <script>
+    $('[data-toggle="collapse"]').click(function () {
+        $(this).find('i').toggleClass('fas fa-plus fas fa-minus'); 
+    });
+        </script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
