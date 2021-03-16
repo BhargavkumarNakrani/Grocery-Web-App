@@ -23,7 +23,15 @@ public class Orders  implements java.io.Serializable {
 
     public Orders() {
     }
-
+    
+    public Orders(Customer customer, int amount, Date orderDate, int status, String address) {
+        this.customer = customer;
+        this.deliveryBoy = deliveryBoy;
+        this.amount = amount;
+        this.orderDate = orderDate;
+        this.status = status;
+        this.address = address;
+    }
 	
     public Orders(Customer customer, DeliveryBoy deliveryBoy, int amount, Date orderDate, int status, String address) {
         this.customer = customer;

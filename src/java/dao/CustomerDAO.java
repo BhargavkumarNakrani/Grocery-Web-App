@@ -74,7 +74,7 @@ public class CustomerDAO {
     }
     
     public static int updateAddress(String address, String email){
-        String hql = "UPDATE Products set address='"+address+"' where email='"+email+"'";
+        String hql = "UPDATE Customer set address='"+address+"' where email='"+email+"'";
         session = HibernateUtil.getSessionFactory().openSession();
         Transaction t=session.beginTransaction();
         int updatedEntities = session.createQuery(hql).executeUpdate();
