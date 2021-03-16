@@ -1,7 +1,7 @@
 <html lang="en">
 
     <head>
-        <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+        <title>Contact - Vegefoods</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -33,17 +33,32 @@
                     <div class="w-100"></div>
                     <div class="col-md-3 d-flex">
                         <div class="info bg-white p-4">
-                            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+                            <p>
+                                <span>Address:</span> 
+                            <ul style="color:black">
+                                <li>School Of Engineering, RK University Rakjot.</li>
+                            </ul>
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex">
                         <div class="info bg-white p-4">
-                            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                            <p><span>Phone:</span>
+                            <ul style="color:black">
+                                <li><a href='tel://7984551549'>7984551549</a></li>
+                                <li><a href='tel://6355365761'>6355365761</a></li>
+                            </ul>
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex">
                         <div class="info bg-white p-4">
-                            <p><span>Email:</span> <a href="https://preview.colorlib.com/cdn-cgi/l/email-protection#3e575058517e47514b4c4d574a5b105d5153"><span class="__cf_email__" data-cfemail="a6cfc8c0c9e6dfc9d3d4d5cfd2c388c5c9cb">[email&#160;protected]</span></a></p>
+                            <p><span>Email:</span>
+                            <ul style="color:black">
+                                <li><a href='mailto://bnakrani833@rku.ac.in'>bnakrani833@rku.ac.in</a></li>
+                                <li><a href='mailto://spanasuriya892@rku.ac.in'>spanasuriya892@rku.ac.in</a></li>
+                            </ul>
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex">
@@ -73,7 +88,9 @@
                         </form>
                     </div>
                     <div class="col-md-6 d-flex">
-                        <div id="map" class="bg-white"></div>
+                        <div id="map" class="bg-white">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7385.956764048237!2d70.901291!3d22.240899!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959b4a155143365%3A0xc2b2c14f7bea1b12!2sSchool%20of%20Engineering%2C%20RKU!5e0!3m2!1sen!2sin!4v1615889090463!5m2!1sen!2sin" width="620" height="560" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,8 +112,6 @@
         <script src="js/jquery.animateNumber.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-        <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
 
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
