@@ -56,6 +56,14 @@
         <link rel="stylesheet" href="css/style.css">
         <style>
             .table tbody tr td,.table tbody tr td h3{color:black;font-size: 15px!important;}
+            .order-id,.order-date{margin-right: 20px;width: 50%;}
+            .modal-body p{margin-top: 1rem;}
+            .modal-footer a{color:black;}
+            .modal-header .close{font-size: 1.5rem!important;border: 0!important;}
+            .cancel-order{color:#fff;}
+            .cancel-order > a.btn:hover ,.modal-footer a:hover{border: 1px solid #82ae46;background: 0 0;color: #82ae46;}
+            @media(max-width:991.98px){.order-id,.order-date{margin-right: 10px!important;width: 50%!important;font-size: smaller;}}
+            @media(max-width:700px){.card-header{padding: 0px;}}
         </style>
     </head>
     <body class="goto-here">
@@ -73,16 +81,35 @@
                         <div class="card-header" id="heading3">
                             <h5 class="mb-0">
                                 <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=order.getOId() %>" aria-expanded="false" aria-controls="collapse3">
-                                    <div style="width:50%;margin-right: 20px">Order ID : <%=order.getOId() %></div> 
-                                    <div style="width:50%;margin-right: 25px">Order Date : <%=formatter.format(order.getOrderDate()) %></div>
+                                    <div class="order-id">Order ID : <%=order.getOId() %></div> 
+                                    <div class="order-date">Order Date : <%=formatter.format(order.getOrderDate()) %></div>
                                     <i class="fa fa-plus float-right m-1"></i>
                                 </a>
                             </h5>
                         </div>
 
+                        <div id="confirm-modal-1" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Confirmation</h5>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Do you want to cancel this order?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="" type="button" class="btn btn-primary" data-dismiss="modal">Close</a>
+                                        <a href="" type="button" class="btn btn-primary">Cancel Order</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    
                         <div id="collapse<%=order.getOId() %>" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                                    <div class="cancel-order mb-3"><a href="" class="btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
                                     <div class="cart-list">
                                         <table class="table table-hover">
                                             <thead class="thead-primary">
