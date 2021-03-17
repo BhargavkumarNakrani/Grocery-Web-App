@@ -137,7 +137,7 @@
                             %>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="product-single.jsp?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <a href="product-single.jsp?productId=<%=product.getPId()%>" class="add-to-cart single d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
                                     <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0) {%>
@@ -164,12 +164,12 @@
                             </div>
                             <% }%>
                         </div>
-                        <div id="snackbar"><%out.print(product.getName()+" added to cart.");%></div>
                     </div>
                 </div>
                         <% }%>
             </div>
-
+            <div id="snackbar"></div>
+            
             <div class="row mt-5">
                 <div class="col text-center">
                     <div class="block-27">
@@ -235,15 +235,21 @@
 </script>
 <script>
     $(document).ready(function () {
-    $('.cart-add').on('click', function(e) {
+    $('a.cart-add').on('click', function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
-        var snackbar = $(this).parentsUntil('.product').next("#snackbar");
+        var anchor = $(this);
+        var productName = $(this).parentsUntil('.text').siblings('h3').find('#pname').text();
+        var snackbar = $("#snackbar");
         $.ajax({
             url: href,
-
-            success: function () {
-                snackbar.prev('.text').find('a.cart-add').remove();
+            success: function (response) {
+                anchor.fadeOut(1000,function (){
+                    $(this).remove();
+                });
+                var cartItem = $(response).find(".cart-item").text();
+                $('.cart-item').text(cartItem);
+                snackbar.text(productName + " added to cart");
                 snackbar.addClass('show');
                 setTimeout(function(){
                     snackbar.removeClass('show');
