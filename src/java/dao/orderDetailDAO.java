@@ -59,4 +59,15 @@ public class orderDetailDAO {
         session.close();
         return orderDetails;
     }
+    
+    public static int deleteByOrders(int OId){
+        String hql = "delete from OrderDetails where orders.OId="+OId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        Query query = session.createQuery(hql);
+        int i = query.executeUpdate();
+        t.commit();
+        session.close();
+        return i;
+    }
 }

@@ -109,7 +109,9 @@
                         <div id="collapse<%=order.getOId() %>" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
-                                    <div class="cancel-order mb-3"><a href="" class="btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
+                                    <% if(order.getStatus()==0) {%>
+                                    <div class="cancel-order mb-3"><a href="cancalOrder.jsp?OId=<%=order.getOId() %>" class="btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
+                                    <% }%>
                                     <div class="cart-list">
                                         <table class="table table-hover">
                                             <thead class="thead-primary">

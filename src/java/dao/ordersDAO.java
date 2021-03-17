@@ -92,4 +92,14 @@ public class ordersDAO {
         return updatedEntities;
     }
     
+    public static int deleteByOrders(int OId){
+        String hql = "delete from Orders where OId="+OId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        Query query = session.createQuery(hql);
+        int i = query.executeUpdate();
+        t.commit();
+        session.close();
+        return i;
+    }
 }
