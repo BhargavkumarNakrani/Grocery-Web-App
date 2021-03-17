@@ -1,3 +1,7 @@
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="entity.Shopkeeper"%>
+<%@page import="entity.OrderDetails"%>
+<%@page import="dao.orderDetailDAO"%>
 <%@page import="dao.DeliveryBoyDAO"%>
 <%@page import="entity.DeliveryBoy"%>
 <%@page import="dao.CustomerDAO"%>
@@ -91,6 +95,20 @@
                                 <%
                                 for(Orders obj : orders)
                                 {
+                                    if(role.equals("SHOPKEEPER")) {
+                                        List<OrderDetails> OrderDetails= orderDetailDAO.viewByOrderId(obj.getOId());
+                                        int count = 0;
+                                        for (OrderDetails od : OrderDetails) {
+                                            if (ShopkeeperDAO.viewSinglebyID(od.getShopkeeper().getSId()).getEmail().equalsIgnoreCase(email)) {
+                                                count++;
+                                                break;
+                                            }
+                                        }
+                                        if (count == 0) {
+                                            continue;
+                                        }
+                                    }
+                                    
                                     Customer customer = CustomerDAO.viewById(obj.getCustomer().getCId());
                                     DeliveryBoy db = new DeliveryBoy();
                                     if(!ordersDAO.checkDB(obj.getOId())) {

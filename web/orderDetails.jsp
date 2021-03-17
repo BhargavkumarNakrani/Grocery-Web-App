@@ -126,6 +126,9 @@
                 { 
                     int shop_id = Integer.parseInt(obj.toString());
                     Shopkeeper shop= ShopkeeperDAO.viewSinglebyID(shop_id);
+                    if(!shop.getEmail().equalsIgnoreCase(email) && role.equals("SHOPKEEPER")){
+                        continue;
+                    }
                 %>
                 <div class="card mb-2">
                     <div class="card-header" id="heading<%=shop_id %>">
