@@ -123,18 +123,18 @@
                         if(count ==0){
                             count++;
             %>
-                        <li><a href="?categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
+                        <li><a href="?page=<%=p%>&categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
                         <% }%>
-                        <li><a href="?categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
+                        <li><a href="?page=<%=p%>&categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
             <% }  else { 
                         if (count == 0) {
                            count++;
             %>
-                        <li><a href="?id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
+                        <li><a href="?page=<%=p%>&id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
                                 out.print("active");
                             } %>">all</a></li>
                             <% }%>
-                        <li><a href="?id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
+                        <li><a href="?page=<%=p%>&id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
                                 out.print("active");%>"><%=category.getName()%></a></li>
             <% } }%>
                     </ul>
