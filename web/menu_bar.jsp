@@ -1,22 +1,55 @@
+<%@page import="dao.DeliveryBoyDAO"%>
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="dao.CustomerDAO"%>
 <%@page import="dao.cartDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% String email = (String) session.getAttribute("email");%>
+<% String email = (String) session.getAttribute("email");
+   String role = (String) session.getAttribute("role");
+   String Name = "";
+        if(role.equals("CUSTOMER")){
+            Name = CustomerDAO.viewByEmail(email).getName();    
+        }else if(role.equals("SHOPKEEPER")){
+                Name = ShopkeeperDAO.viewSingle(email).getName();
+            }else if(role.equals("DELIVERYBOY")){
+                    Name = DeliveryBoyDAO.ViewSingle(email).getName();
+            }
+%>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">Vegefoods</a>
-            <p><center>Welcome, <%=(email!=null)?email:"User" %></center></p>
+            <ul class="navbar-nav ml-auto">
+                <% if(email != null){%>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=Name%></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <% if(role.equals("CUSTOMER")){%>
+                            <a class="dropdown-item" href="profile.jsp">My Profile</a>
+                            <a class="dropdown-item" href="orderHistory.jsp">Orders</a>
+                            <%}else if(role.equals("SHOPKEEPER")){%>
+                                <a class="dropdown-item" href="profile.jsp">Profile</a>
+                                <a class="dropdown-item" href="Category.jsp">Category</a>
+                                <a class="dropdown-item" href="addProduct.jsp">Add Product</a>
+                                <a class="dropdown-item" href="orders.jsp">Orders</a>
+                            <%}else if(role.equals("DELIVERYBOY")){%>
+                                <a class="dropdown-item" href="profile.jsp">Profile</a>
+                                <a class="dropdown-item" href="orders.jsp">Orders</a>
+                        <%}%>
+                    </div>
+                </li>
+                <%}%>
+            </ul>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="shop.jsp" class="nav-link">Shop</a></li>
                     <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
                     <%
-                        if(email != null){ %>
-                            <% if(session.getAttribute("role").equals("CUSTOMER")) {  %>
+                        if(email != null){ 
+                        if(session.getAttribute("role").equals("CUSTOMER")) {  %>
                                 <li class="nav-item cta cta-colored">
                                     <a href="cart.jsp" class="nav-link">
                                         <i class="fa fa-shopping-cart" style="color:black; font-size:20px"></i>
@@ -35,8 +68,7 @@
                         <%} else{%>
                             <li class="nav-item"><button class="btn btn-primary" onclick="window.location.href='login.jsp'">Login</button></li>
                             <li class="nav-item"><button class="btn btn-primary" onclick="window.location.href='signup.jsp'">Signup</button></li>
-                        <%}
-                    %>
+                        <%}%>
                 </ul>
             </div>
         </div>
