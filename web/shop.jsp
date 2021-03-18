@@ -1,3 +1,5 @@
+<%@page import="dao.categoryDAO"%>
+<%@page import="entity.Category"%>
 <%@page import="dao.cartDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Products"%>
@@ -105,20 +107,46 @@
     %>
     <section class="ftco-section">
         <div class="container">
-<!--            <div class="row justify-content-center">
+            <div class="row justify-content-center">
                 <div class="col-md-10 mb-5 text-center">
                     <ul class="product-category">
-                        <li><a href="#" class="active">All</a></li>
-                        <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruits</a></li>
-                        <li><a href="#">Juice</a></li>
-                        <li><a href="#">Dried</a></li>
+            <%
+                String ScategoryId = request.getParameter("categoryId");
+                int categoryId = 0;
+                int count = 0;
+                if(ScategoryId != null){
+                    categoryId = Integer.parseInt(ScategoryId);
+                }
+                List<Category> categories = categoryDAO.viewAll();
+                for(Category category : categories){
+                    if(shop_id == 0){
+                        if(count ==0){
+                            count++;
+            %>
+                        <li><a href="?categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
+                        <% }%>
+                        <li><a href="?categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
+            <% }  else { 
+                        if (count == 0) {
+                           count++;
+            %>
+                        <li><a href="?id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
+                                out.print("active");
+                            } %>">all</a></li>
+                            <% }%>
+                        <li><a href="?id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
+                                out.print("active");%>"><%=category.getName()%></a></li>
+            <% } }%>
                     </ul>
                 </div>
-            </div>-->
+            </div>
             <div class="row">
 <%
-    for(Products product : products) {
+    for(Products product : products) 
+    {
+        if(categoryId != 0 && product.getCategory().getCategoryId()!=categoryId){
+            continue;
+        }
 %>
                 <div class="col-md-6 col-lg-3 ftco-animate" id="delete">
                     <div class="product">
@@ -178,11 +206,11 @@
                             <li><a href="<%="?page=" + (p - 1)%>">&lt;</a></li>
                                 <% } %>
                                 <%for (i = 0; i < pages; i++) { %>
-                            <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?page=<%=i + 1%>"><%=i + 1%></a></li>
+                            <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?id=<%=shop_id %>&categoryId=<%=categoryId %>&page=<%=i + 1%>"><%=i + 1%></a></li>
                                 <% }
                                     if (p < pages) {
                                 %>
-                            <li><a href="<%="?page=" + (p + 1)%>">&gt;</a></li>
+                            <li><a href="?id=<%=shop_id %>&categoryId=<%=categoryId %>&<%="page=" + (p + 1)%>">&gt;</a></li>
                                 <% }%>
                         </ul>
                     </div>
