@@ -135,7 +135,7 @@
                                         <td><%
                                                 if(ordersDAO.checkDB(obj.getOId()) && role.equals("DELIVERYBOY")){
                                                     %>
-                                                    <button><a href="updateOrders.jsp?Oid=<%=obj.getOId() %>">Take order</a></button>
+                                                    <a class="btn btn-primary" href="updateOrders.jsp?Oid=<%=obj.getOId() %>">Take order</a>
                                             <%
                                                 } else if(ordersDAO.checkDB(obj.getOId(),email)){ %>
                                                 <a href="orderDetails.jsp?o_id=<%=obj.getOId() %>">view</a>
