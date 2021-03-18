@@ -16,18 +16,21 @@
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
                     <%
                         if(email != null){ %>
-                            <% if(session.getAttribute("role").equals("SHOPKEEPER")) {  %>
-                                <li class="nav-item dropdown">
+                            <% if(session.getAttribute("role").equals("CUSTOMER")) {  %>
+                                <li class="nav-item cta cta-colored">
+                                    <a href="cart.jsp" class="nav-link">
+                                        <i class="fa fa-shopping-cart" style="color:black; font-size:20px"></i>
+                                        <div class="cart-item"><%=cartDAO.CartItem(email)%></div>
+                                    </a>
+                                </li>
+<!--                                <li class="nav-item dropdown">
                                     <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Register</a>
                                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                                         <a class="dropdown-item" href="shop_registration.jsp">For Shopkeeper</a>
                                         <a class="dropdown-item" href="emp_registration.jsp">For Employee</a>
                                     </div>
-                                </li>
-                            </li>
-                            <% }else{ %>
-                            <li class="nav-item cta cta-colored"><a href="cart.jsp" class="nav-link"><i class="fa fa-shopping-cart" style="color:black; font-size:20px"></i><div class="cart-item"><%=cartDAO.CartItem(email)%></div></a></li>
-                            <%}%>
+                                </li>-->
+                            <% }%>
                             <li class="nav-item"><button onclick="window.location.href='logout.jsp'" class="btn btn-primary">Logout</button></li>
                         <%} else{%>
                             <li class="nav-item"><button class="btn btn-primary" onclick="window.location.href='login.jsp'">Login</button></li>
