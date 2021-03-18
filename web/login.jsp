@@ -96,7 +96,7 @@
                         </div>
                     </div>
                   <div class="d-flex mb-5 align-items-center">
-                    <span class="ml-auto"><a href="index.jsp" class="forgot-pass">Forgot Password?</a></span> 
+                    <span class="ml-auto"><a href="forgotPassword.jsp" class="forgot-pass">Forgot Password?</a></span> 
                   </div>
 
                   <input type="submit" value="Log In" id="submit" class="btn btn-primary" style="width:100%">

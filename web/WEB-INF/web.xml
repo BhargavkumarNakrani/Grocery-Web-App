@@ -18,6 +18,14 @@
         <url-pattern>/SingupController.jsp</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>EmailSendingServlet</servlet-name>
+        <servlet-class>email.EmailSendingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmailSendingServlet</servlet-name>
+        <url-pattern>/EmailSendingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>saveProduct</servlet-name>
         <jsp-file>/saveProduct.jsp</jsp-file>
         <multipart-config>
@@ -39,4 +47,20 @@
         <error-code>404</error-code>
         <location>/404-error.jsp</location>
     </error-page>
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>sanketpanasuriya@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>sanket@892</param-value>
+    </context-param>
 </web-app>

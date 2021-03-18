@@ -80,4 +80,17 @@ public class AccountDAO {
         session.close();
         //return 1;
     }
+    
+    public static Accounts viewByEmail(String email){
+        String hql = "from Accounts where email = '"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Accounts> products = query.list();
+        session.close();
+        Accounts obj = null;
+        if(!products.isEmpty()){
+            obj = products.get(0);
+        }
+        return obj;
+    }
 }

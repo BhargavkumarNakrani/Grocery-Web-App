@@ -125,7 +125,8 @@
                     //for(Products p : products){
                   
                     if(role == null){
-                    List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
+                        List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
+                        role="";
                         for(Shopkeeper obj : sk)
                         {
                 %>
