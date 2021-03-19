@@ -299,14 +299,28 @@
 </script>
 <script>
     $(document).ready(function () {
+        var searchbar;
+        
         $(".fa-search").click(function() {
-            $(this).siblings('.searchbar').toggle();
-            $("input[type='text']").focus();
+            searchbar = $(this).siblings('.searchbar');
+            
+            if($(searchbar).is(':hidden')){
+                searchbar.fadeIn(1000,function(){
+                    $(this).show();
+                    $(this).find("input[type='text']").focus();
+                });
+            }else if($(searchbar).is(':visible')){
+                searchbar.fadeOut(1000,function(){
+                    $(this).hide();
+                });
+            }
         });
         
-//        $('.desktop-search').find('.search_input').focusout(function (){
-//            $(this).parent().parent().toggle(); 
-//        });
+        $('.desktop-search').find('.search_input').focusout(function (){
+            $(this).parent().parent().fadeOut(1000,function(){
+                $(this).hide();
+            }); 
+        });
         
         $('a.cart-add').on('click', function(e) {
         e.preventDefault();
