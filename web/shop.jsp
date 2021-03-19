@@ -123,18 +123,18 @@
                         if(count ==0){
                             count++;
             %>
-                        <li><a href="?page=<%=p%>&categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
+                        <li><a href="?categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
                         <% }%>
-                        <li><a href="?page=<%=p%>&categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
+                        <li><a href="?categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
             <% }  else { 
                         if (count == 0) {
                            count++;
             %>
-                        <li><a href="?page=<%=p%>&id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
+                        <li><a href="?id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
                                 out.print("active");
                             } %>">all</a></li>
                             <% }%>
-                        <li><a href="?page=<%=p%>&id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
+                        <li><a href="?id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
                                 out.print("active");%>"><%=category.getName()%></a></li>
             <% } }%>
                     </ul>
@@ -179,7 +179,7 @@
                             %>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <a href="addProduct.jsp?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fas fa-pencil-alt"></i></span>
                                     </a>
                                     <a href="deleteProduct.jsp?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">

@@ -1,3 +1,5 @@
+<%@page import="entity.Products"%>
+<%@page import="dao.productDAO"%>
 <%@page import="dao.categoryDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.uomDAO"%>
@@ -10,6 +12,23 @@
     //List<Uom> obj = new ArrayList<Uom>();
     List<Uom> obj = uomDAO.view();
     List<Category> categorys = categoryDAO.viewAll();
+    
+    String SId = request.getParameter("productId");
+    int id = 0;
+    String p_name = null;
+    int categoryId = 0;
+    int quantity = 0;
+    int uomId = 0;
+    int price = 0;
+    if(SId != null){
+        id = Integer.parseInt(SId);
+        Products product = productDAO.viewById(id);
+        p_name = product.getName();
+        categoryId = product.getCategory().getCategoryId();
+        quantity = product.getQuantity();
+        uomId = product.getUom().getUomId();
+        price = product.getPrice();
+    }
    
 %>
 <html lang="en">
@@ -66,24 +85,23 @@
                   <div class="mb-4">
                   <h3>Add Product</h3>
                   </div>
-                  <% //if(id!=0){ %>
-<!--                      <style>
+                  <% if(id!=0){ %>
+                      <style>
                           .content{height: 900px;}
                       </style>
                       <div id="div" class="mb-4 preview">
-                          <img src="images/product-1.jpg"  style="width:40%;" class="img-fluid">
-                      </div>-->
-                  <% //}%>
+                          <a href="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" class="image-popup"><img src="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" style="width:40%;" class="img-fluid" alt="Colorlib Template"></a>
+                      </div>
+                  <% }%>
                 <form action="saveProduct.jsp" method="post" autocomplete="off" enctype="multipart/form-data">
-<!--                    <input type="hidden" name="role" value="SHOPKEEPER" id="role">
-                    <input type="hidden" name="id" value="<%//=id%>" id="id">
-                    <input type="hidden" name="accountId" value="<%//=Aid%>" id="id">
-                    <input type="hidden" name="image" value="<%//=image%>" id="id">-->
+                    <input type="hidden" name="role" value="SHOPKEEPER" id="role">
+                    <input type="hidden" name="id" value="<%=id%>" id="id">
+                    <!--<input type="hidden" name="image" value="<%//=image%>" id="id">-->
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
                                 <label for="pname" class="fname">Product Name</label>
-                                <input type="text" value="" name="pname" class="form-control" id="pname">
+                                <input type="text" value="<%=p_name %>" name="pname" class="form-control" id="pname">
                             </div>
                             <span id="pname_error_message" class="text-danger"></span>
                         </div>
@@ -93,7 +111,7 @@
                                     <option value="category">Category</option>
                                     <% 
                                     for(Category category : categorys) { %>
-                                    <option value="<%=category.getCategoryId()%>"><%=category.getName() %></option>
+                                    <option value="<%=category.getCategoryId()%>" <% if(category.getCategoryId()==categoryId) out.print("selected");%>><%=category.getName() %></option>
                                     <% }
                                     %>
                                     
@@ -106,7 +124,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="stock">Available Stock</label>
-                                <input type="number" name="stock" value="" class="form-control" id="stock">
+                                <input type="number" name="stock" value="<%=quantity %>" class="form-control" id="stock">
                             </div>
                             <span id="stock_error_message" class="text-danger"></span>
                         </div>
@@ -137,7 +155,7 @@
                                     <option value="uom">Unit Of Measurement</option>
                                     <% 
                                     for(Uom uom : obj) { %>
-                                    <option value="<%=uom.getUomId() %>"><%=uom.getUomName()%></option>
+                                    <option value="<%=uom.getUomId() %>" <% if(uom.getUomId()==uomId) out.print("selected");%> ><%=uom.getUomName()%></option>
                                     <% }
                                     %>
                                 </select>
@@ -147,7 +165,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="price">Price per quantity</label>
-                                <input type="number" name="price" value="" class="form-control" id="price" >
+                                <input type="number" name="price" value="<%=price%>" class="form-control" id="price" >
                             </div>
                             <span id="price_error_message" class="text-danger"></span>
                         </div>

@@ -55,7 +55,7 @@
     Part image = null;
     image = request.getPart("productimg");
         
-    InputStream inputStream = null; // input stream of the upload fil
+    InputStream inputStream = null; // input stream of the upload file
      if (image != null) {
         // prints out some information for debugging
         System.out.println(image.getName());
@@ -77,7 +77,7 @@
     
     Products product_bean = new Products(category_bean,shopkeeper_bean,uom_bean,pname,quantity, price, img );
     
-    if(SPId == null){
+    if(SPId == null && email != null){
         productDAO.save(product_bean);
         String email1 = email;
         List<Customer> customers = CustomerDAO.viewAll();
@@ -86,7 +86,7 @@
         }
         String recipient = email1;
         String subject = "Product updates for vegeFoods";
-        String content = "New product is added by "+ ShopkeeperDAO.viewSingle(email)+" <br> ***<u>Product Detail</u>***<br> Product name : "+product_bean.getName()+" <br> Product price : "+product_bean.getPrice()+" <br> "
+        String content = "New product is added by "+ ShopkeeperDAO.viewSingle(email).getShopName()+" <br> ***<u>Product Detail</u>***<br> Product name : "+product_bean.getName()+" <br> Product price : "+product_bean.getPrice()+" <br> "
                 + " product quantity :"+product_bean.getQuantity();
          String resultMessage = "";
         try {
@@ -98,13 +98,18 @@
             resultMessage="fail "+ex.getMessage();
         }
         out.print(resultMessage);
-        //response.sendRedirect("shop.jsp");
-    } else {
+        response.sendRedirect("shop.jsp");
+    } else if(PId != 0 && email != null){
         if(image.getSize() > 0){
+            product_bean.setPId(PId);
             productDAO.update(product_bean);
         } else {
             productDAO.update(PId,category_bean.getCategoryId(),shopkeeper_bean.getSId(),uom_bean.getUomId(),pname,quantity ,price);
         }
+        
+        response.sendRedirect("shop.jsp");
+    } else{
+        response.sendRedirect("login.jsp");
     }
     
 %>
