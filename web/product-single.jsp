@@ -16,6 +16,7 @@
             PId = Integer.parseInt(productID);
             product = productDAO.viewById(PId);
         }
+        if(productID != null){
     %>
     <head>
         <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
@@ -36,6 +37,7 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     </head>
     <body class="goto-here">
 
@@ -55,7 +57,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mb-5 ftco-animate">
+                        <% if(productID != null) {%>
                         <a href="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>" class="image-popup"><img src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>" class="img-fluid" alt="Colorlib Template"></a>
+                        <% }%>
                     </div>
                     <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                         <h3><strong><%=product.getName()%></strong></h3>
@@ -346,7 +350,7 @@
             gtag('config', 'UA-23581568-13');
         </script>
     </body>
-
+<% }%>
 </html>    
 <script>
     function alert_dismiss() {
