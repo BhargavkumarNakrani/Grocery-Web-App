@@ -31,7 +31,7 @@
         response.sendRedirect("login.jsp?return_to=" + pageName);
     }
     else if(!role.equalsIgnoreCase("SHOPKEEPER")){
-        if(StringID != null){
+        if(StringID != null && Integer.parseInt(StringID) > 0){
             shop_id = Integer.parseInt(StringID);
             products = productDAO.viewByShopId(shop_id, Start);
         }
