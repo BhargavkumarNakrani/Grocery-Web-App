@@ -178,14 +178,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="container mb-5">
-                    <div class="d-flex">
-                        <div class="searchbar">
-                            <input class="search_input" type="text" name="" placeholder="Search...">
-                            <i class="fas fa-search search_icon"></i>
-                        </div>
-                    </div>
-                </div>
             <div class="row card-container">
 <%
     for(Products product : products) 
@@ -304,22 +296,19 @@
         %>
                  
     }
-//    function search(){
-//        var input,filter,cardContainer,cards;
-//        input = document.getElementsByClassName("search_input");
-//        filter = input.value.toLowerCase();
-//        console.log(filter);
-//        cardContainer = document.getElementById("card-container");
-//        cards = cardContainer.getElementById("delete");
-//        console.log(cards);
-//        cards.filter(function (){
-//            $(this).find(".card-title:not(:contains(" + filter + "))").parent().css('display','none');
-//        });
-//    }
 </script>
 <script>
     $(document).ready(function () {
-    $('a.cart-add').on('click', function(e) {
+        $(".fa-search").click(function() {
+            $(this).siblings('.searchbar').toggle();
+            $("input[type='text']").focus();
+        });
+        
+//        $('.desktop-search').find('.search_input').focusout(function (){
+//            $(this).parent().parent().toggle(); 
+//        });
+        
+        $('a.cart-add').on('click', function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         var anchor = $(this);
@@ -345,12 +334,12 @@
             }
         });
     });
-    $('.search_input').on('keyup',function(){
-        var filter,cardContainer,title,cards;
-        filter = $(this).val().toUpperCase();
-        cardContainer = $('.card-container');
-        cards = $('.card-container').find('.delete');
-        
+//    $('.search_input').on('keyup',function(){
+//        var filter,cardContainer,title,cards;
+//        filter = $(this).val().toUpperCase();
+//        cardContainer = $('.card-container');
+//        cards = $('.card-container').find('.delete');
+//        
 //        $.each(cards,function(index){
 //            title = $(cards[index]).find('.product').text();
 //            if(title.toUpperCase().indexOf(filter) <= -1){
@@ -359,11 +348,11 @@
 //                $(cards[index]).show();
 //            }
 //        });
-        
-        $(cards).filter(function() {
-            $(this).toggle($(this).text().toUpperCase().indexOf(filter) > -1)
-        });
-    });
+//        
+//        $(cards).filter(function() {
+//            $(this).toggle($(this).text().toUpperCase().indexOf(filter) > -1)
+//        });
+//    });
 });
 </script>
 <script src="js/jquery-3.2.1.min.js"></script>
