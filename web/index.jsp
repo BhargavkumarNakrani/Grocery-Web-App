@@ -112,21 +112,27 @@
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <h2 class="mb-4">Shops Near By You</h2>
+                    <%  String role = (String)session.getAttribute("role");
+                        if(role.equals("CUSTOMER")){%>
+                        <span class="subheading">Featured Shops</span>
+                        <h2 class="mb-4">Shops Near By You</h2>  
+                    <%}else if(role.equals("SHOPKEEPER")){%>
+                        <span class="subheading">Your Shop</span>
+                        <h2 class="mb-4">Manage Your</h2>
+                    <%}%>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <% 
-                    String role = (String)session.getAttribute("role");
+                <%
                     System.out.print(role);
                     //String p = productDAO.viewImage(3);
                     //for(Products p : products){
                   
                     if(role == null){
-                        List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
-                        role="";
+                        role = "";
+                    List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
                         for(Shopkeeper obj : sk)
                         {
                 %>
