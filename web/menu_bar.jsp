@@ -6,9 +6,7 @@
 <% String email = (String) session.getAttribute("email");
    String role = (String) session.getAttribute("role");
    String Name = "";
-        if(role == null){
-            role="";
-        }
+   if(role == null){role = "";}
         if(role.equals("CUSTOMER")){
             Name = CustomerDAO.viewByEmail(email).getName();    
         }else if(role.equals("SHOPKEEPER")){
@@ -20,7 +18,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">Vegefoods</a>
-            <ul class="navbar-nav ml-auto">
+            <span style="color:black"><center>Welcome,<%if(email==null){out.print("User");}%></center></span>
+            <ul class="navbar-nav">
                 <% if(email != null){%>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=Name%></a>
@@ -46,13 +45,40 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item desktop-search">
+                        <!-- search for for desktop view -->
+                        <i class="fa fa-search nav-link" aria-hidden="true"></i>
+<!--                        <div class="container">
+                                <div class="d-flex">-->
+                                <div class="searchbar">
+                                    <form>
+                                    <input class="search_input" type="text" name="" placeholder="Search...">
+                                    <i class="fas fa-search search_icon" type="submit" style="padding-top:0px!important;"></i>
+                                    </form>
+                                </div>
+<!--                            </div>
+                        </div>-->
+                    </li>
+                    <!-- search for mobile view -->
+                    <li class="nav-item mobile-search">
+                        <div class="container">
+                            <div class="d-flex">
+                                <div class="searchbar">
+                                    <form>
+                                    <input class="search_input" type="text" name="" placeholder="Search...">
+                                    <i class="fas fa-search search_icon" type="submit"></i>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="shop.jsp" class="nav-link">Shop</a></li>
                     <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
                     <%
                         if(email != null){ 
-                        if(session.getAttribute("role").equals("CUSTOMER")) {  %>
+                        if(role.equals("CUSTOMER")) {  %>
                                 <li class="nav-item cta cta-colored">
                                     <a href="cart.jsp" class="nav-link">
                                         <i class="fa fa-shopping-cart" style="color:black; font-size:20px"></i>
