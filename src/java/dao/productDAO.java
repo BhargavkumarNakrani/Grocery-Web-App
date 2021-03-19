@@ -51,6 +51,17 @@ public class productDAO {
         return products;
     }
     
+    public static List<Products> viewAll(int Start, int categoryId){
+        String hql = "from Products where category.categoryId="+categoryId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
     public static List<Products> viewByShop(int id){
         String hql = "from Products where shopkeeper.SId = "+id;
         session = HibernateUtil.getSessionFactory().openSession();
@@ -117,7 +128,40 @@ public class productDAO {
         long i = (long) query.uniqueResult();
         session.close();
         return i;
-    }    
+    }
+
+    public static long getCount(int categoryId){
+        String hql = "SELECT count(*) from Products where category.categoryId="+categoryId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    public static long getCount(String email, int categoryId) {
+        String hql = "SELECT count(*) from Products where shopkeeper.email = '"+email+"' and category.categoryId=" + categoryId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    public static long getCount(int categoryId, int shopId){
+        String hql = "SELECT count(*) from Products where category.categoryId="+categoryId+" and shopkeeper.SId="+shopId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    public static long getCount(String email){
+        String hql = "SELECT count(*) from Products where shopkeeper.email = '"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
     
     public static Products viewById(int id){
         String hql = "from Products where PId = "+id;
@@ -150,9 +194,30 @@ public class productDAO {
         session.close();
         return products;
     }
+    public static List<Products> viewByShopId(int id, int Start, int categoryId) {
+        String hql = "from Products where category.categoryId="+categoryId+" and shopkeeper.SId ="+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
     
     public static List<Products> viewByShopEmail(String email, int Start) {
         String hql = "from Products where shopkeeper.email = '"+email+"'";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static List<Products> viewByShopEmail(String email, int Start, int categoryId) {
+        String hql = "from Products where shopkeeper.email = '"+email+"' and category.categoryId="+categoryId;
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         query.setFirstResult(Start).
