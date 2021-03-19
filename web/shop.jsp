@@ -178,7 +178,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
+            <div class="container mb-5">
+                    <div class="d-flex">
+                        <div class="searchbar">
+                            <input class="search_input" type="text" name="" placeholder="Search...">
+                            <i class="fas fa-search search_icon"></i>
+                        </div>
+                    </div>
+                </div>
+            <div class="row card-container">
 <%
     for(Products product : products) 
     {
@@ -186,7 +194,7 @@
             continue;
         }
 %>
-                <div class="col-md-6 col-lg-3 ftco-animate" id="delete">
+                <div class="col-md-6 col-lg-3 ftco-animate delete">
                     <div class="product">
                         <a class="img-prod"><img class="img-fluid" src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>">
                             <div class="overlay"></div>
@@ -273,8 +281,6 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-<script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
@@ -298,6 +304,18 @@
         %>
                  
     }
+//    function search(){
+//        var input,filter,cardContainer,cards;
+//        input = document.getElementsByClassName("search_input");
+//        filter = input.value.toLowerCase();
+//        console.log(filter);
+//        cardContainer = document.getElementById("card-container");
+//        cards = cardContainer.getElementById("delete");
+//        console.log(cards);
+//        cards.filter(function (){
+//            $(this).find(".card-title:not(:contains(" + filter + "))").parent().css('display','none');
+//        });
+//    }
 </script>
 <script>
     $(document).ready(function () {
@@ -327,6 +345,25 @@
             }
         });
     });
+    $('.search_input').on('keyup',function(){
+        var filter,cardContainer,title,cards;
+        filter = $(this).val().toUpperCase();
+        cardContainer = $('.card-container');
+        cards = $('.card-container').find('.delete');
+        
+//        $.each(cards,function(index){
+//            title = $(cards[index]).find('.product').text();
+//            if(title.toUpperCase().indexOf(filter) <= -1){
+//                $(cards[index]).hide();
+//            }else{
+//                $(cards[index]).show();
+//            }
+//        });
+        
+        $(cards).filter(function() {
+            $(this).toggle($(this).text().toUpperCase().indexOf(filter) > -1)
+        });
+    });
 });
 </script>
-<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
