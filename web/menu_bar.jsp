@@ -6,6 +6,9 @@
 <% String email = (String) session.getAttribute("email");
    String role = (String) session.getAttribute("role");
    String Name = "";
+        if(role == null){
+            role="";
+        }
         if(role.equals("CUSTOMER")){
             Name = CustomerDAO.viewByEmail(email).getName();    
         }else if(role.equals("SHOPKEEPER")){

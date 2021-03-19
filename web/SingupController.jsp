@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="email.EmailUtility"%>
 <%@page import="dao.DeliveryBoyDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="org.apache.commons.io.IOUtils"%>
@@ -19,8 +20,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%!
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+    %>
     <%
-        
+        ServletContext context = pageContext.getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        user = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+           
         String role = "CUSTOMER";
         String String_Sid = request.getParameter("id");
         int id=0;
@@ -85,47 +97,101 @@
         if(id==0){
             if(AccountDAO.save(bean) > 0){
                 if(role.equalsIgnoreCase("CUSTOMER")){
-                    //Customer bean_fk = new Customer(bean,name, "", phone, email);
-                    CustomerDAO.save(bean_customer);
-                    session.setAttribute("successMessage", "Welcome "+name+ ".<br>You are now member of VegeFoods.");
-                    response.sendRedirect("login.jsp");
+                    String recipient = email;
+                    String subject = "Registration for vegeFoods";
+                    String content = " Hello, <b>"+name+"</b> as the role of <b>"+role+"</b> now you are the member of the vegeFoods<br> please continue shopping";
+                    try {
+                            EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+                            
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+
+                    } finally {
+                        CustomerDAO.save(bean_customer);
+                        session.setAttribute("successMessage", "Welcome "+name+ ".<br>You are now member of VegeFoods.");
+                        response.sendRedirect("login.jsp");
+                    }
+                    
                 }
                 else if(role.equalsIgnoreCase("SHOPKEEPER")){
-                    ShopkeeperDAO.insert(bean_shopkeeper);
-                    response.sendRedirect("index.jsp");
+                    String recipient = email;
+                    String subject = "Registration for vegeFoods";
+                    String content = " Hello, <b>"+name+"</b> as the role of <b>"+role+"</b> now you are the member of the vegeFoods";
+                    try {
+                            EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+                            
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+
+                    } finally {
+                        ShopkeeperDAO.insert(bean_shopkeeper);
+                        response.sendRedirect("index.jsp");
+                    }
                 }
                 else if(role.equalsIgnoreCase("DELIVERYBOY")){
-                    out.println(bean.getAcccountId());// bean_DeliveryBoy.getAccounts().getAcccountId();
-                    bean_deliveryboy.setOrderTaken(0);
-                    Date date = new java.util.Date();
-                    bean_deliveryboy.setHireDate(date);
-                    DeliveryBoyDAO.insert(bean_deliveryboy);
-                    response.sendRedirect("index.jsp");
-                    out.print("Inserted Deliveryboy");
+                    String recipient = email;
+                    String subject = "Registration for vegeFoods";
+                    String content = " Hello, <b>"+name+"</b> as the role of <b>"+role+"</b> now you are the member of the vegeFoods";
+                    try {
+                            EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+                            
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+
+                    } finally {
+                        bean_deliveryboy.setOrderTaken(0);
+                        Date date = new java.util.Date();
+                        bean_deliveryboy.setHireDate(date);
+                        DeliveryBoyDAO.insert(bean_deliveryboy);
+                        response.sendRedirect("index.jsp");
+                        out.print("Inserted Deliveryboy");
+                    }
                 }
             }
         }
         else {
-            out.print("Hello");
             if(role.equalsIgnoreCase("SHOPKEEPER") && accountId != 0){
-                bean.setAcccountId(accountId);
-                AccountDAO.update(bean);
-                bean_shopkeeper.setSId(id);
-                if(image.getSize() > 0){
-                    ShopkeeperDAO.update(bean_shopkeeper);
-                } else {
-                    ShopkeeperDAO.update(id,name, sname, address, phone, email);
+                String recipient = email;
+                String subject = "Update detail for vegeFoods";
+                String content = " Hello, <b>" + name + "</b> as the role of <b>" + role + "</b> now you are the updated the user details of the vegeFoods";
+                try {
+                    EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                } finally {
+                    bean.setAcccountId(accountId);
+                    AccountDAO.update(bean);
+                    bean_shopkeeper.setSId(id);
+                    if(image.getSize() > 0){
+                        ShopkeeperDAO.update(bean_shopkeeper);
+                    } else {
+                        ShopkeeperDAO.update(id,name, sname, address, phone, email);
+                    }
+
+                    response.sendRedirect("index.jsp");
                 }
-                response.sendRedirect("index.jsp");
             }
             else if(role.equalsIgnoreCase("DELIVERYBOY") && accountId != 0){
-                bean.setAcccountId(accountId);
-                AccountDAO.update(bean);
-                bean_deliveryboy.setDbId(id);
-                bean_deliveryboy.setOrderTaken(DeliveryBoyDAO.viewOrderTaken(id));
-                DeliveryBoyDAO.update(bean_deliveryboy);
-                
-                response.sendRedirect("index.jsp");
+                String recipient = email;
+                String subject = "Update detail for vegeFoods";
+                String content = " Hello, <b>" + name + "</b> as the role of <b>" + role + "</b> now you are the updated the user details of the vegeFoods";
+                try {
+                    EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                } finally {
+                    bean.setAcccountId(accountId);
+                    AccountDAO.update(bean);
+                    bean_deliveryboy.setDbId(id);
+                    bean_deliveryboy.setOrderTaken(DeliveryBoyDAO.viewOrderTaken(id));
+                    DeliveryBoyDAO.update(bean_deliveryboy);
+
+                    response.sendRedirect("index.jsp");
+                }
             }
         }
             

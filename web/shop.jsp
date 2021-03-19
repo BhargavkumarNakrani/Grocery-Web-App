@@ -205,10 +205,10 @@
                             <% if (p > 1) {%>
                             <li><a href="<%="?page=" + (p - 1)%>">&lt;</a></li>
                                 <% } %>
-                                <%for (i = 0; i < pages; i++) { %>
+                                <%for (i = 0; i <= pages; i++) { %>
                             <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?id=<%=shop_id %>&categoryId=<%=categoryId %>&page=<%=i + 1%>"><%=i + 1%></a></li>
                                 <% }
-                                    if (p < pages) {
+                                    if (p <= pages) {
                                 %>
                             <li><a href="?id=<%=shop_id %>&categoryId=<%=categoryId %>&<%="page=" + (p + 1)%>">&gt;</a></li>
                                 <% }%>

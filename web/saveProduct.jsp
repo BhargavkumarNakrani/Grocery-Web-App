@@ -4,6 +4,10 @@
     Author     : Dell
 --%>
 
+<%@page import="dao.CustomerDAO"%>
+<%@page import="entity.Customer"%>
+<%@page import="java.util.List"%>
+<%@page import="email.EmailUtility"%>
 <%@page import="dao.productDAO"%>
 <%@page import="dao.uomDAO"%>
 <%@page import="dao.categoryDAO"%>
@@ -16,7 +20,19 @@
 <%@page import="java.io.InputStream"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%!
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+ %>
 <%
+    ServletContext context = pageContext.getServletContext();
+    host = context.getInitParameter("host");
+    port = context.getInitParameter("port");
+    user = context.getInitParameter("user");
+    pass = context.getInitParameter("pass");
+           
     String email = (String) session.getAttribute("email");
     if(email == null){
         response.sendRedirect("login.jsp");
@@ -63,7 +79,26 @@
     
     if(SPId == null){
         productDAO.save(product_bean);
-        response.sendRedirect("shop.jsp");
+        String email1 = email;
+        List<Customer> customers = CustomerDAO.viewAll();
+        for(Customer customer : customers){
+            email1 = email1+","+customer.getEmail();
+        }
+        String recipient = email1;
+        String subject = "Product updates for vegeFoods";
+        String content = "New product is added by "+ ShopkeeperDAO.viewSingle(email)+" <br> ***<u>Product Detail</u>***<br> Product name : "+product_bean.getName()+" <br> Product price : "+product_bean.getPrice()+" <br> "
+                + " product quantity :"+product_bean.getQuantity();
+         String resultMessage = "";
+        try {
+                EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+                resultMessage="Success";
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            resultMessage="fail "+ex.getMessage();
+        }
+        out.print(resultMessage);
+        //response.sendRedirect("shop.jsp");
     } else {
         if(image.getSize() > 0){
             productDAO.update(product_bean);

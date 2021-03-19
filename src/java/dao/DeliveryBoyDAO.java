@@ -28,6 +28,15 @@ public class DeliveryBoyDAO {
         session.close();
     }
     
+    public static List<DeliveryBoy> viewAll(){
+        String hql = "from DeliveryBoy";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<DeliveryBoy> deliveryBoy = query.list();
+        session.close();
+        return deliveryBoy;
+    }
+    
     public static void update(DeliveryBoy bean)
     {
         session = HibernateUtil.getSessionFactory().openSession();

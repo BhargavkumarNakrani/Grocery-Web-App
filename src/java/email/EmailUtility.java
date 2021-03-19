@@ -45,8 +45,10 @@ public class EmailUtility {
         
          
         msg.setFrom(new InternetAddress(userName));
-        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
-        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+//        InternetAddress[] toAddresses = { new InternetAddress(toAddress,true) };
+//        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        InternetAddress[] parse = InternetAddress.parse(toAddress , true);
+        msg.setRecipients(javax.mail.Message.RecipientType.BCC,  parse);
         msg.setSubject(subject);
         msg.setSentDate(new Date());
         msg.setContent(message,"text/html");

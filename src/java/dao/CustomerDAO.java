@@ -82,4 +82,13 @@ public class CustomerDAO {
         session.close();
         return updatedEntities;
     }
+    
+    public static List<Customer> viewAll(){
+        String hql = "from Customer";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Customer> customer = query.list();
+        session.close();
+        return customer;
+    }
 }

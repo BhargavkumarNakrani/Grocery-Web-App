@@ -4,6 +4,8 @@
     Author     : Dell
 --%>
 
+<%@page import="dao.DeliveryBoyDAO"%>
+<%@page import="email.EmailUtility"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="entity.Shopkeeper"%>
 <%@page import="dao.productDAO"%>
@@ -22,7 +24,18 @@
 <%@page import="entity.Orders"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%!
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+%>
 <%
+    ServletContext context = pageContext.getServletContext();
+    host = context.getInitParameter("host");
+    port = context.getInitParameter("port");
+    user = context.getInitParameter("user");
+    pass = context.getInitParameter("pass");
     String email = (String) session.getAttribute("email");
     
     //Cart cart = new Cart();
@@ -61,7 +74,38 @@
                 out.print(orderDetailDAO.save(orderDetail_bean)+" ");
                 cartDAO.delete(c.getId());
             }
-            response.sendRedirect("cart.jsp");   
+            String recipient = email;
+            String subject = "Order Place";
+            String content = " Hello, <b>"+name+"</b> your order is place successfully and your order id is <b>"+o_id+"</b>";
+            try {
+                    EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+
+            } finally{
+                List<Shopkeeper> shopkeepers= ShopkeeperDAO.viewAll();
+                List<DeliveryBoy> deliveryBoys = DeliveryBoyDAO.viewAll();
+                String sendEmail = "";
+                for(Shopkeeper shopkeeper : shopkeepers){
+                    sendEmail = sendEmail+","+shopkeeper.getEmail();
+                }
+                for(DeliveryBoy deliveryBoy : deliveryBoys){
+                    sendEmail = sendEmail+","+deliveryBoy.getEmail();
+                }
+                recipient = sendEmail;
+                subject = "Customer Order Place";
+                content = " Hello, <b>"+name+"</b> is order place successfully and He/Her order id is <b>"+o_id+"</b>";
+                try {
+                        EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                } finally{
+                    response.sendRedirect("cart.jsp"); 
+                }
+            }
        }
     }
 %>
