@@ -7,12 +7,49 @@
 <%@page import="dao.productDAO"%>
 
 <%
-    
-    int i = (int) productDAO.getCount();
+    String email = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
+    String ScategoryId = request.getParameter("categoryId");
+    String StringID = request.getParameter("id");
+    int shop_id = 0;
+    int categoryId = 0;
+    int count = 0;
+    int i;
+    if(role == null) role = "";
+    if(StringID != null){
+        shop_id = Integer.parseInt(StringID);
+    }
+    if(ScategoryId != null){
+        categoryId = Integer.parseInt(ScategoryId);
+    }
+    if(categoryId > 0){
+        i = (int) productDAO.getCount(categoryId);
+        if(shop_id > 0){
+            i = (int) productDAO.getCount(categoryId,shop_id);
+            if(role.equalsIgnoreCase("SHOPKEEPER")){    
+                i = (int) productDAO.getCount(email,categoryId);
+            }
+        }
+    } else if(role.equalsIgnoreCase("SHOPKEEPER")){    
+        i = (int) productDAO.getCount(email);
+        if(categoryId > 0){
+            i = (int) productDAO.getCount(email,categoryId);
+            if(shop_id > 0){
+                i = (int) productDAO.getCount(categoryId,shop_id);
+                if(role.equalsIgnoreCase("SHOPKEEPER")){    
+                    i = (int) productDAO.getCount(email,categoryId);
+                }
+            }
+        }   
+    } else{
+        i = (int) productDAO.getCount();
+    }
+        
+        
+     
     int pages = i / 12;
     String s_page = request.getParameter("page");
     int p = 1;
-    String email = (String) session.getAttribute("email");
     
     if (s_page != null) {
         p = Integer.parseInt(s_page);            
@@ -20,11 +57,8 @@
     int Start = (p*12)-12;
     //long InCart= cartDAO.checkProductInCart(1, "pansuriya@gmail.com");
     //out.print(in);
-    String role = (String) session.getAttribute("role");
     List<Products> products = new ArrayList<Products>();
     
-    String StringID = request.getParameter("id");
-    int shop_id = 0;
     if(role == null){
         String uri = request.getRequestURI();
         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
@@ -33,14 +67,23 @@
     else if(!role.equalsIgnoreCase("SHOPKEEPER")){
         if(StringID != null && Integer.parseInt(StringID) > 0){
             shop_id = Integer.parseInt(StringID);
-            products = productDAO.viewByShopId(shop_id, Start);
+            if(categoryId == 0)
+                products = productDAO.viewByShopId(shop_id, Start);
+            else 
+                products = productDAO.viewByShopId(shop_id, Start,categoryId);
         }
         else {
-            products = productDAO.viewAll(Start);
+            if(categoryId == 0)
+                products = productDAO.viewAll(Start);
+            else 
+                products = productDAO.viewAll(Start,categoryId);
         }
     }
     else {
-       products = productDAO.viewByShopEmail(email,Start);
+        if(categoryId == 0)
+            products = productDAO.viewByShopEmail(email,Start);
+        else 
+            products = productDAO.viewByShopEmail(email,Start,categoryId);
     }
     
 %>
@@ -111,12 +154,7 @@
                 <div class="col-md-10 mb-5 text-center">
                     <ul class="product-category">
             <%
-                String ScategoryId = request.getParameter("categoryId");
-                int categoryId = 0;
-                int count = 0;
-                if(ScategoryId != null){
-                    categoryId = Integer.parseInt(ScategoryId);
-                }
+                
                 List<Category> categories = categoryDAO.viewAll();
                 for(Category category : categories){
                     if(shop_id == 0){
