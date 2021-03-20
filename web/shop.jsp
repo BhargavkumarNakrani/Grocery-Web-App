@@ -11,11 +11,13 @@
     String role = (String) session.getAttribute("role");
     String ScategoryId = request.getParameter("categoryId");
     String StringID = request.getParameter("id");
+    String search = request.getParameter("s");
     int shop_id = 0;
     int categoryId = 0;
     int count = 0;
     int i;
     if(role == null) role = "";
+    if(search == null) search ="";
     if(StringID != null){
         shop_id = Integer.parseInt(StringID);
     }
@@ -23,24 +25,66 @@
         categoryId = Integer.parseInt(ScategoryId);
     }
     if(categoryId > 0){
-        i = (int) productDAO.getCount(categoryId);
         if(shop_id > 0){
-            i = (int) productDAO.getCount(categoryId,shop_id);
             if(role.equalsIgnoreCase("SHOPKEEPER")){    
-                i = (int) productDAO.getCount(email,categoryId);
+                if(search != null || search != ""){
+                    i = (int) productDAO.getSearchCount(search,email,categoryId);
+                } else{
+                    i = (int) productDAO.getCount(email,categoryId);
+                }
+            } else {
+                if(search != null || search != ""){
+                    i = (int) productDAO.getSearchCount(search,categoryId,shop_id);
+                } else {
+                    i = (int) productDAO.getCount(categoryId,shop_id);
+                }
+            }
+        } else {
+            if(search != null || search != ""){
+                i = (int) productDAO.getSearchCount(search,categoryId);
+            } else {
+                i = (int) productDAO.getCount(categoryId);
             }
         }
     } else if(role.equalsIgnoreCase("SHOPKEEPER")){    
         i = (int) productDAO.getCount(email);
         if(categoryId > 0){
-            i = (int) productDAO.getCount(email,categoryId);
             if(shop_id > 0){
-                i = (int) productDAO.getCount(categoryId,shop_id);
-                if(role.equalsIgnoreCase("SHOPKEEPER")){    
+                if(role.equalsIgnoreCase("SHOPKEEPER")){  
+                    if(search != null || search != ""){
+                        i = (int) productDAO.getSearchCount(search,email,categoryId);
+                    } else {
+                        i = (int) productDAO.getCount(email,categoryId);
+                    }
+                } else{
+                    if(search != null || search != ""){
+                        i = (int) productDAO.getSearchCount(search,categoryId,shop_id);
+                    } else{
+                        i = (int) productDAO.getCount(categoryId,shop_id);
+                    }
+                }
+            } else{
+                if(search != null || search != ""){
+                    i = (int) productDAO.getSearchCount(search,email,categoryId);
+                } else {
                     i = (int) productDAO.getCount(email,categoryId);
                 }
             }
         }   
+    } else if(search != ""){
+        if (categoryId > 0) {
+                if (shop_id > 0) {
+                    if (role.equalsIgnoreCase("SHOPKEEPER")) {
+                        i = (int) productDAO.getSearchCount(search, email, categoryId);
+                    } else {
+                        i = (int) productDAO.getSearchCount(search,categoryId, shop_id);
+                    }
+                } else{
+                    i = (int) productDAO.getSearchCount(search,email, categoryId);
+                }
+        } else{
+            i = (int) productDAO.getSearchCount(search);
+        }
     } else{
         i = (int) productDAO.getCount();
     }
@@ -67,23 +111,45 @@
     else if(!role.equalsIgnoreCase("SHOPKEEPER")){
         if(StringID != null && Integer.parseInt(StringID) > 0){
             shop_id = Integer.parseInt(StringID);
-            if(categoryId == 0)
-                products = productDAO.viewByShopId(shop_id, Start);
+            if(categoryId == 0) {
+                if(search != null){
+                    products = productDAO.viewByShopId(shop_id, Start,search);
+                } else {
+                    products = productDAO.viewByShopId(shop_id, Start);
+                }
+            }   
             else 
                 products = productDAO.viewByShopId(shop_id, Start,categoryId);
         }
         else {
-            if(categoryId == 0)
-                products = productDAO.viewAll(Start);
-            else 
-                products = productDAO.viewAll(Start,categoryId);
+            if(categoryId == 0){
+                if(search != null){
+                    products = productDAO.viewAll(Start, search);  
+                } else {
+                    products = productDAO.viewAll(Start);
+                }
+            }
+            else {
+                if(search != null){
+                products = productDAO.viewAll(Start,categoryId,search);
+                } else {
+                    products = productDAO.viewAll(Start,categoryId);
+                }
+            }
         }
     }
     else {
         if(categoryId == 0)
-            products = productDAO.viewByShopEmail(email,Start);
+            if(search != null){
+                products = productDAO.viewByShopEmail(email,Start,search);
+            } else {
+                products = productDAO.viewByShopEmail(email,Start);
+            }
         else 
-            products = productDAO.viewByShopEmail(email,Start,categoryId);
+            if(search != null){
+                products = productDAO.viewByShopEmail(email,Start,categoryId,search);
+            }
+                products = productDAO.viewByShopEmail(email,Start,categoryId);
     }
     
 %>
@@ -161,18 +227,18 @@
                         if(count ==0){
                             count++;
             %>
-                        <li><a href="?categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
+            <li><a href="?s=<%=search%>&categoryId=0" class="<% if(categoryId == 0) out.print("active"); %>">all</a></li>
                         <% }%>
-                        <li><a href="?categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
+                        <li><a href="?s=<%=search%>&categoryId=<%=category.getCategoryId()%>" class="<% if(categoryId == category.getCategoryId()) out.print("active"); %>"><%=category.getName() %></a></li>
             <% }  else { 
                         if (count == 0) {
                            count++;
             %>
-                        <li><a href="?id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
+                        <li><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=0" class="<% if (categoryId == 0) {
                                 out.print("active");
                             } %>">all</a></li>
                             <% }%>
-                        <li><a href="?id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
+                        <li><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=category.getCategoryId()%>" class="<% if (categoryId == category.getCategoryId())
                                 out.print("active");%>"><%=category.getName()%></a></li>
             <% } }%>
                     </ul>
@@ -199,14 +265,14 @@
                                 </div>
                             </div>
                             <%
-                            if(role.equalsIgnoreCase("CUSTOMER") || role.equalsIgnoreCase("DELIVERYBOY")){
+                            if(role.equalsIgnoreCase("CUSTOMER") || role.equalsIgnoreCase("DELIVERYBOY") || role == ""){
                             %>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
                                     <a href="product-single.jsp?productId=<%=product.getPId()%>" class="add-to-cart single d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
-                                    <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0) {%>
+                                    <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0 && role != "") {%>
                                     <a href="addToCart.jsp?productId=<%=product.getPId()%>" class="cart-add buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fa fa-shopping-cart"></i></span>
                                     </a>
@@ -244,11 +310,11 @@
                             <li><a href="<%="?page=" + (p - 1)%>">&lt;</a></li>
                                 <% } %>
                                 <%for (i = 0; i <= pages; i++) { %>
-                            <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?id=<%=shop_id %>&categoryId=<%=categoryId %>&page=<%=i + 1%>"><%=i + 1%></a></li>
+                            <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=categoryId %>&page=<%=i + 1%>"><%=i + 1%></a></li>
                                 <% }
                                     if (p <= pages) {
                                 %>
-                            <li><a href="?id=<%=shop_id %>&categoryId=<%=categoryId %>&<%="page=" + (p + 1)%>">&gt;</a></li>
+                            <li><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=categoryId %>&<%="page=" + (p + 1)%>">&gt;</a></li>
                                 <% }%>
                         </ul>
                     </div>

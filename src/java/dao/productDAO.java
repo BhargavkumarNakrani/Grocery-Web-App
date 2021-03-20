@@ -51,10 +51,34 @@ public class productDAO {
         return products;
     }
     
+    public static List<Products> viewAll(int Start, String search){
+        String hql = "from Products where (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
     public static List<Products> viewAll(int Start, int categoryId){
         String hql = "from Products where category.categoryId="+categoryId;
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static List<Products> viewAll(int Start, int categoryId, String search) {
+        String hql = "from Products where category.categoryId=" + categoryId+" and (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
         query.setFirstResult(Start).
                 setMaxResults(12);
         List<Products> products = query.list();
@@ -138,6 +162,47 @@ public class productDAO {
         session.close();
         return i;
     }
+    
+    public static long getSearchCount(String search){
+        String hql = "SELECT count(*) from Products where (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
+    public static long getSearchCount(String search, int categoryId){
+        String hql = "SELECT count(*) from Products where category.categoryId="+categoryId+" and (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
+    public static long getSearchCount(String search, String email, int categoryId){
+        String hql = "SELECT count(*) from Products where shopkeeper.email = '"+email+"' and category.categoryId="+categoryId+" (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
+    public static long getSearchCount(String search, int categoryId,int shopId){
+        String hql = "SELECT count(*) from Products where shopkeeper.SId="+shopId+" and category.categoryId="+categoryId+" (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
     public static long getCount(String email, int categoryId) {
         String hql = "SELECT count(*) from Products where shopkeeper.email = '"+email+"' and category.categoryId=" + categoryId;
         session = HibernateUtil.getSessionFactory().openSession();
@@ -194,10 +259,35 @@ public class productDAO {
         session.close();
         return products;
     }
+    public static List<Products> viewByShopId(int id, int Start, String search) {
+        String hql = "from Products where shopkeeper.SId = "+id+" and (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
     public static List<Products> viewByShopId(int id, int Start, int categoryId) {
         String hql = "from Products where category.categoryId="+categoryId+" and shopkeeper.SId ="+id;
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static List<Products> viewByShopId(int id, int Start, int categoryId, String search) {
+        String hql = "from Products where category.categoryId=" + categoryId + " and shopkeeper.SId =" + id+" "
+                + "and (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
         query.setFirstResult(Start).
                 setMaxResults(12);
         List<Products> products = query.list();
@@ -216,10 +306,34 @@ public class productDAO {
         return products;
     }
     
+    public static List<Products> viewByShopEmail(String email, int Start, String search) {
+        String hql = "from Products where shopkeeper.email = '"+email+"' and (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
     public static List<Products> viewByShopEmail(String email, int Start, int categoryId) {
         String hql = "from Products where shopkeeper.email = '"+email+"' and category.categoryId="+categoryId;
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
+        query.setFirstResult(Start).
+                setMaxResults(12);
+        List<Products> products = query.list();
+        session.close();
+        return products;
+    }
+    
+    public static List<Products> viewByShopEmail(String email, int Start, int categoryId, String search) {
+        String hql = "from Products where shopkeeper.email = '"+email+"' and category.categoryId="+categoryId+" and (category.name like :keyword"
+                + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
         query.setFirstResult(Start).
                 setMaxResults(12);
         List<Products> products = query.list();

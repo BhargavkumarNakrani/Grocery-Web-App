@@ -485,3 +485,75 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function () {
+        var searchbar;
+        
+        $(".fa-search").click(function() {
+            searchbar = $(this).siblings('.searchbar');
+            
+            if($(searchbar).is(':hidden')){
+                searchbar.fadeIn(1000,function(){
+                    $(this).show();
+                    $(this).find("input[type='text']").focus();
+                });
+            }else if($(searchbar).is(':visible')){
+                searchbar.fadeOut(1000,function(){
+                    $(this).hide();
+                });
+            }
+        });
+        
+        $('.desktop-search').find('.search_input').focusout(function (){
+            $(this).parent().parent().fadeOut(1000,function(){
+                $(this).hide();
+            }); 
+        });
+        
+        $('a.cart-add').on('click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var anchor = $(this);
+        var productName = $(this).parentsUntil('.text').siblings('h3').find('#pname').text();
+        var snackbar = $("#snackbar");
+        $.ajax({
+            url: href,
+            success: function (response) {
+                anchor.fadeOut(1000,function (){
+                    $(this).remove();
+                });
+                var cartItem = $(response).find(".cart-item").text();
+                $('.cart-item').text(cartItem);
+                snackbar.text(productName + " added to cart");
+                snackbar.addClass('show');
+                setTimeout(function(){
+                    snackbar.removeClass('show');
+                },5000);
+            },
+
+            error: function (jxhr, text, error) {
+                alert(error);
+            }
+        });
+    });
+//    $('.search_input').on('keyup',function(){
+//        var filter,cardContainer,title,cards;
+//        filter = $(this).val().toUpperCase();
+//        cardContainer = $('.card-container');
+//        cards = $('.card-container').find('.delete');
+//        
+//        $.each(cards,function(index){
+//            title = $(cards[index]).find('.product').text();
+//            if(title.toUpperCase().indexOf(filter) <= -1){
+//                $(cards[index]).hide();
+//            }else{
+//                $(cards[index]).show();
+//            }
+//        });
+//        
+//        $(cards).filter(function() {
+//            $(this).toggle($(this).text().toUpperCase().indexOf(filter) > -1)
+//        });
+//    });
+});
+</script>
