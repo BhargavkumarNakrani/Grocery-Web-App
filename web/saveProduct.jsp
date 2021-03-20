@@ -77,7 +77,7 @@
     
     Products product_bean = new Products(category_bean,shopkeeper_bean,uom_bean,pname,quantity, price, img );
     
-    if(SPId == null && email != null){
+    if(PId == 0 && email != null){
         productDAO.save(product_bean);
         String email1 = email;
         List<Customer> customers = CustomerDAO.viewAll();
@@ -97,8 +97,8 @@
             ex.printStackTrace();
             resultMessage="fail "+ex.getMessage();
         }
-        out.print(resultMessage);
-        response.sendRedirect("shop.jsp");
+        out.print(resultMessage+"");
+        //response.sendRedirect("shop.jsp");
     } else if(PId != 0 && email != null){
         if(image.getSize() > 0){
             product_bean.setPId(PId);
