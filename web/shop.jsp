@@ -345,7 +345,7 @@
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
 <script src="js/main.js"></script>
-
+<script src="js/searchJS.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -370,28 +370,6 @@
 </script>
 <script>
     $(document).ready(function () {
-        var searchbar;
-        
-        $(".fa-search").click(function() {
-            searchbar = $(this).siblings('.searchbar');
-            
-            if($(searchbar).is(':hidden')){
-                searchbar.fadeIn(1000,function(){
-                    $(this).show();
-                    $(this).find("input[type='text']").focus();
-                });
-            }else if($(searchbar).is(':visible')){
-                searchbar.fadeOut(1000,function(){
-                    $(this).hide();
-                });
-            }
-        });
-        
-        $('.desktop-search').find('.search_input').focusout(function (){
-            $(this).parent().parent().fadeOut(1000,function(){
-                $(this).hide();
-            }); 
-        });
         
         $('a.cart-add').on('click', function(e) {
         e.preventDefault();
