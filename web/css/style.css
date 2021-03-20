@@ -695,7 +695,7 @@ pre code{font-size:inherit;color:inherit;word-break:normal}
     .container > .searchbar {display: none;}
     .searchbar{position: absolute;margin-bottom: auto;display:none ;margin-left: -10px;margin-top: auto;height: 60px;background-color: #82ae46;border-radius: 30px;padding: 10px;}
     .search_input{color: white;border: 0;outline: 0;background: none;width: 200px;caret-color:white;line-height: 40px;transition: width 0.4s linear;}
-    .searchbar:before{content: "";position: absolute;top: -27px;left: 25px;border-left: 12px solid transparent;border-right: 12px solid transparent;border-top: 14px solid transparent;border-bottom: 14px solid #82ae46;}
+    .desktop-search .searchbar:before{content: "";position: absolute;top: -27px;left: 25px;border-left: 12px solid transparent;border-right: 12px solid transparent;border-top: 14px solid transparent;border-bottom: 14px solid #82ae46;}
     .search_icon{background: white;color:#82ae46!important;float:right!important;}
 }
 

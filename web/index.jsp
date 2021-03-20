@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <%-- if(!role.equals("SHOPKEEPER")){%>
+        <%if(!role.equals("SHOPKEEPER")){%>
         <div class="container mb-5 pb-5 pl-4">
             <div class="ftco-animate mb-5">
             <div class="d-flex">
@@ -135,7 +135,7 @@
             </div>
             </div>
         </div>
-        <%}--%>
+        <%}%>
         <div class="container">
             <div class="row">
                 <%
