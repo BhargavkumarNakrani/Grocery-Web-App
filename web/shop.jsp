@@ -139,17 +139,20 @@
         }
     }
     else {
-        if(categoryId == 0)
-            if(search != null){
+        if(categoryId == 0) {
+            if(search != ""){
                 products = productDAO.viewByShopEmail(email,Start,search);
             } else {
                 products = productDAO.viewByShopEmail(email,Start);
             }
-        else 
-            if(search != null){
+        }
+        else {
+            if(search != ""){
                 products = productDAO.viewByShopEmail(email,Start,categoryId,search);
-            }
+            } else {
                 products = productDAO.viewByShopEmail(email,Start,categoryId);
+            }
+        }
     }
     
 %>
