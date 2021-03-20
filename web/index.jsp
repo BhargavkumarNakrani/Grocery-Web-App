@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <% if(!role.equals("SHOPKEEPER")){%>
+        <%-- if(!role.equals("SHOPKEEPER")){%>
         <div class="container mb-5 pb-5 pl-4">
             <div class="ftco-animate mb-5">
             <div class="d-flex">
@@ -135,9 +135,9 @@
             </div>
             </div>
         </div>
-        <%}%>
+        <%}--%>
         <div class="container">
-            <div class="row card-container">
+            <div class="row">
                 <%
                     //System.out.print(role);
                     //String p = productDAO.viewImage(3);
@@ -149,7 +149,7 @@
                         {
                 %>
                 
-                <div class="col-md-6 col-lg-3 shop-card ftco-animate fadeInUp ftco-animated">
+                <div class="col-md-6 col-lg-3 shop-card ftco-animate">
                     <div class="product">
                         <div class="card" style="width:100%">
                             <div class="img-prod">
@@ -177,7 +177,7 @@
                         {
                 %>
                 
-                <div class="col-md-6 shop-card col-lg-3 ftco-animate fadeInUp ftco-animated">
+                <div class="col-md-6 shop-card col-lg-3 ftco-animate">
                     <div class="product">
                         <div class="card" style="width:100%">
                             <div class="img-prod">
@@ -203,7 +203,7 @@
                     Shopkeeper obj = ShopkeeperDAO.viewSingle(email);
                 %>
                 
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+                <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <div class="card" style="width:100%">
                             <div class="img-prod">
