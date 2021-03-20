@@ -184,7 +184,7 @@ public class productDAO {
     }
     
     public static long getSearchCount(String search, String email, int categoryId){
-        String hql = "SELECT count(*) from Products where shopkeeper.email = '"+email+"' and category.categoryId="+categoryId+" (category.name like :keyword"
+        String hql = "SELECT count(*) from Products where shopkeeper.email = '"+email+"' and category.categoryId="+categoryId+" and (category.name like :keyword"
                 + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
@@ -194,7 +194,7 @@ public class productDAO {
     }
     
     public static long getSearchCount(String search, int categoryId,int shopId){
-        String hql = "SELECT count(*) from Products where shopkeeper.SId="+shopId+" and category.categoryId="+categoryId+" (category.name like :keyword"
+        String hql = "SELECT count(*) from Products where shopkeeper.SId="+shopId+" and category.categoryId="+categoryId+" and (category.name like :keyword"
                 + " OR name like :keyword OR shopkeeper.shopName like :keyword)";
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql).setString("keyword", "%"+search+"%");
