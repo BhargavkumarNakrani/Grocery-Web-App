@@ -113,31 +113,43 @@
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
                     <%  String role = (String)session.getAttribute("role");
-                        if(role.equals("CUSTOMER")){%>
+                    if(role == null){role = "";}
+    if(role.equals("CUSTOMER") || role.equals("")){%>
                         <span class="subheading">Featured Shops</span>
                         <h2 class="mb-4">Shops Near By You</h2>  
                     <%}else if(role.equals("SHOPKEEPER")){%>
                         <span class="subheading">Your Shop</span>
-                        <h2 class="mb-4">Manage Your</h2>
+                        <h2 class="mb-4">Manage Your Shop</h2>
                     <%}%>
                 </div>
             </div>
         </div>
+        <% if(!role.equals("SHOPKEEPER")){%>
+        <div class="container mb-5 pb-5 pl-4">
+            <div class="ftco-animate mb-5">
+            <div class="d-flex">
+                <div class="searchbar" style="display: block;">
+                    <input class="search_input" type="text" name="" placeholder="Search...">
+                    <i class="fas fa-search search_icon" style="padding-top: 0px!important;"></i>
+                </div>
+            </div>
+            </div>
+        </div>
+        <%}%>
         <div class="container">
-            <div class="row">
+            <div class="row card-container">
                 <%
-                    System.out.print(role);
+                    //System.out.print(role);
                     //String p = productDAO.viewImage(3);
                     //for(Products p : products){
                   
-                    if(role == null){
-                        role = "";
+                    if(role == ""){
                     List<Shopkeeper> sk = ShopkeeperDAO.viewAll();
                         for(Shopkeeper obj : sk)
                         {
                 %>
                 
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+                <div class="col-md-6 col-lg-3 shop-card ftco-animate fadeInUp ftco-animated">
                     <div class="product">
                         <div class="card" style="width:100%">
                             <div class="img-prod">
@@ -145,10 +157,11 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
-                                <h6  class="shop-add"><%=obj.getAddress()%></h6>
-                                <h6  class="phone"><%=obj.getPhone()%></h6>
-                                <div class="flexible"></div>
+                                <div class="shop-details">
+                                    <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
+                                    <h6  class="shop-add"><%=obj.getAddress()%></h6>
+                                    <h6  class="phone"><%=obj.getPhone()%></h6>
+                                </div>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Shop Product</a>
                             </div>
                         </div>
@@ -164,7 +177,7 @@
                         {
                 %>
                 
-                <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+                <div class="col-md-6 shop-card col-lg-3 ftco-animate fadeInUp ftco-animated">
                     <div class="product">
                         <div class="card" style="width:100%">
                             <div class="img-prod">
@@ -172,10 +185,11 @@
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body text">
-                                <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
-                                <h6  class="shop-add"><%=obj.getAddress()%></h6>
-                                <h6  class="phone"><%=obj.getPhone()%></h6>
-                                <div class="flexible"></div>
+                                <div class="shop-details">
+                                    <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
+                                    <h6  class="shop-add"><%=obj.getAddress()%></h6>
+                                    <h6  class="phone"><%=obj.getPhone()%></h6>
+                                </div>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Shop Product</a>
                             </div>
                         </div>
@@ -200,7 +214,6 @@
                                 <h3 class="card-title shop-name" style="margin-bottom:25px;"><%=obj.getShopName()%></h3>
                                 <h6  class="shop-add"><%=obj.getAddress()%></h6>
                                 <h6  class="phone"><%=obj.getPhone()%></h6>
-                                <div class="flexible"></div>
                                 <a href="shop.jsp?id=<%=obj.getSId()%>" class="btn btn-primary">See Shop Product</a>
                             </div>
                         </div>
@@ -437,7 +450,7 @@
     
     <jsp:include page="footer.html" />
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
-<script src="js/jquery.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -450,10 +463,23 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-<script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
+<script>
+    $('.search_input').on('keyup',function(){
+        var filter,title,cards;
+        filter = $(this).val().toUpperCase();
+        cards = $('.card-container').find('.shop-card');
 
+        $.each(cards,function(index){
+            title = $(cards[index]).find('.shop-details').text();
+            if(title.toUpperCase().indexOf(filter) <= -1){
+                $(cards[index]).hide();
+            }else{
+                $(cards[index]).show();
+            }
+        });
+    });
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 
 </body>
