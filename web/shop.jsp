@@ -309,7 +309,8 @@
                 <div class="col text-center">
                     <div class="block-27">
                         <ul>
-                            <% if (p > 1) {%>
+                            <% if(i != 0) {
+                                if (p > 1) {%>
                             <li><a href="<%="?page=" + (p - 1)%>">&lt;</a></li>
                                 <% } %>
                                 <%for (i = 0; i <= pages; i++) { %>
@@ -318,7 +319,8 @@
                                     if (p <= pages) {
                                 %>
                             <li><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=categoryId %>&<%="page=" + (p + 1)%>">&gt;</a></li>
-                                <% }%>
+                                <% }
+                            }%>
                         </ul>
                     </div>
                 </div>
