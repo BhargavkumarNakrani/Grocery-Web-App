@@ -15,11 +15,13 @@ $(document).ready(function () {
             });
         }
     });
-
-    $('.desktop-search').find('.search_input').focusout(function (){
-        $(this).parent().parent().fadeOut(1000,function(){
-            $(this).hide();
-        }); 
-    });
+    
+    $('.ftco-section').click(function(){
+        if($(searchbar).is(':visible')){
+            searchbar.fadeOut(1000,function(){
+                $(this).hide();
+            });
+        }
+      });
 });
 
