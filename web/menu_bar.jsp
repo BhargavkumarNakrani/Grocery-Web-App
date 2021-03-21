@@ -64,8 +64,8 @@
                         <div class="container">
                             <div class="d-flex">
                                 <div class="searchbar">
-                                    <form>
-                                    <input class="search_input" type="text" name="" placeholder="Search...">
+                                    <form action="shop.jsp" method="get">
+                                    <input class="search_input" type="text" name="s" placeholder="Search...">
                                     <i class="fas fa-search search_icon" type="submit"></i>
                                     </form>
                                 </div>
