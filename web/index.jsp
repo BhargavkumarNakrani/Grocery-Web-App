@@ -114,7 +114,7 @@
                 <div class="col-md-12 heading-section text-center ftco-animate">
                     <%  String role = (String)session.getAttribute("role");
                     if(role == null){role = "";}
-    if(role.equals("CUSTOMER") || role.equals("")){%>
+                    if(role.equals("CUSTOMER") || role.equals("")){%>
                         <span class="subheading">Featured Shops</span>
                         <h2 class="mb-4">Shops Near By You</h2>  
                     <%}else if(role.equals("SHOPKEEPER")){%>
@@ -137,7 +137,7 @@
         </div>
         <%}%>
         <div class="container">
-            <div class="row">
+            <div class="row card-container">
                 <%
                     //System.out.print(role);
                     //String p = productDAO.viewImage(3);
@@ -240,212 +240,6 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/category.jpg" alt="Colorlib Template">
-                            <span class="status">30%</span>
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Bell Pepper</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/image_1.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Strawberry</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/person_3.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Green Beans</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-4.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Purple Cabbage</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-5.jpg" alt="Colorlib Template">
-                            <span class="status">30%</span>
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Tomatoe</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-6.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Brocolli</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-7.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Carrots</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="images/product-8.jpg" alt="Colorlib Template">
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Fruit Juice</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="fa fa-bars"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fa fa-shopping-cart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     
     <jsp:include page="footer.html" />
@@ -464,12 +258,16 @@
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/searchJS.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+</body>
 <script>
+$(document).ready(function () {
     $('.search_input').on('keyup',function(){
         var filter,title,cards;
         filter = $(this).val().toUpperCase();
         cards = $('.card-container').find('.shop-card');
-
+        
         $.each(cards,function(index){
             title = $(cards[index]).find('.shop-details').text();
             if(title.toUpperCase().indexOf(filter) <= -1){
@@ -478,82 +276,11 @@
                 $(cards[index]).show();
             }
         });
-    });
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-
-</body>
-
-</html>
-<script>
-    $(document).ready(function () {
-        var searchbar;
         
-        $(".fa-search").click(function() {
-            searchbar = $(this).siblings('.searchbar');
-            
-            if($(searchbar).is(':hidden')){
-                searchbar.fadeIn(1000,function(){
-                    $(this).show();
-                    $(this).find("input[type='text']").focus();
-                });
-            }else if($(searchbar).is(':visible')){
-                searchbar.fadeOut(1000,function(){
-                    $(this).hide();
-                });
-            }
-        });
-        
-        $('.desktop-search').find('.search_input').focusout(function (){
-            $(this).parent().parent().fadeOut(1000,function(){
-                $(this).hide();
-            }); 
-        });
-        
-        $('a.cart-add').on('click', function(e) {
-        e.preventDefault();
-        var href = $(this).attr('href');
-        var anchor = $(this);
-        var productName = $(this).parentsUntil('.text').siblings('h3').find('#pname').text();
-        var snackbar = $("#snackbar");
-        $.ajax({
-            url: href,
-            success: function (response) {
-                anchor.fadeOut(1000,function (){
-                    $(this).remove();
-                });
-                var cartItem = $(response).find(".cart-item").text();
-                $('.cart-item').text(cartItem);
-                snackbar.text(productName + " added to cart");
-                snackbar.addClass('show');
-                setTimeout(function(){
-                    snackbar.removeClass('show');
-                },5000);
-            },
-
-            error: function (jxhr, text, error) {
-                alert(error);
-            }
-        });
-    });
-//    $('.search_input').on('keyup',function(){
-//        var filter,cardContainer,title,cards;
-//        filter = $(this).val().toUpperCase();
-//        cardContainer = $('.card-container');
-//        cards = $('.card-container').find('.delete');
-//        
-//        $.each(cards,function(index){
-//            title = $(cards[index]).find('.product').text();
-//            if(title.toUpperCase().indexOf(filter) <= -1){
-//                $(cards[index]).hide();
-//            }else{
-//                $(cards[index]).show();
-//            }
-//        });
-//        
 //        $(cards).filter(function() {
 //            $(this).toggle($(this).text().toUpperCase().indexOf(filter) > -1)
 //        });
-//    });
+    });
 });
 </script>
+</html>
