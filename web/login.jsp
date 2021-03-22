@@ -129,7 +129,7 @@ $(document).ready(function(){
     <%}%>
 });
 </script>
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/login_validation.js"></script>
     <script src="js/floating_label.js"></script>
     <script src="js/popper.min.js"></script>
