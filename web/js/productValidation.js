@@ -15,13 +15,13 @@ $("document").ready(function() {
         var error_price = false;
         
         
-        $("#pname").focusout(function() {
+        $("#pname").keyup(function() {
             check_pname();
          });
         $("#category").change(function() {
             check_category();
          });
-        $("#stock").focusout(function() {
+        $("#stock").keyup(function() {
             check_stock();
          });
         $('#productimg').on('change',function(){
@@ -30,7 +30,7 @@ $("document").ready(function() {
         $("#uom").change(function() {
             check_uom();
          });
-        $("#price").focusout(function() {
+        $("#price").keyup(function() {
             check_price();
          });
         
@@ -83,7 +83,7 @@ $("document").ready(function() {
             var regex = new RegExp("([a-zA-Z0-9 ()\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
             
             if (fileUpload.val()===''){
-                if($('div').is(".preview")){
+                if($('div .preview').is(':visible')){
                     error_productimg = false;
                 }else{
                     lblError.html("Upload Image File.");

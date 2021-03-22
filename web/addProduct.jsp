@@ -96,10 +96,10 @@
                       <style>
                           .content{height: 900px;}
                       </style>
-                      <div id="div" class="mb-4 preview">
-                          <a href="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" class="image-popup"><img src="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" style="width:40%;" class="img-fluid" alt="Colorlib Template"></a>
+                   <%}%>
+                      <div id="div" class="mb-5 preview">
+                          <img src="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" style="width:40%;" class="img-fluid" alt="Colorlib Template">
                       </div>
-                  <% }%>
                 <form action="saveProduct.jsp" method="post" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
                     <input type="hidden" name="id" value="<%=id%>" id="id">
@@ -193,5 +193,25 @@
     <script src="js/floating_label.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+        <%if(id!=0){%>
+            $('.preview').show();
+        <%}else{%>
+            $('.preview').hide();
+        <%}%>
+        $("#productimg").change(function() {
+            
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                  $('.preview img').attr('src', e.target.result);
+                  $('.preview').show();
+                }
+
+            reader.readAsDataURL(this.files[0]); // convert to base64 string
+          }
+        });
+    </script>
   </body>
 </html>
