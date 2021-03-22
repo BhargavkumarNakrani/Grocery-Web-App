@@ -7,10 +7,10 @@ $("document").ready(function() {
         var error_pswd = false;
         
         
-        $("#email").focusout(function() {
+        $("#email").keyup(function() {
             check_email();
          });
-        $("#pswd").focusout(function() {
+        $("#pswd").keyup(function() {
             check_pswd();
          });
          

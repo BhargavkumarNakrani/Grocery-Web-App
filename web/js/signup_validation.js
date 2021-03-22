@@ -14,22 +14,22 @@ $("document").ready(function() {
         var error_pswd = false;
         var error_cpswd = false;
         
-        $("#fname").focusout(function(){
+        $("#fname").keyup(function(){
             check_fname();
          });
-        $("#lname").focusout(function() {
+        $("#lname").keyup(function() {
             check_lname();
          });
-        $("#email").focusout(function() {
+        $("#email").keyup(function() {
             check_email();
          });
-        $("#contact").focusout(function() {
+        $("#contact").keyup(function() {
             check_contact();
          });
-        $("#pswd").focusout(function() {
+        $("#pswd").keyup(function() {
             check_pswd();
          });
-        $("#cpswd").focusout(function() {
+        $("#cpswd").keyup(function() {
             check_cpswd();
          });
 
