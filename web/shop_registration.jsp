@@ -62,6 +62,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        <%if (id != 0) {%>
+        .form-group label{margin-top: -25px!important;}
+        <%}%>
         .content{
             background-image: url(images/bg.jpg);
             padding-top:30px;
@@ -96,10 +99,10 @@
                   <style>
                       .content{height: 900px;}
                   </style>
-                  <div class="mb-4">
+                  <%}%>
+                  <div class="mb-5 preview">
                       <img src="images/product-1.jpg" style="width:40%" class="img-fluid">
                   </div>
-                  <%}%>
                 <form action="SingupController.jsp" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
                     <input type="hidden" name="id" value="<%=id%>" id="id">
@@ -221,6 +224,26 @@
                     $('.file-name').html(fileName);
                 }
             })
+    </script>
+    <script>
+        <%if (id != 0) {%>
+            $('.preview').show();
+        <%} else {%>
+            $('.preview').hide();
+        <%}%>
+        $("#shopimg").change(function() {
+            
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                  $('.preview img').attr('src', e.target.result);
+                  $('.preview').show();
+                }
+
+            reader.readAsDataURL(this.files[0]); // convert to base64 string
+          }
+        });
     </script>
   </body>
 </html>
