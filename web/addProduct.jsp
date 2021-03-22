@@ -56,6 +56,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        <%if(id!=0){%>
+        .form-group label{margin-top: -25px!important;}
+        <%}%>
         .content{
             background-image: url(images/bg.jpg);
             height: 695px;
@@ -83,7 +86,11 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="mb-4">
+                      <%if(id!=0){%>
+                  <h3>Edit Product</h3>
+                  <%}else{%>
                   <h3>Add Product</h3>
+                  <%}%>
                   </div>
                   <% if(id!=0){ %>
                       <style>
