@@ -167,13 +167,15 @@ $("document").ready(function() {
             error_email = false;
             error_pswd = false;
             error_cpswd = false;
-
+            error_contact = false;
+            
             check_fname();
             check_lname();
             check_email();
             check_pswd();
             check_cpswd();
-
+            check_contact();
+            
             if (error_fname === false && error_lname === false && error_email === false && error_contact === false && error_pswd === false && error_cpswd === false) {
 //               alert("Registration Successfull");
                return true;
