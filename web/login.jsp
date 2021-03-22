@@ -53,13 +53,6 @@
                 String errorMessage = (String) session.getAttribute("errorMessage");
                 String successMessage = (String) session.getAttribute("successMessage");
                 
-                if (errorMessage!=null){ 
-                    out.print("<div class=\"alert alert-danger alert-dismissible fade show\">");
-                    out.print("<strong>"+ errorMessage +"</strong>");
-                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
-                    out.print("</div>");
-                
-                }
                 if(successMessage != null){
                     out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
                     out.print("<strong>"+ successMessage +"</strong>");
@@ -111,6 +104,7 @@
       </div>
     </div>
   </div>
+  <div id="snackbar"></div>
   <%--<jsp:include page="footer.html" />--%>
   <script>
     function alert_dismiss() {
@@ -119,6 +113,21 @@
         <% session.removeAttribute("successMessage"); %>
                 
     }
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var snackbar = $('#snackbar');
+    <% if(errorMessage!=null){ %>
+        snackbar.text("<%=errorMessage%>");
+    <%}else if(successMessage!=null){%>
+        snackbar.text("<%=successMessage%>");
+    <%} if(errorMessage!=null || successMessage!=null){%>
+        snackbar.addClass('show');
+        setTimeout(function(){
+            snackbar.removeClass('show');
+        },5000);
+    <%}%>
+});
 </script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/login_validation.js"></script>
