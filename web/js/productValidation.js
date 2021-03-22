@@ -80,7 +80,7 @@ $("document").ready(function() {
             var allowedFiles = [".png", ".jpg", ".jpeg"];
             var fileUpload = $("#productimg");
             var lblError = $("#productimg_error_message");
-            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+            var regex = new RegExp("([a-zA-Z0-9 ()\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
             
             if (fileUpload.val()===''){
                 if($('div').is(".preview")){
