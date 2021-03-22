@@ -1,3 +1,4 @@
+<%@page import="java.net.URL"%>
 <%@page import="dao.cartDAO"%>
 <%@page import="dao.uomDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
@@ -7,6 +8,8 @@
     <%
         String productID = request.getParameter("productId");
         String email = (String) session.getAttribute("email");
+        String role = (String) session.getAttribute("role");
+        if(role==null){role="";}
         int PId = 0;
         Products product = new Products();
         if (productID == null) {
@@ -125,11 +128,14 @@
                                     <p style="color: #000;"><%=product.getQuantity()%> <%=uomDAO.getName(product.getUom().getUomId())%> available</p>
                                 </div>
                             </div>
+                            <% if(role.equals("CUSTOMER") || role.equals("")){%>
                             <% if(cartDAO.checkCartByProductId(PId, email) > 0 ){ %>
                                     <p><a type="submit" href="cart.jsp" class="btn btn-black py-3 px-5">Go to Cart</a></p>                               
                             <% } else {%>
-                            <p><a type="submit" href="addToCart.jsp?productId=<%=product.getPId()%>" class="btn btn-black py-3 px-5">Add to Cart</a></p>
-                            <% }%>
+                            <p><a type="submit" href="addToCart.jsp?productId=<%=product.getPId()%>" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+                            <% }}else if(role.equals("SHOPKEEPER")){%>
+                            <p><a type="submit" href="addProduct.jsp?productId=<%=product.getPId()%>" class="btn btn-primary py-3 px-5">Edit Product</a></p>
+                            <%}%>
                         </form>
 
                     </div>
