@@ -38,7 +38,17 @@
       if(session.getAttribute("email")!=null){
         response.sendRedirect("index.jsp");
       }
+      int id = 0;
+      String Sid = (String) request.getAttribute("id");
+      if(Sid!=null){
+          id = Integer.parseInt(Sid);
+      }
   %>
+  <%if(id!=0){%>
+  <style>
+      .form-group label{margin-top: -25px!important;}
+  </style>
+  <%}%>
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
@@ -103,7 +113,18 @@
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    
+                    <% if(id!=0){%>
+                    <div class="mb-3"></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input type="text" name="address" value="" class="form-control" id="address" autocomplete="nope">
+                            </div>
+                            <span id="add_error_message" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <%}%>
                   <div class="mb-5"></div>
                   <input type="submit" value="Sign Up" id="submit" class="btn btn-primary" style="width:100%">
 
@@ -115,7 +136,7 @@
       </div>
     </div>
   </div>
-    <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/signup_validation.js"></script>
     <script src="js/floating_label.js"></script>
     <script src="js/popper.min.js"></script>
