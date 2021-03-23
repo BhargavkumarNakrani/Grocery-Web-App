@@ -223,6 +223,8 @@
                 }
                 if(role.equals("DELIVERYBOY") ){
                     response.sendRedirect("orders.jsp");
+                } else if(role.equals("ADMIN")){
+                    response.sendRedirect("admin.jsp");
                 }
                 %>
               

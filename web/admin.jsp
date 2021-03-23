@@ -1,10 +1,33 @@
+<%@page import="dao.ordersDAO"%>
+<%@page import="dao.AccountDAO"%>
+<%@page import="entity.Accounts"%>
+<%@page import="javax.security.sasl.AuthenticationException"%>
+<%@page import="dao.DeliveryBoyDAO"%>
+<%@page import="dao.ShopkeeperDAO"%>
+<%@page import="dao.CustomerDAO"%>
+<%@page import="entity.DeliveryBoy"%>
+<%@page import="entity.Shopkeeper"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Customer"%>
+<%@page import="java.util.List"%>
 <%
     String email = (String) session.getAttribute("email");
     String role = (String) session.getAttribute("role");
+    List<Customer> customers = new ArrayList<Customer>();
+    List<Shopkeeper> shopkeepers = new ArrayList<Shopkeeper>();
+    List<DeliveryBoy> deliveryBoys = new ArrayList<DeliveryBoy>();
+    Accounts account = new Accounts();
     if(role == null){
         String uri = request.getRequestURI();
         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
         response.sendRedirect("login.jsp?return_to=" + pageName);
+    } else if(!role.equals("ADMIN")){
+            throw new AuthenticationException();
+    } else {
+        customers = CustomerDAO.viewAll();
+        shopkeepers = ShopkeeperDAO.viewAll();
+        deliveryBoys = DeliveryBoyDAO.viewAll();
+        //accounts = AccountDAO.viewAll();
     }
 %>
 
@@ -64,16 +87,23 @@
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Status</th>
+                                    <th>Total Orders</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <% 
+                                 for(Customer customer : customers){ 
+                                    account = AccountDAO.viewByEmail(customer.getEmail());
+                                %>
                                 <tr class="text-center">
-                                    <td>Bhargav Nakrani</td>
-                                    <td>bnakrani822@rku.ac.in</td>
-                                    <td>7984551549</td>
-                                    <td>Surat</td>
-                                    <td>Active</td>
+                                    <td><%=customer.getName() %></td>
+                                    <td><%=customer.getEmail() %></td>
+                                    <td><%=customer.getPhone() %></td>
+                                    <td><%=customer.getAddress() %></td>
+                                    <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
+                                    <td><%=ordersDAO.getCountCustomer(customer.getCId()) %></td>
                                 </tr>
+                                <% }%>
                             </tbody>
                         </table>
                     </div>
@@ -100,21 +130,30 @@
                         <table class="table">
                             <thead class="thead-primary">
                                 <tr class="text-center">
-                                    <th>Customer Name</th>
+                                    <th>Shopkeeper Name</th>
+                                    <th>Shop Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Status</th>
+                                    <th>Total product sell</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <% 
+                                 for(Shopkeeper shopkeeper : shopkeepers){ 
+                                    account = AccountDAO.viewByEmail(shopkeeper.getEmail());
+                                %>
                                 <tr class="text-center">
-                                    <td>Bhargav Nakrani</td>
-                                    <td>bnakrani822@rku.ac.in</td>
-                                    <td>7984551549</td>
-                                    <td>Surat</td>
-                                    <td>Active</td>
+                                    <td><%=shopkeeper.getName() %></td>
+                                    <td><%=shopkeeper.getShopName() %></td>
+                                    <td><%=shopkeeper.getEmail() %></td>
+                                    <td><%=shopkeeper.getPhone() %></td>
+                                    <td><%=shopkeeper.getAddress() %></td>
+                                    <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
+                                    <td><%=ordersDAO.getCountShopkeeper(shopkeeper.getSId()) %></td>
                                 </tr>
+                                <% }%>
                             </tbody>
                         </table>
                     </div>
@@ -141,21 +180,30 @@
                         <table class="table">
                             <thead class="thead-primary">
                                 <tr class="text-center">
-                                    <th>Customer Name</th>
+                                    <th>Employee Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Status</th>
+                                    <th>Total Order Taken</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <% 
+                                 for(DeliveryBoy db : deliveryBoys){ 
+                                    account = AccountDAO.viewByEmail(db.getEmail());
+                                %>
                                 <tr class="text-center">
-                                    <td>Bhargav Nakrani</td>
-                                    <td>bnakrani822@rku.ac.in</td>
-                                    <td>7984551549</td>
-                                    <td>Surat</td>
-                                    <td>Active</td>
+                                    <td><%=db.getName() %></td>
+                                    <td><%=db.getEmail() %></td>
+                                    <td><%=db.getPhone() %></td>
+                                    <td><%=db.getAddress() %></td>
+                                    <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
+                                    <td><%=DeliveryBoyDAO.viewOrderTaken(db.getDbId()) %></td>
+                                    <td><button>Pay Salary</button></td>
                                 </tr>
+                                <% }%>
                             </tbody>
                         </table>
                     </div>
