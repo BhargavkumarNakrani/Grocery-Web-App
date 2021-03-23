@@ -5,7 +5,7 @@
 <%
     String email = (String) session.getAttribute("email");
     Customer obj = new Customer();
-    int id = 0;
+//    int id = 0;
     //String StringID = request.getParameter("id");
     String fname =""; 
     String lname = "";
@@ -81,13 +81,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="firstname">First Name</label>
-                                        <input type="text" value="<%=fname %>" name="fname" class="form-control" placeholder="">
+                                        <input type="text" value="<%=fname %>" name="fname" class="form-control" placeholder="" <%if(!fname.equals("")){out.print("disabled");}%> >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lastname">Last Name</label>
-                                        <input type="text" value="<%=lname %>" name="lname" class="form-control" placeholder="">
+                                        <input type="text" value="<%=lname %>" name="lname" class="form-control" placeholder="" <%if(!lname.equals("")){out.print("disabled");}%> >
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
@@ -95,20 +95,20 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <textarea name="address" class="form-control" rows="4" placeholder="Enter your full Address"><% if(!address.equals("No Address")){ out.print(address); } %></textarea>
+                                        <textarea name="address" class="form-control" rows="4" <%if(!address.equals("No Address")){out.print("disabled");}%> placeholder="Enter your full Address"><% if(!address.equals("No Address")){ out.print(address); } %></textarea>
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input type="number" value="<%if(contact!=0){out.print(contact);}%>" name="contact" class="form-control" placeholder="">
+                                        <input type="number" value="<%if(contact!=0){out.print(contact);}%>" name="contact" class="form-control" placeholder="" <%if(contact!=0){out.print("disabled");}%> >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="emailaddress">Email Address</label>
-                                        <input type="text" value="<%=email %>" name="email" class="form-control" placeholder="">
+                                        <input type="text" value="<%=email %>" name="email" class="form-control" placeholder="" <%if(!email.equals("")){out.print("disabled");}%> >
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
