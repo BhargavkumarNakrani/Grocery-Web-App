@@ -178,15 +178,8 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<style>.mouse{z-index: -1;}</style>
+<style>.mouse{z-index: -1;}.container-fluid{margin-top: -60px;}</style>
 </head>
-<%
-      if(session.getAttribute("email")==null){
-          String uri = request.getRequestURI();
-          String pageName = uri.substring(uri.lastIndexOf("/") + 1);
-          //response.sendRedirect("login.jsp?return_to=" + pageName);
-      }
-  %>
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
@@ -320,7 +313,23 @@
                                 %>
                             <li><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=categoryId %>&<%="page=" + (p + 1)%>">&gt;</a></li>
                                 <% }
-                            }%>
+                            }else{%>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body cart">
+                                                <div class="col-sm-12 empty-cart-cls text-center"> <img src="images/error-no-search-results.png" width="300" height="300" class="img-fluid mb-5 mt-5 mr-3">
+                                                    <h3><strong>Sorry, no results found!</strong></h3>
+                                                    <p>Please check the spelling or try searching for something else</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                            <style>@media(max-width:991.98px){.ftco-section{padding-top:2rem!important;}}</style>
+                            <%}%>
                         </ul>
                     </div>
                 </div>
