@@ -62,7 +62,7 @@ public class Accounts  implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Serializable getActive() {
+    public boolean getActive() {
         return this.active;
     }
     

@@ -1,3 +1,6 @@
+<%@page import="dao.DeliveryBoyDAO"%>
+<%@page import="entity.DeliveryBoy"%>
+<%@page import="entity.Shopkeeper"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="dao.productDAO"%>
 <%@page import="dao.orderDetailDAO"%>
@@ -15,18 +18,36 @@
     String role = (String) session.getAttribute("role");
     String email = (String) session.getAttribute("email");
     Customer customer = new Customer();
+    Shopkeeper shopkeeper = new Shopkeeper();
     List<Orders> orders = new ArrayList<Orders>();
+    List<Orders> orders1 = new ArrayList<Orders>();
     if(email == null) {
         role = "";
         email = "";
         String uri = request.getRequestURI();
         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
         response.sendRedirect("login.jsp?return_to=" + pageName);
-    } else if(role.equals("SHOPKEEPER") && role.equals("DELIVERYBOY")){
-        throw new AuthenticationException(); 
-    } else if(role.equals("CUSTOMER")){
+    } 
+    //else if(role.equals("SHOPKEEPER") && role.equals("DELIVERYBOY")){
+     //   throw new AuthenticationException(); 
+    //} 
+    else if(role.equals("CUSTOMER")){
         customer = CustomerDAO.viewByEmail(email);
         orders=ordersDAO.viewByCustomerId(customer.getCId());
+    } else if(role.equals("SHOPKEEPER")){
+        shopkeeper = ShopkeeperDAO.viewSinglebyEmail(email);
+        orders1=ordersDAO.viewAll();
+        for(Orders o : orders1){
+            List<OrderDetails> ods =orderDetailDAO.viewByOrderId(o.getOId());
+            for(OrderDetails od : ods){
+                if(od.getShopkeeper().getSId() == ShopkeeperDAO.viewSingle(email).getSId())
+                    orders.add(o);
+            }
+                  
+        }
+    } else if(role.equals("DELIVERYBOY")){
+        DeliveryBoy db = DeliveryBoyDAO.ViewSingle(email);
+        orders = ordersDAO.viewByDeliveryBoyId(db.getDbId());
     }
 
 %>
@@ -109,7 +130,7 @@
                         <div id="collapse<%=order.getOId() %>" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
-                                    <% if(order.getStatus()==0) {%>
+                                    <% if(order.getStatus()==0 && !role.equals("SHOPKEEPER") && !role.equals("DELIVERYBOY")) {%>
                                     <div class="cancel-order mb-3"><a href="cancalOrder.jsp?OId=<%=order.getOId() %>" class="btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
                                     <% }%>
                                     <div class="cart-list">
@@ -126,10 +147,22 @@
                                             </thead>
                                             <tbody>
                                             <%
-                                            List<OrderDetails> OrdersDetail = orderDetailDAO.viewByOrderId(order.getOId());
+                                            
+                                            List<OrderDetails> OrdersDetail1 = orderDetailDAO.viewByOrderId(order.getOId());
+                                            List<OrderDetails> orderDetail = new ArrayList<OrderDetails>();
                                             int total = 0;
-                                            for(OrderDetails obj : OrdersDetail) {
+                                            if(role.equals("SHOPKEEPER")){
+                                                for(OrderDetails od : OrdersDetail1){
+                                                    if(od.getShopkeeper().getSId() == ShopkeeperDAO.viewSingle(email).getSId())
+                                                        orderDetail.add(od);
+
+                                                }
+                                            } else if(role.equals("CUSTOMER") || role.equals("DELIVERYBOY")){
+                                                orderDetail=OrdersDetail1;
+                                            }
+                                            for(OrderDetails obj : orderDetail) {
                                                 total = obj.getAmount()+total;
+                                              
                                             %>
                                                 <tr class="text-center">
                                                     <td><%=obj.getId() %></td>
@@ -137,8 +170,8 @@
                                                     <td><%=obj.getPrice() %></td>
                                                     <td><%=obj.getQuantity() %></td>
                                                     <td><%=obj.getAmount() %></td>
-                                                    <% if(obj.equals(OrdersDetail.get(OrdersDetail.size()-1))) { %>
-                                                    <td rowspan="<%=OrdersDetail.size() %>"><%=total %></td>
+                                                    <% if(obj.equals(orderDetail.get(orderDetail.size()-1))) { %>
+                                                    <td rowspan="<%=orderDetail.size() %>"><%=total %></td>
                                                 <% }%>
                                                    
                                                 </tr>

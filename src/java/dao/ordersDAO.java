@@ -40,6 +40,15 @@ public class ordersDAO {
         return order;
     }
     
+    public static List<Orders> viewByDeliveryBoyId(int dbId){
+        String hql = "from Orders where deliveryBoy.dbId= "+dbId+ " ORDER BY orderDate DESC";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Orders> order = query.list();
+        session.close();
+        return order;
+    }
+    
     public static int save(Orders bean){
         session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
@@ -99,6 +108,23 @@ public class ordersDAO {
         Query query = session.createQuery(hql);
         int i = query.executeUpdate();
         t.commit();
+        session.close();
+        return i;
+    }
+    public static long getCountCustomer(int id){
+        String hql = "SELECT count(*) from Orders where customer.CId = "+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
+        session.close();
+        return i;
+    }
+    
+    public static long getCountShopkeeper(int id){
+        String hql = "SELECT count(*) from OrderDetails where shopkeeper.SId = "+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        long i = (long) query.uniqueResult();
         session.close();
         return i;
     }

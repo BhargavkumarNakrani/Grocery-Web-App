@@ -64,8 +64,9 @@
         customer_bean = CustomerDAO.viewByEmail(email);
         order_bean = new Orders(customer_bean, Total, orderDate, 0, address);
         int o_id = ordersDAO.save(order_bean);
+        int i = DeliveryBoyDAO.updateDBorderTaken(email);
         out.print(o_id);
-        if(o_id > 1){
+        if(o_id > 1 && i > 0){
             for(Cart c : cart){
                 out.print(c.getProducts().getPId()+" ");
                 Products product_bean = productDAO.viewById(c.getProducts().getPId());
