@@ -34,7 +34,7 @@
 <html lang="en">
 
 <head>
-<title>index - Vegefoods</title>
+<title>Admin - Vegefoods</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -55,9 +55,10 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
     td{color:black;}
-    .ftco-section{padding: 6em 0em 0em 0px;}
-    .top-section{padding-top: 0px;}
+    .ftco-section{padding: 2em 0em 0em 0px;}
     .mb{margin-bottom: 6em;}
+    .ftco-footer{margin-top: 8em;}
+    @media(max-width:576px){.mng-btn{width:50%;margin-bottom: 10px;}}
 </style>
 </head>
 <body class="goto-here">
@@ -68,18 +69,47 @@
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <h2 class="mb-4">Manage Customers</h2>
+                    <h2 class="mb-4">Manage All Members</h2>
                 </div>
             </div>
         </div>
     </section>
     
-    <section class="ftco-section top-section">
+    <div class="container pb-5 pl-4">
+        <div class="ftco-animate mb-5">
+            <div class="d-flex">
+                <div class="searchbar" style="display: block;">
+                    <input class="search_input" type="text" name="" placeholder="Search...">
+                    <i class="fas fa-search search_icon" style="padding-top: 0px!important;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div id="accordion">
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 mng-btn">
+            <button class="btn btn-primary m-auto d-flex collapsed" data-toggle="collapse" data-target="#customer" aria-expanded="false" aria-controls="collapse">Customers</button>
+            </div>
+            <div class="col-lg-3 col-sm-3 mng-btn">
+            <button class="btn btn-primary m-auto d-flex collapsed" data-toggle="collapse" data-target="#shopkeeper" aria-expanded="false" aria-controls="collapse">shopkeepers</button>
+            </div>
+            <div class="col-lg-3 col-sm-3 mng-btn">
+            <button class="btn btn-primary m-auto d-flex collapsed" data-toggle="collapse" data-target="#employee" aria-expanded="false" aria-controls="collapse">Employees</button>
+            </div>
+            <div class="col-lg-3 col-sm-3 mng-btn">
+            <button class="btn btn-primary m-auto d-flex collapsed" data-toggle="collapse" data-target="#empdetails" aria-expanded="false" aria-controls="collapse">Employee Details</button>
+            </div>
+        </div>
+        </div>
+        <div class="accordion-group">
+    <section class="ftco-section pt-5 collapse" id="customer" aria-labelledby="heading3" data-parent="#accordion">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ftco-animate">
                     <div class="cart-list">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead class="thead-primary">
                                 <tr class="text-center">
                                     <th>Customer Name</th>
@@ -90,7 +120,7 @@
                                     <th>Total Orders</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody">
                                 <% 
                                  for(Customer customer : customers){ 
                                     account = AccountDAO.viewByEmail(customer.getEmail());
@@ -111,8 +141,7 @@
             </div>
         </div>
     </section>
-    
-    <section class="ftco-section">
+<!--    <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
@@ -120,9 +149,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     
-    <section class="ftco-section top-section">
+    <section class="ftco-section pt-5 collapse" id="shopkeeper" aria-labelleby="heading3" data-parent="#accordion">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ftco-animate">
@@ -139,7 +168,7 @@
                                     <th>Total product sell</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody">
                                 <% 
                                  for(Shopkeeper shopkeeper : shopkeepers){ 
                                     account = AccountDAO.viewByEmail(shopkeeper.getEmail());
@@ -162,7 +191,7 @@
         </div>
     </section>
     
-    <section class="ftco-section">
+<!--    <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
@@ -170,9 +199,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     
-    <section class="ftco-section top-section mb">
+    <section class="ftco-section pt-5 collapse" id="employee" aria-labelleby="heading3" data-parent="#accordion">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ftco-animate">
@@ -189,7 +218,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody">
                                 <% 
                                  for(DeliveryBoy db : deliveryBoys){ 
                                     account = AccountDAO.viewByEmail(db.getEmail());
@@ -211,7 +240,37 @@
             </div>
         </div>
     </section>
-    
+                            
+    <section class="ftco-section pt-5 collapse" id="empdetails" aria-labelledby="heading3" data-parent="#accordion">
+        <div class="container">
+            <div class="card-body">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+                        <table class="table table-hover">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th>Employee ID</th>
+                                    <th>Employee Name</th>
+                                    <th>Salary</th>
+                                    <th>Salary Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <tr class="text-center">
+                                    <td>1</td>
+                                    <td>Mahesh</td>
+                                    <td>5000</td>
+                                    <td>2/3/2021</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    </div>
     <jsp:include page="footer.html"/>
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
 <script src="js/jquery-3.2.1.min.js"></script>
@@ -236,6 +295,18 @@
   gtag('js', new Date());
   
   gtag('config', 'UA-23581568-13');
+</script>
+<script>
+$(document).ready(function () {
+    $('.search_input').on('keyup',function(){
+        var filter;
+        filter = $(this).val().toUpperCase();
+        
+        $(".tbody tr").filter(function() {
+            $(this).toggle($(this).text().toUpperCase().indexOf(filter) > -1)
+        });
+    });
+});
 </script>
 </body>
 </html>
