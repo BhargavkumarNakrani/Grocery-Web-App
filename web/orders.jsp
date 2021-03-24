@@ -120,7 +120,7 @@
                                         <td><%=obj.getOId() %></td>
                                         <td><%=customer.getName() %></td>
                                         <td><%=customer.getPhone() %></td>
-                                        <td><%=obj.getAddress() %></td>
+                                        <td style="width:20%;"><%=obj.getAddress() %></td>
                                         <td><%=obj.getAmount() %></td>
                                         <td><%=obj.getOrderDate() %></td>
                                         <td><%
