@@ -55,6 +55,7 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
     td{color:black;}
+    #address{width: 30%}
     .ftco-section{padding: 2em 0em 0em 0px;}
     .mb{margin-bottom: 6em;}
     .ftco-footer{margin-top: 8em;}
@@ -129,7 +130,7 @@
                                     <td><%=customer.getName() %></td>
                                     <td><%=customer.getEmail() %></td>
                                     <td><%=customer.getPhone() %></td>
-                                    <td><%=customer.getAddress() %></td>
+                                    <td id="address">dfds edsfrsfd sdfxvcf sdfxcrsf efdefdf fesdxf wasedf  edfrsdx rfdvc</td>
                                     <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
                                     <td><%=ordersDAO.getCountCustomer(customer.getCId()) %></td>
                                 </tr>
@@ -178,7 +179,7 @@
                                     <td><%=shopkeeper.getShopName() %></td>
                                     <td><%=shopkeeper.getEmail() %></td>
                                     <td><%=shopkeeper.getPhone() %></td>
-                                    <td><%=shopkeeper.getAddress() %></td>
+                                    <td id="address"><%=shopkeeper.getAddress() %></td>
                                     <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
                                     <td><%=ordersDAO.getCountShopkeeper(shopkeeper.getSId()) %></td>
                                 </tr>
@@ -227,7 +228,7 @@
                                     <td><%=db.getName() %></td>
                                     <td><%=db.getEmail() %></td>
                                     <td><%=db.getPhone() %></td>
-                                    <td><%=db.getAddress() %></td>
+                                    <td id="address"><%=db.getAddress() %></td>
                                     <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
                                     <td><%=DeliveryBoyDAO.viewOrderTaken(db.getDbId()) %></td>
                                     <td><button>Pay Salary</button></td>
