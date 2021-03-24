@@ -79,7 +79,7 @@
     <section class="ftco-section ftco-cart">
         <div class="container">
             <div class="row mb-5 justify-content-start">
-                <div class="col-lg-6 cart-wrap ftco-animate fadeInUp ftco-animated">
+                <div class="col-lg-6 cart-wrap ftco-animate">
                     <div class="cart-total mb-3">
                         <h3>Order Details</h3>
                         <p class="d-flex">
@@ -116,6 +116,11 @@
                         <% }
                         %>
                         
+                    </div>
+                </div>
+                <div class="col-lg-6 ftco-animate">
+                    <div class="float-right">
+                        <a href="" class="btn py-3 px-4 btn-primary">Order Delivered</a>
                     </div>
                 </div>
             </div>
