@@ -1,7 +1,18 @@
-
-
+<%@page import="javax.security.sasl.AuthenticationException"%>
+<%@page import="entity.Customer"%>
+<%@page import="dao.CustomerDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
+    <%
+        String sEmail = (String)session.getAttribute("email");
+        String role = (String) session.getAttribute("role");
+        String action = request.getParameter("action");
+        if(sEmail==null){sEmail="";}
+        if(role==null){role="";}
+        if(action==null){action="";}
+//        if(role!="CUSTOMER"){throw new AuthenticationException(); }
+
+    %>
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -26,57 +37,76 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        @media(max-width:991.98px){
-            .content{
-                    padding-top:2rem;
-            }
-        }
+        @media(max-width:991.98px){.content{padding-top:2rem;}}
     </style>
     <title>Signup - Vegefoods</title>
   </head>
   <%
-      if(session.getAttribute("email")!=null){
-        response.sendRedirect("index.jsp");
-      }
-      int id = 0;
-      String Sid = (String) request.getAttribute("id");
-      if(Sid!=null){
-          id = Integer.parseInt(Sid);
-      }
+        String fname = "";
+        String lname = "";
+        String email = "";
+        String address = "";
+        long contact = 0;
   %>
-  <%if(id!=0){%>
+  
+  <%if(action!="" && sEmail!=""){
+                    
+        Customer customer = CustomerDAO.viewByEmail(sEmail);
+        String name =  customer.getName();
+        String[] n = name.split(" ", 2);
+        fname = n[0];
+        lname = n[1];
+        email = customer.getEmail();
+        contact = customer.getPhone();
+        address = customer.getAddress();
+  %>
   <style>
-      .form-group label{margin-top: -25px!important;}
+      .content{height:695px;}
   </style>
   <%}%>
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
-    <jsp:include page="login_menu_bar.jsp"/>
+    <%if(action==""){%>
+    <jsp:include page="login_menu_bar.jsp"/> 
+    <%}else{%>
+    <jsp:include page="menu_bar.jsp"/>   
+    <%}%>
    
 <div class="content" style="background-image: url(images/bg.jpg);}">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6 contents">
+        <div class="col-md-9 col-lg-6 contents">
           <div class="row justify-content-center">
             <div class="col-md-12">
               <div class="form-block">
-                  <div class="mb-4">
-                  <h3>Signup to <strong>VEGEFOODS</strong></h3>
+                  <div class="row">
+                      <%if(action=="" || sEmail==""){%>
+                      <div class="mb-4">
+                          <h3>Signup to <strong>VEGEFOODS</strong></h3>
+                      </div>
+                      <%}else{%>
+                      <div class="col-7 mb-4">
+                          <h3>Profile</h3>
+                      </div>
+                      <div class="col-4">
+                          <button class="btn btn-primary editProfile">Edit Profile</button>
+                      </div>
+                      <%}%>
                   </div>
                 <form action="SingupController.jsp" method="GET" autocomplete="off">   
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
                                 <label for="fname" class="fname">First Name</label>
-                                <input type="text" name="fname" class="form-control" id="fname" autocomplete="nope">
+                                <input type="text" value="<%=fname%>" name="fname" class="form-control" id="fname" autocomplete="nope">
                             </div>
                             <span id="fname_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" name="lname" class="form-control" id="lname" autocomplete="nope">
+                                <input type="text" value="<%=lname%>" name="lname" class="form-control" id="lname" autocomplete="nope">
                             </div>
                             <span id="lname_error_message" class="text-danger"></span>
                         </div>
@@ -85,14 +115,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" autocomplete="nope">
+                                <input type="email" value="<%=email%>" name="email" class="form-control" id="email" autocomplete="nope">
                             </div>
                             <span id="email_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="contact">Contact Number</label>
-                                <input type="number" name="contact" class="form-control" id="contact" >
+                                <input type="number" value="<%if(contact!=0){out.print(contact);}%>" name="contact" class="form-control" id="contact" >
                             </div>
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
@@ -113,21 +143,20 @@
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <% if(id!=0){%>
+                    <% if(action!="" && sEmail!=""){%>
                     <div class="mb-3"></div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="Address">Address</label>
-                                <input type="text" name="address" value="" class="form-control" id="address" autocomplete="nope">
+                                <input type="text" name="address" value="<%=address%>" class="form-control" id="address" autocomplete="nope">
                             </div>
                             <span id="add_error_message" class="text-danger"></span>
                         </div>
                     </div>
                     <%}%>
                   <div class="mb-5"></div>
-                  <input type="submit" value="Sign Up" id="submit" class="btn btn-primary" style="width:100%">
-
+                  <button type="submit" value="Sign Up" id="submit" class="btn btn-primary" style="width:100%">Sign up</button>
                 </form>
               </div>
             </div>
@@ -142,4 +171,21 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
+  <script>
+    <% if(action!=""){%>
+        $('input').each(function(){
+            var value = $(this).attr('value');
+            if (value!=null){
+                $(this).siblings('label').css('margin-top','-25px');
+            }
+        });
+        $('input').prop("disabled",true);
+        $('.editProfile').click(function(){
+            $('input').prop("disabled",false);
+            $(this).slideUp(1000,function(){
+                $(this).hide();
+            });
+        });
+    <%}%>
+  </script>
 </html>
