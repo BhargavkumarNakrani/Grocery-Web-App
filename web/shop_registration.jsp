@@ -1,14 +1,28 @@
 
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.AccountDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="entity.Shopkeeper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    String semail = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
+    String action = request.getParameter("action");
+    if(semail == null){semail="";}
+    if(role == null){role="";}
+    if(action == null){action="";}
+    if (semail == "") {
+        String uri = request.getRequestURI();
+        String pageName = uri.substring(uri.lastIndexOf("/") + 1);
+        String URL = pageName + "?" + request.getQueryString();
+        response.sendRedirect("login.jsp?return_to=" + URL);
+    }
+    
+    
     Shopkeeper obj = new Shopkeeper();
     int id = 0;
-    String StringID = request.getParameter("id");
-    String fname =""; 
+    String fname = "";
     String lname = "";
     String email = "";
     String password = "";
@@ -17,21 +31,31 @@
     String address = "";
     String image = "";
     int Aid = 0;
-    
-    if(StringID != null){
-        id = Integer.parseInt(StringID);
-        obj = ShopkeeperDAO.viewSinglebyID(id);
-        String name =  obj.getName();
-        String[] n = name.split(" ", 2);
-        fname = n[0];
-        lname = n[1];
-        email = obj.getEmail();
-        Aid = obj.getAccounts().getAcccountId();
-        password = AccountDAO.getPassword(Aid);
-        image = ShopkeeperDAO.viewImage(id);
-        sname = obj.getShopName();
-        contact = obj.getPhone();
-        address = obj.getAddress();
+//    String StringID = request.getParameter("id");
+    if(action==""){
+        if(!role.equals("ADMIN")){
+            throw new AuthenticationException();
+        }
+    }else{
+        if(!role.equals("SHOPKEEPER")){
+            throw new AuthenticationException();
+        }else{                
+            obj = ShopkeeperDAO.viewSinglebyEmail(semail);
+                String name = obj.getName();
+                String[] n = name.split(" ", 2);
+                fname = n[0];
+                lname = n[1];
+                email = obj.getEmail();
+                Aid = obj.getAccounts().getAcccountId();
+                password = AccountDAO.getPassword(Aid);
+                image = ShopkeeperDAO.viewImage(id);
+                sname = obj.getShopName();
+                contact = obj.getPhone();
+                address = obj.getAddress();
+        }
+    }    
+    if(semail != ""){
+//        id = Integer.parseInt(StringID);
         //out.println(image);
     }
    
@@ -62,8 +86,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        <%if (id != 0) {%>
-        .form-group label{margin-top: -25px!important;}
+        <%if (action != "") {%>
+        /*.form-group label{margin-top: -25px!important;}*/
+        .content{height: 900px!important;}
         <%}%>
         .content{
             background-image: url(images/bg.jpg);
@@ -85,21 +110,27 @@
     <jsp:include page="top_bar.html"/>
     <%--<jsp:include page="login_menu_bar.jsp"/>--%>
    
-<div class="content" style="">
+<div class="content">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6 contents">
+        <div class="col-md-9 col-lg-6 contents">
           <div class="row justify-content-center">
             <div class="col-md-12">
               <div class="form-block">
-                  <div class="mb-4">
-                  <h3>Shop Registration</h3>
+                  <div class="row">
+                      <%if (action == "") {%>
+                      <div class="mb-4">
+                          <h3>Shop Registration</h3>
+                      </div>
+                      <%} else {%>
+                      <div class="col-7 mb-4">
+                          <h3>Profile</h3>
+                      </div>
+                      <div class="col-4">
+                          <button class="btn btn-primary editProfile">Edit Profile</button>
+                      </div>
+                      <%}%>
                   </div>
-                  <% if(id!=0){ %>
-                  <style>
-                      .content{height: 900px;}
-                  </style>
-                  <%}%>
                   <div class="mb-5 preview">
                       <img src="images/product-1.jpg" style="width:40%" class="img-fluid">
                   </div>
@@ -172,14 +203,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
-                                <input type="password" name="pswd" value="<%=password%>" class="form-control" id="pswd" autocomplete="nope">
+                                <input type="password" name="pswd" class="form-control" id="pswd" autocomplete="nope">
                             </div>
                             <span id="pswd_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="cpswd">Confirm Password</label>
-                                <input type="password" name="cpswd" value="<%=password%>" class="form-control" id="cpswd" autocomplete="nope">
+                                <input type="password" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
                             </div>
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
@@ -223,10 +254,30 @@
                     var fileName = path.substr(fileNameIndex);
                     $('.file-name').html(fileName);
                 }
-            })
+            });
     </script>
     <script>
-        <%if (id != 0) {%>
+        <%if (action != "") {%>
+            $('input').each(function(){
+                var value = $(this).attr('value');
+                if (value!=null){
+                    $(this).siblings('label').css('margin-top','-25px');
+                }
+            });
+            $('input').on('keyup',function(){
+                if(!$(this).val()){
+                    $(this).siblings('label').removeAttr("style");
+                }
+            });
+            $('input').prop("disabled",true);
+            
+            $('.editProfile').click(function(){
+                $('input').prop("disabled",false);
+                $(this).slideUp(1000,function(){
+                    $(this).hide();
+                });
+            });
+            
             $('.preview').show();
         <%} else {%>
             $('.preview').hide();
@@ -239,6 +290,7 @@
                 reader.onload = function(e) {
                   $('.preview img').attr('src', e.target.result);
                   $('.preview').show();
+                  $('.content').css('height','1000px');
                 }
 
             reader.readAsDataURL(this.files[0]); // convert to base64 string
