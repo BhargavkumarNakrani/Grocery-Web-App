@@ -19,32 +19,39 @@
         <div class="container">
             <a class="navbar-brand" href="index.jsp">Vegefoods</a>
             <span style="color:black"><center>Welcome,<%if(email==null){out.print("User");}%></center></span>
+            <% if(email != null){
+                    if(!role.equals("ADMIN")){
+                %>                
             <ul class="navbar-nav">
-                <% if(email != null){%>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=Name%></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <% if(role.equals("CUSTOMER")){%>
-                            <a class="dropdown-item" href="profile.jsp">My Profile</a>
-                            <a class="dropdown-item" href="orderHistory.jsp">Orders</a>
+                            <a class="dropdown-item" href="signup.jsp?action=editProfile">My Profile</a>
+                            <a class="dropdown-item" href="orderHistory.jsp">Order history</a>
                             <%}else if(role.equals("SHOPKEEPER")){%>
-                                <a class="dropdown-item" href="profile.jsp">Profile</a>
-                                <a class="dropdown-item" href="Category.jsp">Category</a>
+                                <a class="dropdown-item" href="shop_registration.jsp">My Profile</a>
+                                <a class="dropdown-item" href="addCategory.jsp">Add Category</a>
                                 <a class="dropdown-item" href="addProduct.jsp">Add Product</a>
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
+                                <a class="dropdown-item" href="orderhistory.jsp">Order History</a>
                             <%}else if(role.equals("DELIVERYBOY")){%>
-                                <a class="dropdown-item" href="profile.jsp">Profile</a>
+                                <a class="dropdown-item" href="emp_registration.jsp">Profile</a>
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
+                                <a class="dropdown-item" href="orderhistory.jsp">Order history</a>
                         <%}%>
                     </div>
                 </li>
-                <%}%>
             </ul>
+                <%}else{ %>
+                    <span style="color: black">Admin</span>
+                <%} }%>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
+                    <% if(!role.equals("ADMIN") && !role.equals("DELIVERYBOY")){%>
                     <li class="nav-item desktop-search">
                         <!-- search for for desktop view -->
                         <i class="fa fa-search nav-link" aria-hidden="true"></i>
@@ -52,7 +59,7 @@
                                 <div class="d-flex">-->
                                 <div class="searchbar">
                                     <form action="shop.jsp" method="GET" >
-                                        <input class="search_input" type="text" name="s" placeholder="Search...">
+                                        <input class="search_input" type="text" name="s" placeholder="Search Product..">
                                         <i class="fas fa-search search_icon" type="submit" style="padding-top:0px!important;"></i>
                                     </form>
                                 </div>
@@ -65,16 +72,18 @@
                             <div class="d-flex">
                                 <div class="searchbar">
                                     <form action="shop.jsp" method="get">
-                                    <input class="search_input" type="text" name="s" placeholder="Search...">
+                                    <input class="search_input" type="text" name="s" placeholder="Search Product..">
                                     <i class="fas fa-search search_icon" type="submit"></i>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    <%}%>
                     <li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
+                    <% if(!role.equals("ADMIN") && !role.equals("DELIVERYBOY")){%>
                     <li class="nav-item"><a href="shop.jsp" class="nav-link">Shop</a></li>
-                    <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
+                    <%}%>
                     <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
                     <%
                         if(email != null){ 
@@ -85,14 +94,15 @@
                                         <div class="cart-item"><%=cartDAO.CartItem(email)%></div>
                                     </a>
                                 </li>
-<!--                                <li class="nav-item dropdown">
-                                    <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Register</a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                        <a class="dropdown-item" href="shop_registration.jsp">For Shopkeeper</a>
-                                        <a class="dropdown-item" href="emp_registration.jsp">For Employee</a>
-                                    </div>
-                                </li>-->
-                            <% }%>
+                        <% }else if(role.equals("ADMIN")){%>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Register</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="shop_registration.jsp">For Shopkeeper</a>
+                                    <a class="dropdown-item" href="emp_registration.jsp">For Employee</a>
+                                </div>
+                            </li>
+                        <%}%>
                             <li class="nav-item"><button onclick="window.location.href='logout.jsp'" class="btn btn-primary">Logout</button></li>
                         <%} else{%>
                             <li class="nav-item"><button class="btn btn-primary" onclick="window.location.href='login.jsp'">Login</button></li>
