@@ -16,7 +16,7 @@ $(document).ready(function () {
         }
     });
     
-    $('.ftco-section').click(function(){
+    $('.ftco-section ,#home-section').click(function(){
         if($(searchbar).is(':visible')){
             searchbar.fadeOut(1000,function(){
                 $(this).hide();
