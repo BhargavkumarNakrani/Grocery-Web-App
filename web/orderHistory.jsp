@@ -108,6 +108,7 @@
                 </div>
             </div>
         </div>
+        <div id="cover-spin"></div>
         <section class="ftco-section ftco-cart mb-5">
             <div class="container">
                 <div id="accordion">
@@ -204,35 +205,42 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-            $(document).ready(function(){
-                var orderRow ;
-                $('a.btn-link').click(function () {
-                    $(this).find('i').toggleClass('fa-plus fa-minus');
-                    $(this).closest('div.card').siblings().each(function(){
-                        if($(this).find('i.fa').hasClass('fa-minus')){
-                            $(this).find('i.fa').toggleClass('fa-minus fa-plus');
-                        }
-                    });
+            $(document).on({
+                ajaxStart: function(){
+                    $("#cover-spin").show(); 
+                },
+                ajaxStop: function(){ 
+                    $("#cover-spin").hide(); 
+                }    
+            });
+            
+            $('a.btn-link').click(function () {
+                $(this).find('i').toggleClass('fa-plus fa-minus');
+                $(this).closest('div.card').siblings().each(function(){
+                    if($(this).find('i.fa').hasClass('fa-minus')){
+                        $(this).find('i.fa').toggleClass('fa-minus fa-plus');
+                    }
                 });
-
-                $('.cancel-btn').click(function(){
-                    var id = $(this).parent().parent().parent().parent().attr('id');
-                    var oId = id.substring(id.lastIndexOf('e') + 1);
-                    $('.confirm-ok').attr('href',"cancalOrder.jsp?OId=" + oId);
-    //                $(this).parents('.order-row').remove();
-                    orderRow = $(this);
-
-                    
-                });
+            });
+            
+            $('.cancel-btn').click(function(){
+                var tableDiv = $(this).parent().parent().parent().parent();
+                var id = tableDiv.attr('id');
+                var oId = id.substring(id.lastIndexOf('e') + 1);
+                $('.confirm-ok').attr('href',"cancalOrder.jsp?OId=" + oId);
                 
                 $('.confirm-ok').click(function(e){
                     e.preventDefault();
                     var href = $(this).attr('href');
+                    
                     $.ajax({
                         url:href,
                         success:function(){
-                            orderRow.parents('.order-row').slideUp(1000,function(){
-                                $(this).remove();
+                            $('#confirm-modal').modal('toggle');
+                            tableDiv.parents('.order-row').delay(800).animate({opacity:'0'},1000,function(){
+                                tableDiv.parents('.order-row').animate({height:'0px'},1000,function(){
+                                    tableDiv.parents('.order-row').remove();
+                                });
                             });
                         },
                         error: function (jxhr, text, error) {
@@ -241,6 +249,7 @@
                     });
                 });
             });
+            
             
         </script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
