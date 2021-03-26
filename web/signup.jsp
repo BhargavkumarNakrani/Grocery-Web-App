@@ -156,7 +156,8 @@
                     </div>
                     <%}%>
                   <div class="mb-5"></div>
-                  <button type="submit" value="Sign Up" id="submit" class="btn btn-primary" style="width:100%">Sign up</button>
+                  <input type="submit"
+                         value="<%if (action!="") {%>Save<%} else if(action=="") {%>Register<%}%>" id="submit" class="btn btn-primary" style="width:100%">
                 </form>
               </div>
             </div>
