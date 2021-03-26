@@ -1,3 +1,4 @@
+<%@page import="dao.ShopkeeperDAO"%>
 <%@page import="dao.categoryDAO"%>
 <%@page import="entity.Category"%>
 <%@page import="dao.cartDAO"%>
@@ -255,6 +256,7 @@
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <h3><a id="pname"><%=product.getName()%></a></h3>
+                            <span><%=ShopkeeperDAO.viewSinglebyID(product.getShopkeeper().getSId()).getShopName() %></span>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span>&#8360; <%=product.getPrice()%> </span></p>

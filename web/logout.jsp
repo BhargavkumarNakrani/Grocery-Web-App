@@ -10,9 +10,13 @@
     <body>
         <%
             String email = (String) session.getAttribute("email");
-            Accounts a= AccountDAO.viewByEmail(email);
-            a.setActive(false);
-            AccountDAO.update(a);
+            try {
+                Accounts a= AccountDAO.viewByEmail(email);
+                a.setActive(false);
+                AccountDAO.update(a);
+            }catch(Exception ex) {
+                out.print("You are already logout");
+            }
             session.invalidate();
             response.sendRedirect("login.jsp");
 %>
