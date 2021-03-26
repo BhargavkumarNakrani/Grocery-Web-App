@@ -1,3 +1,4 @@
+<%@page import="entity.Accounts"%>
 <html>
 <body>	
 
@@ -20,6 +21,9 @@
             String role = AccountDAO.getRole(EMAIL);
             session.setAttribute("email",EMAIL);
             session.setAttribute("role",role);
+            Accounts a= AccountDAO.viewByEmail(EMAIL);
+            a.setActive(true);
+            AccountDAO.update(a);
             response.sendRedirect(Return_to);
             
 	}
