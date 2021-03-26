@@ -91,4 +91,14 @@ public class CustomerDAO {
         session.close();
         return customer;
     }
+    
+    public static void update(Customer bean)
+    {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        session.update(bean);
+        t.commit();
+        session.close();
+        //return 1;
+    }
 }
