@@ -7,6 +7,8 @@
         String sEmail = (String)session.getAttribute("email");
         String role = (String) session.getAttribute("role");
         String action = request.getParameter("action");
+        int id = 0;
+        int AId = 0;
         if(sEmail==null){sEmail="";}
         if(role==null){role="";}
         if(action==null){action="";}
@@ -59,6 +61,8 @@
         email = customer.getEmail();
         contact = customer.getPhone();
         address = customer.getAddress();
+        id = customer.getCId();
+        AId = customer.getAccounts().getAcccountId();
   %>
   <style>
       .content{height:695px;}
@@ -94,7 +98,9 @@
                       </div>
                       <%}%>
                   </div>
-                <form action="SingupController.jsp" method="GET" autocomplete="off">   
+                <form action="SingupController.jsp" method="GET" autocomplete="off">  
+                    <input type="hidden" name="id" value="<%=id%>" id="id">
+                    <input type="hidden" name="accountId" value="<%=AId%>" id="id">
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-group">
