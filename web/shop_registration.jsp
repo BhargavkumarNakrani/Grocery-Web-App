@@ -8,14 +8,14 @@
 <%
     String semail = (String) session.getAttribute("email");
     String role = (String) session.getAttribute("role");
-    String action = request.getParameter("action");
     if(semail == null){semail="";}
     if(role == null){role="";}
-    if(action == null){action="";}
-    if (semail == "") {
+    if (role.equals("")) {
         String uri = request.getRequestURI();
         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
-        String URL = pageName + "?" + request.getQueryString();
+        String query = request.getQueryString();
+        if(query == null){query="";}
+        String URL = pageName + "?" + query;
         response.sendRedirect("login.jsp?return_to=" + URL);
     }
     
@@ -32,28 +32,25 @@
     String image = "";
     int Aid = 0;
 //    String StringID = request.getParameter("id");
-    if(action==""){
-        if(!role.equals("ADMIN")){
-            throw new AuthenticationException();
-        }
+    if(role.equals("SHOPKEEPER")){
+        obj = ShopkeeperDAO.viewSinglebyEmail(semail);
+        String name = obj.getName();
+        String[] n = name.split(" ", 2);
+        fname = n[0];
+        lname = n[1];
+        email = obj.getEmail();
+        Aid = obj.getAccounts().getAcccountId();
+        password = AccountDAO.getPassword(Aid);
+        image = ShopkeeperDAO.viewImage(id);
+        sname = obj.getShopName();
+        contact = obj.getPhone();
+        address = obj.getAddress();
     }else{
-        if(!role.equals("SHOPKEEPER")){
+        if(role.equals("")){
+        }else if(!role.equals("ADMIN")){
             throw new AuthenticationException();
-        }else{                
-            obj = ShopkeeperDAO.viewSinglebyEmail(semail);
-                String name = obj.getName();
-                String[] n = name.split(" ", 2);
-                fname = n[0];
-                lname = n[1];
-                email = obj.getEmail();
-                Aid = obj.getAccounts().getAcccountId();
-                password = AccountDAO.getPassword(Aid);
-                image = ShopkeeperDAO.viewImage(id);
-                sname = obj.getShopName();
-                contact = obj.getPhone();
-                address = obj.getAddress();
         }
-    }    
+    }   
     if(semail != ""){
 //        id = Integer.parseInt(StringID);
         //out.println(image);
@@ -86,10 +83,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        <%if (action != "") {%>
-        /*.form-group label{margin-top: -25px!important;}*/
-        .content{height: 900px!important;}
-        <%}%>
         .content{
             background-image: url(images/bg.jpg);
             padding-top:30px;
@@ -102,8 +95,16 @@
             color:#000;
             margin-bottom: 2rem;
         }
+        </style>
+        <%if (role.equals("SHOPKEEPER")) {%>
+    <style>
+        /*.form-group label{margin-top: -25px!important;}*/
+        .content{height: 900px!important;}
     </style>
     <title>Shop Registration - Vegefoods</title>
+        <%}else{%>
+    <title>Shop Profile - Vegefoods</title>
+        <%}%>
   </head>
 <body class="goto-here">
     
@@ -118,11 +119,11 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="row">
-                      <%if (action == "") {%>
+                      <%if (role.equals("ADMIN")) {%>
                       <div class="mb-4">
                           <h3>Shop Registration</h3>
                       </div>
-                      <%} else {%>
+                      <%} else if (role.equals("SHOPKEEPER")){%>
                       <div class="col-7 mb-4">
                           <h3>Profile</h3>
                       </div>
@@ -227,7 +228,7 @@
                     </div>
                     
                   <div class="mb-5"></div>
-                  <input type="submit" value="Register" id="submit" class="btn btn-primary" style="width:100%">
+                  <input type="submit" value="<%if(role.equals("SHOPKEEPER")){%>Save<%}else if(role.equals("ADMIN")){%>Register<%}%>" id="submit" class="btn btn-primary" style="width:100%">
 
                 </form>
               </div>
@@ -257,14 +258,14 @@
             });
     </script>
     <script>
-        <%if (action != "") {%>
+        <%if (role.equals("SHOPKEEPER")) {%>
             $('input').each(function(){
                 var value = $(this).attr('value');
                 if (value!=null){
                     $(this).siblings('label').css('margin-top','-25px');
-                }
+                }   
             });
-            $('input').on('keyup',function(){
+            $('input').on('input',function(){
                 if(!$(this).val()){
                     $(this).siblings('label').removeAttr("style");
                 }
