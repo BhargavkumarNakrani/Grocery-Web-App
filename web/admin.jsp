@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="dao.DeliveryBoyDetailDAO"%>
+<%@page import="entity.DeliveryBoyDetail"%>
 <%@page import="dao.ordersDAO"%>
 <%@page import="dao.AccountDAO"%>
 <%@page import="entity.Accounts"%>
@@ -16,6 +19,7 @@
     List<Customer> customers = new ArrayList<Customer>();
     List<Shopkeeper> shopkeepers = new ArrayList<Shopkeeper>();
     List<DeliveryBoy> deliveryBoys = new ArrayList<DeliveryBoy>();
+    List<DeliveryBoyDetail> deliveryBoyDetails = new ArrayList<DeliveryBoyDetail>();
     Accounts account = new Accounts();
     if(role == null){
         String uri = request.getRequestURI();
@@ -27,6 +31,7 @@
         customers = CustomerDAO.viewAll();
         shopkeepers = ShopkeeperDAO.viewAll();
         deliveryBoys = DeliveryBoyDAO.viewAll();
+        deliveryBoyDetails = DeliveryBoyDetailDAO.viewAll();
         //accounts = AccountDAO.viewAll();
     }
 %>
@@ -216,6 +221,7 @@
                                     <th>Address</th>
                                     <th>Status</th>
                                     <th>Total Order Taken</th>
+                                    <th>Payable salary</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -231,7 +237,10 @@
                                     <td id="address"><%=db.getAddress() %></td>
                                     <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
                                     <td><%=DeliveryBoyDAO.viewOrderTaken(db.getDbId()) %></td>
-                                    <td><button>Pay Salary</button></td>
+                                    <td><%=(DeliveryBoyDAO.viewOrderTaken(db.getDbId())-DeliveryBoyDetailDAO.viewOrderTaken(db.getDbId()))*50 %></td>
+                                    <td><button><a <% 
+                                                    if((DeliveryBoyDAO.viewOrderTaken(db.getDbId())-DeliveryBoyDetailDAO.viewOrderTaken(db.getDbId()))> 0){
+                                                %>href="paySalary.jsp?dbId=<%=db.getDbId()%>" <% }%>>Pay Salary</a></button></td>
                                 </tr>
                                 <% }%>
                             </tbody>
@@ -252,17 +261,26 @@
                                 <tr class="text-center">
                                     <th>Employee ID</th>
                                     <th>Employee Name</th>
+                                    <th>Orders Taken</th>
                                     <th>Salary</th>
                                     <th>Salary Date</th>
                                 </tr>
                             </thead>
                             <tbody class="tbody">
+                                <% 
+                                 SimpleDateFormat formatter = new SimpleDateFormat("E,dd MMMM yyyy"); 
+                                 for(DeliveryBoyDetail dbDetail : deliveryBoyDetails){ 
+                                    account = AccountDAO.viewByEmail(DeliveryBoyDAO.viewSinglebyID(dbDetail.getDeliveryBoy().getDbId()).getEmail());
+                                    DeliveryBoy db = DeliveryBoyDAO.viewSinglebyID(dbDetail.getDeliveryBoy().getDbId());
+                                %>
                                 <tr class="text-center">
-                                    <td>1</td>
-                                    <td>Mahesh</td>
-                                    <td>5000</td>
-                                    <td>2/3/2021</td>
+                                    <td><%=db.getDbId() %></td>
+                                    <td><%=db.getName() %></td>
+                                    <td><%=dbDetail.getOrdersTaken()%></td>
+                                    <td><%=dbDetail.getSalary() %></td>
+                                    <td><%=formatter.format(db.getHireDate()) %></td>
                                 </tr>
+                                <% }%>
                             </tbody>
                         </table>
                     </div>

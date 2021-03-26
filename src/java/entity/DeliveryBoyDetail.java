@@ -14,14 +14,17 @@ public class DeliveryBoyDetail  implements java.io.Serializable {
      private DeliveryBoy deliveryBoy;
      private Date salaryDate;
      private int salary;
+     private int ordersTaken;
+
 
     public DeliveryBoyDetail() {
     }
 
-    public DeliveryBoyDetail(DeliveryBoy deliveryBoy, Date salaryDate, int salary) {
+    public DeliveryBoyDetail(DeliveryBoy deliveryBoy, Date salaryDate, int salary, int ordersTaken) {
        this.deliveryBoy = deliveryBoy;
        this.salaryDate = salaryDate;
        this.salary = salary;
+       this.ordersTaken = ordersTaken;
     }
    
     public Integer getId() {
@@ -53,6 +56,13 @@ public class DeliveryBoyDetail  implements java.io.Serializable {
         this.salary = salary;
     }
 
+    public int getOrdersTaken() {
+        return ordersTaken;
+    }
+
+    public void setOrdersTaken(int ordersTaken) {
+        this.ordersTaken = ordersTaken;
+    }
 
 
 
