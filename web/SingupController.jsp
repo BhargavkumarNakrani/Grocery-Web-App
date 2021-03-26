@@ -78,15 +78,17 @@
         Shopkeeper bean_shopkeeper = new Shopkeeper();
         DeliveryBoy bean_deliveryboy = new DeliveryBoy();
         Accounts bean = new Accounts(email, pass,false, role);
-        if(role.equalsIgnoreCase("CUSTOMER"))
-            bean_customer = new Customer(bean,name, "No Address", phone, email);
-        else if(role.equalsIgnoreCase("DELIVERYBOY")){
+        if(role.equalsIgnoreCase("CUSTOMER")) {
+            if(address==null) {address="No Address";}
+            bean_customer = new Customer(bean,name, address, phone, email);
+        }else if(role.equalsIgnoreCase("DELIVERYBOY")){
             if(address==null) {address="No Address";}
             Date date = new java.util.Date();
             bean_deliveryboy = new DeliveryBoy(bean, name, phone, email,address);
         }
-        else if(role.equalsIgnoreCase("SHOPKEEPER"))
+        else if(role.equalsIgnoreCase("SHOPKEEPER")) {
             bean_shopkeeper = new Shopkeeper(bean, name, sname, address, phone, email,img);
+    }
                 
 //        AccountDAO.save(bean);
 //        if(role == "CUSTOMER"){
@@ -193,6 +195,25 @@
                     response.sendRedirect("index.jsp");
                 }
             }
+            else if (role.equalsIgnoreCase("CUSTOMER") && accountId != 0) {
+                    String recipient = email;
+                    String subject = "Update detail for vegeFoods";
+                    String content = " Hello, <b>" + name + "</b> as the role of <b>" + role + "</b> now you are the updated the user details of the vegeFoods";
+                    try {
+                        EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+
+                    } finally {
+                        bean.setAcccountId(accountId);
+                        AccountDAO.update(bean);
+                        bean_customer.setCId(id);
+                        CustomerDAO.update(bean_customer);
+
+                        response.sendRedirect("index.jsp");
+                    }
+                }
         }
             
             
