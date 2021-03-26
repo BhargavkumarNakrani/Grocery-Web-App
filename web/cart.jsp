@@ -225,9 +225,30 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-<script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        $('.product-remove').find('a').on('click',function(e){
+            e.preventDefault();
+            var href = $(this).attr('href');
+            var tbody = $(this).parent().parent().parent();
+            $.ajax({
+                url:href,
+                success:function(response){
+                    var cartItem = $(response).find(".cart-item").text();
+                    $('.cart-item').text(cartItem);
+                    tbody.animate({opacity:'0'},500,function(){
+                        tbody.remove();
+                    });
+                },
+                error: function (jxhr, text, error) {
+                                alert(error);
+                            }
+            });
+        });
+    });
+</script>
 <!--<script>
 		$(document).ready(function(){
                     
