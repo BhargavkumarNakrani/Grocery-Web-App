@@ -90,7 +90,24 @@
     <body class="goto-here">
         <jsp:include page="top_bar.html"/>
         <jsp:include page="menu_bar.jsp"/>
-        
+
+        <div id="confirm-modal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you want to cancel this order?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" type="button" class="btn btn-primary" data-dismiss="modal">Close</a>
+                        <a href="" type="button" class="confirm-ok btn btn-primary">Cancel Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section class="ftco-section ftco-cart mb-5">
             <div class="container">
                 <div id="accordion">
@@ -98,7 +115,7 @@
                     SimpleDateFormat formatter = new SimpleDateFormat("E,dd MMMM yyyy (hh:mm a)");  
                     for(Orders order : orders){
                     %>
-                    <div class="card mb-2">
+                    <div class="card mb-2 order-row">
                         <div class="card-header" id="heading3">
                             <h5 class="mb-0">
                                 <a class="btn d-flex btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=order.getOId() %>" aria-expanded="false" aria-controls="collapse3">
@@ -108,30 +125,12 @@
                                 </a>
                             </h5>
                         </div>
-
-                        <div id="confirm-modal-1" class="modal fade" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirmation</h5>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Do you want to cancel this order?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="" type="button" class="btn btn-primary" data-dismiss="modal">Close</a>
-                                        <a href="" type="button" class="btn btn-primary">Cancel Order</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                                     
                         <div id="collapse<%=order.getOId() %>" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
                                     <% if(order.getStatus()==0 && !role.equals("SHOPKEEPER") && !role.equals("DELIVERYBOY")) {%>
-                                    <div class="cancel-order mb-3"><a href="cancalOrder.jsp?OId=<%=order.getOId() %>" class="btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
+                                    <div class="cancel-order mb-3"><a href="#confirm-modal" class="btn cancel-btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
                                     <% }%>
                                     <div class="cart-list">
                                         <table class="table table-hover">
@@ -205,14 +204,44 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-            $('a.btn-link').click(function () {
-                $(this).find('i').toggleClass('fa-plus fa-minus');
-                $(this).closest('div.card').siblings().each(function(){
-                    if($(this).find('i.fa').hasClass('fa-minus')){
-                        $(this).find('i.fa').toggleClass('fa-minus fa-plus');
-                    }
+            $(document).ready(function(){
+                var orderRow ;
+                $('a.btn-link').click(function () {
+                    $(this).find('i').toggleClass('fa-plus fa-minus');
+                    $(this).closest('div.card').siblings().each(function(){
+                        if($(this).find('i.fa').hasClass('fa-minus')){
+                            $(this).find('i.fa').toggleClass('fa-minus fa-plus');
+                        }
+                    });
+                });
+
+                $('.cancel-btn').click(function(){
+                    var id = $(this).parent().parent().parent().parent().attr('id');
+                    var oId = id.substring(id.lastIndexOf('e') + 1);
+                    $('.confirm-ok').attr('href',"cancalOrder.jsp?OId=" + oId);
+    //                $(this).parents('.order-row').remove();
+                    orderRow = $(this);
+
+                    
+                });
+                
+                $('.confirm-ok').click(function(e){
+                    e.preventDefault();
+                    var href = $(this).attr('href');
+                    $.ajax({
+                        url:href,
+                        success:function(){
+                            orderRow.parents('.order-row').slideUp(1000,function(){
+                                $(this).remove();
+                            });
+                        },
+                        error: function (jxhr, text, error) {
+                            alert(error);
+                        }
+                    });
                 });
             });
+            
         </script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script>
