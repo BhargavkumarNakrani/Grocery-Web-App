@@ -57,6 +57,19 @@ public class DeliveryBoyDAO {
         session.close();
     }
     
+    public static void updateOrderTaken(int i, int id)
+    {
+        String hql = "update DeliveryBoy set orderTaken= :one where dbId=:Id";
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        int updatedEntities = session.createQuery(hql)
+                .setInteger("one", i)
+                .setInteger("Id", id)
+                .executeUpdate();
+        t.commit();
+        session.close();
+    }
+    
     public static DeliveryBoy ViewSingle(String email){
         String hql = "from DeliveryBoy where email='"+email+"'";
         session = HibernateUtil.getSessionFactory().openSession();

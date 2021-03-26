@@ -93,6 +93,20 @@ public class AccountDAO {
         }
         return obj;
     }
+    
+    public static Accounts viewById(int id){
+        String hql = "from Accounts where id = "+id;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<Accounts> products = query.list();
+        session.close();
+        Accounts obj = null;
+        if(!products.isEmpty()){
+            obj = products.get(0);
+        }
+        return obj;
+    }
+    
     public static List<Accounts> viewAll(){
         String hql = "from Accounts";
         session = HibernateUtil.getSessionFactory().openSession();
