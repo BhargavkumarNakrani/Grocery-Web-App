@@ -130,7 +130,7 @@
                                     <td><%=customer.getName() %></td>
                                     <td><%=customer.getEmail() %></td>
                                     <td><%=customer.getPhone() %></td>
-                                    <td id="address">dfds edsfrsfd sdfxvcf sdfxcrsf efdefdf fesdxf wasedf  edfrsdx rfdvc</td>
+                                    <td id="address"><%=customer.getAddress() %></td>
                                     <td><% if(account.getActive() == true){ out.print("Online"); } else { out.print("Offline"); } %></td>
                                     <td><%=ordersDAO.getCountCustomer(customer.getCId()) %></td>
                                 </tr>

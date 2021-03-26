@@ -35,7 +35,7 @@
         int OId = Integer.parseInt(SOId);
         
         ordersDAO.updateDB(OId, DeliveryBoyDAO.ViewSingle(email).getDbId());
-        if(DeliveryBoyDAO.updateDBorderTaken(email)>0)
+        if(DeliveryBoyDAO.updateDBorderTaken(email)>0) {
             recipientDB = email;
             String recipientCustomer = CustomerDAO.viewById(ordersDAO.viewByOrderId(OId).getCustomer().getCId()).getEmail() ;
             
@@ -69,6 +69,6 @@
                 session.setAttribute("OrderAssign", "This order is taken by you");
                 response.sendRedirect("orders.jsp");
             }
-        
+        }
     }
 %>

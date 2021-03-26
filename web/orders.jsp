@@ -34,9 +34,15 @@
 <html lang="en">
 <%
     String OrderAssign = (String) session.getAttribute("OrderAssign");
+    String orderDelivered = (String) session.getAttribute("orderDelivered");
     if(OrderAssign != null){
                     out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
                     out.print("<strong>"+ OrderAssign +"</strong>");
+                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+                    out.print("</div>");
+    } else if(orderDelivered != null){
+        out.print("<div class=\"alert alert-success alert-dismissible fade show\">");
+                    out.print("<strong>"+ orderDelivered +"</strong>");
                     out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
                     out.print("</div>");
     }
@@ -199,6 +205,7 @@
     function alert_dismiss() {
         
         <%  session.removeAttribute("OrderAssign"); 
+            session.removeAttribute("orderDelivered"); 
          %>
                  
     }
