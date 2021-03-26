@@ -75,19 +75,21 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 ftco-animate">
-                        <form action="placeOrder.jsp" class="billing-form" method="POST">
+                        <form action="placeOrder.jsp" class="billing-form" method="GET">
                             <h3 class="mb-4 billing-heading">Billing Details</h3>
                             <div class="row align-items-end">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="firstname">First Name</label>
                                         <input type="text" value="<%=fname %>" name="fname" class="form-control" placeholder="" <%if(!fname.equals("")){out.print("disabled");}%> >
+                                        <input type="hidden" value="<%=fname %>" name="fname"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lastname">Last Name</label>
                                         <input type="text" value="<%=lname %>" name="lname" class="form-control" placeholder="" <%if(!lname.equals("")){out.print("disabled");}%> >
+                                        <input type="hidden" value="<%=lname %>" name="lname" />
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
@@ -95,7 +97,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <textarea name="address" class="form-control" rows="4" <%if(!address.equals("No Address")){out.print("disabled");}%> placeholder="Enter your full Address"><% if(!address.equals("No Address")){ out.print(address); } %></textarea>
+                                        <textarea name="address" class="form-control" rows="4" placeholder="Enter your full Address"><% if(!address.equals("No Address")){ out.print(address); } %></textarea>
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
@@ -103,12 +105,14 @@
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
                                         <input type="number" value="<%if(contact!=0){out.print(contact);}%>" name="contact" class="form-control" placeholder="" <%if(contact!=0){out.print("disabled");}%> >
+                                        <input type="hidden" value="<%if(contact!=0){out.print(contact);}%>" name="contact" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="emailaddress">Email Address</label>
                                         <input type="text" value="<%=email %>" name="email" class="form-control" placeholder="" <%if(!email.equals("")){out.print("disabled");}%> >
+                                        <input type="hidden" value="<%=email %>" name="email" />
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
@@ -147,14 +151,14 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <div class="radio">
-                                                    <label><input type="radio" name="paymentMethod" class="mr-2"> Cash on Delivery</label>
+                                                    <label><input type="radio" name="paymentMethod" class="mr-2" required> Cash on Delivery</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
+                                                    <label><input type="checkbox" value="" class="mr-2" required> I have read and accept the terms and conditions</label>
                                                 </div>
                                             </div>
                                         </div>
