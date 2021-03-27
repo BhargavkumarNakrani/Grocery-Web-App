@@ -98,9 +98,9 @@
         .content{height: 900px!important;}
     </style>
     <title>Shop Profile - Vegefoods</title>
-        <%}else{%>
+    <%}else{%>
     <title>Shop Registration - Vegefoods</title>
-        <%}%>
+    <%}%>
   </head>
 <body class="goto-here">
     
