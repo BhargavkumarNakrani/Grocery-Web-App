@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.CustomerDAO"%>
 <%@page import="entity.Customer"%>
 <%@page import="java.util.List"%>
@@ -34,9 +35,13 @@
     pass = context.getInitParameter("pass");
            
     String email = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
     if(email == null){
+        role = "";
         response.sendRedirect("login.jsp");
-    }
+    } else if (!role.equals("SHOPKEEPER")) {
+            throw new AuthenticationException();
+        }
     String SPId = request.getParameter("id");
     int PId = 0;
     if(SPId != null) {

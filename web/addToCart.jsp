@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.cartDAO"%>
 <%@page import="dao.productDAO"%>
 <%@page import="entity.Products"%>
@@ -13,6 +14,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <% 
+    String role = (String)session.getAttribute("role");
+    if(role == null){
+        role = "";
+    } else if (!role.equals("CUSTOMER")) {
+            throw new AuthenticationException();
+    }
     String SproductId = request.getParameter("productId");
     String email = (String)session.getAttribute("email");
     String Squantity = request.getParameter("quantity");

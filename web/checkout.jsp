@@ -1,9 +1,11 @@
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.CustomerDAO"%>
 <%@page import="entity.Customer"%>
 <%@page import="dao.cartDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String email = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
     Customer obj = new Customer();
 //    int id = 0;
     //String StringID = request.getParameter("id");
@@ -11,7 +13,11 @@
     String lname = "";
     long contact = 0;
     String address = "";
-    
+    if(role == null){
+        role = "";
+    } else if (!role.equals("CUSTOMER")) {
+            throw new AuthenticationException();
+    }
     if(email != null){
         obj = CustomerDAO.viewByEmail(email);
         String name =  obj.getName();

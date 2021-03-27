@@ -1,3 +1,4 @@
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.productDAO"%>
@@ -8,8 +9,13 @@
     
     int CId = 4;
     String email = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
     List<Cart> cart = new ArrayList<Cart>();
-    if(session.getAttribute("email")!=null){
+    if(role == null){
+        role = "";
+    } else if (!role.equals("CUSTOMER")) {
+            throw new AuthenticationException();
+    } else if(session.getAttribute("email")!=null){
         cart = cartDAO.viewCart(email);
     }
     //out.print(cart.get(0).getPrice());

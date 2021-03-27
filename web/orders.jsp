@@ -91,7 +91,7 @@
                                         <th>Amount</th>
                                         <th>Date</th>
                                         <th>Status</th>
-                                        <% if(role.equals("SHOPKEEPER")) {%>
+                                        <% if(role.equals("SHOPKEEPER") || role.equals("ADMIN")){%>
                                         <th>Delivery Boy Name</th> <% } else { %>
                                         <th>Action</th>
                                         <% }%>

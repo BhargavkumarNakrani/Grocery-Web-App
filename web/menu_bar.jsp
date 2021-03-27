@@ -34,11 +34,11 @@
                                 <a class="dropdown-item" href="addCategory.jsp">Add Category</a>
                                 <a class="dropdown-item" href="addProduct.jsp">Add Product</a>
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
-                                <a class="dropdown-item" href="orderhistory.jsp">Order History</a>
+                                <a class="dropdown-item" href="orderHistory.jsp">Order History</a>
                             <%}else if(role.equals("DELIVERYBOY")){%>
                                 <a class="dropdown-item" href="emp_registration.jsp">Profile</a>
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
-                                <a class="dropdown-item" href="orderhistory.jsp">Order history</a>
+                                <a class="dropdown-item" href="orderHistory.jsp">Order history</a>
                         <%}%>
                     </div>
                 </li>

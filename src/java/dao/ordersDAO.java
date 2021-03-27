@@ -91,6 +91,16 @@ public class ordersDAO {
         return obj;
     }
     
+    public static int updateStatus(int OId) {
+        String hql = "UPDATE Orders set status=status+1 where OId=" + OId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        int updatedEntities = session.createQuery(hql).executeUpdate();
+        t.commit();
+        session.close();
+        return updatedEntities;
+    }
+    
     public static int updateDB(int OId , int DBId){
         String hql = "UPDATE Orders set deliveryBoy.dbId='"+DBId+"' ,status=1 where OId="+OId;
         session = HibernateUtil.getSessionFactory().openSession();

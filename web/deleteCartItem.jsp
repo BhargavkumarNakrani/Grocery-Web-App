@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.cartDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +14,12 @@
             String sid = request.getParameter("id");
             //String SCid = request.getParameter("CId");
             String email = (String)session.getAttribute("email");
+            String role = (String)session.getAttribute("role");
+            if(role == null){
+                role = "";
+            } else if (!role.equals("CUSTOMER")) {
+                    throw new AuthenticationException();
+                }
             if(sid!=null && email != null){
                 id = Integer.parseInt(sid);
                 if(cartDAO.checkEmail(id,email)>0){

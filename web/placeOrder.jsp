@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.DeliveryBoyDAO"%>
 <%@page import="email.EmailUtility"%>
 <%@page import="dao.ShopkeeperDAO"%>
@@ -37,6 +38,12 @@
     user = context.getInitParameter("user");
     pass = context.getInitParameter("pass");
     String email = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
+    if(role == null){
+        role = "";
+    } else if (!role.equals("CUSTOMER")) {
+            throw new AuthenticationException();
+    }
     
     //Cart cart = new Cart();
     Orders order_bean = new Orders();

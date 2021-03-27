@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.DeliveryBoyDAO"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="entity.DeliveryBoy"%>
@@ -30,7 +31,12 @@
         
     String SOId = request.getParameter("OId");
     String email = (String) session.getAttribute("email");
-    if(SOId != null && email != null) {
+    String role = (String) session.getAttribute("role");
+    if(role == null){
+        role = "";
+    } else if (!role.equals("CUSTOMER")) {
+            throw new AuthenticationException();
+    } else if(SOId != null && email != null) {
         int OId = Integer.parseInt(SOId);
         if(orderDetailDAO.deleteByOrders(OId)>0){
             if(ordersDAO.deleteByOrders(OId)>0){

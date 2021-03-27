@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     String email = (String)session.getAttribute("email");
+    String role = (String)session.getAttribute("role");
     //List<Uom> obj = new ArrayList<Uom>();
     List<Uom> obj = uomDAO.view();
     List<Category> categorys = categoryDAO.viewAll();
@@ -20,6 +21,11 @@
     int quantity = 0;
     int uomId = 0;
     int price = 0;
+    if(role == null){
+        role = "";
+    } else if (!role.equals("SHOPKEEPER")) {
+            throw new javax.security.sasl.AuthenticationException();
+    }
     if(SId != null){
         id = Integer.parseInt(SId);
         Products product = productDAO.viewById(id);

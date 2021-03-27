@@ -27,11 +27,7 @@
         String uri = request.getRequestURI();
         String pageName = uri.substring(uri.lastIndexOf("/") + 1);
         response.sendRedirect("login.jsp?return_to=" + pageName);
-    } 
-    //else if(role.equals("SHOPKEEPER") && role.equals("DELIVERYBOY")){
-     //   throw new AuthenticationException(); 
-    //} 
-    else if(role.equals("CUSTOMER")){
+    } else if(role.equals("CUSTOMER")){
         customer = CustomerDAO.viewByEmail(email);
         orders=ordersDAO.viewByCustomerId(customer.getCId());
     } else if(role.equals("SHOPKEEPER")){
@@ -39,9 +35,13 @@
         orders1=ordersDAO.viewAll();
         for(Orders o : orders1){
             List<OrderDetails> ods =orderDetailDAO.viewByOrderId(o.getOId());
+            int count = 0;
             for(OrderDetails od : ods){
-                if(od.getShopkeeper().getSId() == ShopkeeperDAO.viewSingle(email).getSId())
+                if(od.getShopkeeper().getSId() == ShopkeeperDAO.viewSingle(email).getSId() && count ==0){
                     orders.add(o);
+                    count++;
+                }
+                    
             }
                   
         }

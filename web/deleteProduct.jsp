@@ -4,14 +4,19 @@
     Author     : Dell
 --%>
 
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.cartDAO"%>
 <%@page import="dao.productDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     String role = (String) session.getAttribute("role");
-       if(role.equalsIgnoreCase("SHOPKEEPER"))
-       {
+        if (role == null) {
+            role = "";
+        }
+        else if (!role.equals("SHOPKEEPER")) {
+                throw new AuthenticationException();
+        } else if(role.equalsIgnoreCase("SHOPKEEPER")) {
            String s_id = request.getParameter("productId");
            if(s_id!=null){
                int id = Integer.parseInt(s_id);
