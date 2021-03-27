@@ -16,7 +16,7 @@
     int shop_id = 0;
     int categoryId = 0;
     int count = 0;
-    int i;
+    int i = 0;
     if(role == null) role = "";
     if(search == null) search ="";
     if(StringID != null){
@@ -87,7 +87,11 @@
             i = (int) productDAO.getSearchCount(search);
         }
     } else{
-        i = (int) productDAO.getCount();
+        if(shop_id > 0  ) {
+            i = (int) productDAO.getCount(categoryId, shop_id);
+        } else {
+            i = (int) productDAO.getCount();
+        }
     }
         
         
