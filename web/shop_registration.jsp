@@ -50,11 +50,7 @@
         }else if(!role.equals("ADMIN")){
             throw new AuthenticationException();
         }
-    }   
-    if(semail != ""){
-//        id = Integer.parseInt(StringID);
-        //out.println(image);
-    }
+    }  
    
 %>
 <html lang="en">
@@ -101,9 +97,9 @@
         /*.form-group label{margin-top: -25px!important;}*/
         .content{height: 900px!important;}
     </style>
-    <title>Shop Registration - Vegefoods</title>
-        <%}else{%>
     <title>Shop Profile - Vegefoods</title>
+        <%}else{%>
+    <title>Shop Registration - Vegefoods</title>
         <%}%>
   </head>
 <body class="goto-here">
