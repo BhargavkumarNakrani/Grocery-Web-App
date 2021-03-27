@@ -212,7 +212,12 @@ public class productDAO {
         return i;
     }
     public static long getCount(int categoryId, int shopId){
-        String hql = "SELECT count(*) from Products where category.categoryId="+categoryId+" and shopkeeper.SId="+shopId;
+        String hql = "";
+        if(categoryId == 0){
+            hql = "SELECT count(*) from Products where shopkeeper.SId="+shopId;
+        } else {
+            hql = "SELECT count(*) from Products where category.categoryId="+categoryId+" and shopkeeper.SId="+shopId;
+        }
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         long i = (long) query.uniqueResult();
