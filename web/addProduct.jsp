@@ -59,7 +59,6 @@
     <link rel="stylesheet" href="css/jquery.timepicker.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
         <%if(id!=0){%>
@@ -194,7 +193,7 @@
       </div>
     </div>
   </div>
-    <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="js/productValidation.js"></script>
     <script src="js/floating_label.js"></script>
     <script src="js/popper.min.js"></script>

@@ -1509,6 +1509,9 @@ a.close.disabled{pointer-events:none}
 .modal-header .close{padding:1rem;margin:-1rem -1rem -1rem auto}
 .modal-title{margin-bottom:0;line-height:1.5}
 .modal-body{position:relative;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;padding:1rem}
+.modal-body .form-group label{font-size: 14px;display: block;margin-bottom: 0;color: black;}
+.modal-body .form-group{position: relative;}
+.modal-body .form-group input{padding-left: 0px;font-size: 15px;background: transparent!important;border: none;border-bottom: 1px solid black;}
 .modal-footer{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;padding:1rem;border-top:1px solid #e9ecef;border-bottom-right-radius:.3rem;border-bottom-left-radius:.3rem}
 .modal-footer>:not(:first-child){margin-left:.25rem}
 .modal-footer>:not(:last-child){margin-right:.25rem}
