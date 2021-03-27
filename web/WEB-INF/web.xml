@@ -63,4 +63,8 @@
         <param-name>pass</param-name>
         <param-value>sanket@892</param-value>
     </context-param>
+    
+    <session-config>
+        <session-timeout>10000</session-timeout>
+    </session-config>
 </web-app>
