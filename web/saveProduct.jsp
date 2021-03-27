@@ -98,7 +98,7 @@
             resultMessage="fail "+ex.getMessage();
         }
         out.print(resultMessage+"");
-        //response.sendRedirect("shop.jsp");
+        response.sendRedirect("shop.jsp");
     } else if(PId != 0 && email != null){
         if(image.getSize() > 0){
             product_bean.setPId(PId);
