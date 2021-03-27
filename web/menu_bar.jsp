@@ -31,7 +31,7 @@
                             <a class="dropdown-item" href="orderHistory.jsp">Order history</a>
                             <%}else if(role.equals("SHOPKEEPER")){%>
                                 <a class="dropdown-item" href="shop_registration.jsp">My Profile</a>
-                                <a class="dropdown-item" href="addCategory.jsp">Add Category</a>
+                                <a class="dropdown-item" href="#category-modal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
                                 <a class="dropdown-item" href="addProduct.jsp">Add Product</a>
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
                                 <a class="dropdown-item" href="orderhistory.jsp">Order History</a>
@@ -112,3 +112,30 @@
             </div>
         </div>
     </nav>
+    <div id="category-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" method="">
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="category">Category Name</label>
+                                <input type="text" name="category" class="form-control" id="category">
+                            </div>
+                            <span id="category_error_message" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="confirm-ok btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
