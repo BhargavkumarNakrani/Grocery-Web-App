@@ -1,5 +1,6 @@
 $('#category_error_message').hide();
-$('.modal-footer .confirm-ok').click(function () {
+function validate(){
+    
     var noError = true;
     var pattern = /^[a-zA-Z]*$/;
     var categoryName = $("#category").val();
@@ -11,7 +12,7 @@ $('.modal-footer .confirm-ok').click(function () {
     } else {
         if (pattern.test(categoryName)) {
             $("#category_error_message").hide();
-            $("#fname").css("border-bottom", "1px solid #82ae41");
+            $("#category").css("border-bottom", "1px solid #82ae41");
             noError = true;
         } else {
             $("#category_error_message").html("Only Characters is allowed");
@@ -22,4 +23,10 @@ $('.modal-footer .confirm-ok').click(function () {
     }
 
     return noError;
+}
+$('#category').keyup(function(){
+    validate(); 
+});
+$('.modal-footer .confirm-ok').click(function () {
+    validate();
 });
