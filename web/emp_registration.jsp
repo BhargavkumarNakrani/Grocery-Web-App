@@ -1,16 +1,28 @@
+<%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="dao.ShopkeeperDAO"%>
 <%@page import="dao.AccountDAO"%>
 <%@page import="dao.DeliveryBoyDAO"%>
 <%@page import="entity.DeliveryBoy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String email = "";//(String) session.getAttribute("email");
-    //String role = (String) session.getAttribute("role");
+    String semail = (String) session.getAttribute("email");
+    String role = (String) session.getAttribute("role");
     DeliveryBoy obj = new DeliveryBoy();
+    if(semail == null){semail="";}
+    if(role == null){role="";}
+    if (role.equals("")) {
+        String uri = request.getRequestURI();
+        String pageName = uri.substring(uri.lastIndexOf("/") + 1);
+        String query = request.getQueryString();
+        if(query == null){query="";}
+        String URL = pageName + "?" + query;
+        response.sendRedirect("login.jsp?return_to=" + URL);
+    }
     int id = 0;
-    String StringID = request.getParameter("id");
+    //String StringID = request.getParameter("id");
     String fname =""; 
     String lname = "";
+    String email = "";
     String password = "";
     String sname = "";
     long contact = 0;
@@ -18,9 +30,9 @@
     String image = "";
     int Aid = 0;
     
-    if(StringID != null && email != null){
-        id = Integer.parseInt(StringID);
-        obj = DeliveryBoyDAO.viewSinglebyID(id);
+    if(role.equals("DELIVERYBOY")){
+        //id = Integer.parseInt(StringID);
+        obj = DeliveryBoyDAO.ViewSingle(semail);
         String name =  obj.getName();
         String[] n = name.split(" ", 2);
         fname = n[0];
@@ -34,7 +46,12 @@
         address = obj.getAddress();
         //role = obj.
         //out.println(image);
-    }
+    }else{
+        if(role.equals("")){
+        }else if(!role.equals("ADMIN")){
+            throw new AuthenticationException();
+        }
+    }   
 %>
 <html lang="en">
   <head>
@@ -67,11 +84,16 @@
             margin-bottom: 0px!important;
         }
     </style>
+    <%if (role.equals("DELIVERYBOY")) {%>
     <title>Employee Registration - Vegefoods</title>
+    <%} else {%>
+    <title>Employee Profile - Vegefoods</title>
+    <%}%>
   </head>
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
+    <jsp:include page="menu_bar.jsp"/>
    
 <div class="content" style="background-image: url(images/bg.jpg);}">
     <div class="container">
@@ -80,12 +102,23 @@
           <div class="row justify-content-center">
             <div class="col-md-12">
               <div class="form-block">
-                  <div class="mb-4">
-                  <h3>Employee Registration</h3>
+                  <div class="row">
+                      <%if (role.equals("ADMIN")) {%>
+                      <div class="mb-4">
+                          <h3>Employee Registration</h3>
+                      </div>
+                      <%} else if (role.equals("DELIVERYBOY")) {%>
+                      <div class="col-7 mb-4">
+                          <h3>Profile</h3>
+                      </div>
+                      <div class="col-4">
+                          <button class="btn btn-primary editProfile">Edit Profile</button>
+                      </div>
+                      <%}%>
                   </div>
                 <form action="SingupController.jsp" method="POST" autocomplete="off">   
                     <div class="row mb-3">
-                        <input type="hidden" name="role" value="DELIVERYBOY" id="role">
+                    <input type="hidden" name="role" value="DELIVERYBOY" id="role">
                     <input type="hidden" name="id" value="<%=id%>" id="id">
                     <input type="hidden" name="accountId" value="<%=Aid%>" id="id">
                         <div class="col">
@@ -146,7 +179,7 @@
                         </div>
                     </div>
                   <div class="mb-5"></div>
-                  <input type="submit" value="Register" id="submit" class="btn btn-primary" style="width:100%">
+                  <input type="submit" value="<%if(role.equals("DELIVERYBOY")){%>Save<%}else if(role.equals("ADMIN")){%>Register<%}%>" id="submit" class="btn btn-primary" style="width:100%">
 
                 </form>
               </div>
@@ -161,6 +194,29 @@
     <script src="js/floating_label.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+        <%if (role.equals("DELIVERYBOY")) {%>
+            $('input').each(function(){
+                var value = $(this).attr('value');
+                if (value!=null){
+                    $(this).siblings('label').css('margin-top','-25px');
+                }   
+            });
+            $('input').on('input',function(){
+                if(!$(this).val()){
+                    $(this).siblings('label').removeAttr("style");
+                }
+            });
+            $('input').prop("disabled",true);
+            
+            $('.editProfile').click(function(){
+                $('input').prop("disabled",false);
+                $(this).slideUp(1000,function(){
+                    $(this).hide();
+                });
+            });
+        <%}%>
+    </script>
   </body>
 </html>
 
