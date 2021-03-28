@@ -205,7 +205,7 @@
         <%if (role.equals("DELIVERYBOY")) {%>
             $('input').each(function(){
                 var value = $(this).attr('value');
-                if (value!=null){
+                if (value!=null && value!=null){
                     $(this).siblings('label').css('margin-top','-25px');
                 }   
             });

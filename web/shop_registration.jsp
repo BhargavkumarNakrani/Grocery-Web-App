@@ -207,14 +207,14 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
-                                <input type="password" name="pswd" class="form-control" id="pswd" autocomplete="nope">
+                                <input type="password" value="<%=password%>" name="pswd" class="form-control" id="pswd" autocomplete="nope">
                             </div>
                             <span id="pswd_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="cpswd">Confirm Password</label>
-                                <input type="password" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
+                                <input type="password" value="<%=password%>" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
                             </div>
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
