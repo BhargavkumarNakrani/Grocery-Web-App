@@ -151,7 +151,15 @@
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <%if(role.equals("DELIVERYBOY")){%>
+                    <div class="d-flex mt-2 align-items-center">
+                        <label class="control control--checkbox mb-0"><span class="caption">Change Password</span>
+                            <input type="checkbox" id="ckbox" class="form-check-input" style="display:none">
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                    <%}%>
+                    <div class="row mb-3 mt-4">
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
@@ -206,13 +214,29 @@
                     $(this).siblings('label').removeAttr("style");
                 }
             });
-            $('input').prop("disabled",true);
+            $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
             
             $('.editProfile').click(function(){
-                $('input').prop("disabled",false);
-                $(this).slideUp(1000,function(){
-                    $(this).hide();
+                $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit profile");
+    //            $(this).text('Cancel');
+                $('input').not(':checkbox , :password').prop("disabled",function(){
+                    if($(this).is(':disabled')){
+                        $(this).css('opacity','1');
+                        return false;
+                    }else{
+                        $(this).css('opacity','0.6');
+                        return true;
+                    }
                 });
+            });
+            $('input[type="checkbox"]').click(function(){
+                if($(this).is(':checked')){
+                    $('input[type="password"]').prop('disabled',false).css('opacity','1');
+                    $('input[type="submit"]').prop('disabled',false).css('opacity','1');
+                }else{
+                    $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
+                    $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
+                }
             });
         <%}%>
     </script>
