@@ -1,3 +1,4 @@
+<%@page import="dao.AccountDAO"%>
 <%@page import="javax.security.sasl.AuthenticationException"%>
 <%@page import="entity.Customer"%>
 <%@page import="dao.CustomerDAO"%>
@@ -6,12 +7,12 @@
     <%
         String sEmail = (String)session.getAttribute("email");
         String role = (String) session.getAttribute("role");
-        String action = request.getParameter("action");
+        //String action = request.getParameter("action");
         int id = 0;
         int AId = 0;
         if(sEmail==null){sEmail="";}
         if(role==null){role="";}
-        if(action==null){action="";}
+//        if(action==null){action="";}
 //        if(role!="CUSTOMER"){throw new AuthenticationException(); }
 
     %>
@@ -47,10 +48,11 @@
         String lname = "";
         String email = "";
         String address = "";
+        String password = "";
         long contact = 0;
   %>
   
-  <%if(action!="" && sEmail!=""){
+  <%if(sEmail!=""){
                     
         Customer customer = CustomerDAO.viewByEmail(sEmail);
         String name =  customer.getName();
@@ -60,8 +62,9 @@
         email = customer.getEmail();
         contact = customer.getPhone();
         address = customer.getAddress();
-        id = customer.getCId();
         AId = customer.getAccounts().getAcccountId();
+        password = AccountDAO.getPassword(AId);
+        id = customer.getCId();
   %>
   <style>
       .content{height:695px;}
@@ -70,7 +73,7 @@
 <body class="goto-here">
     
     <jsp:include page="top_bar.html"/>
-    <%if(action==""){%>
+    <%if(sEmail==""){%>
     <jsp:include page="login_menu_bar.jsp"/> 
     <%}else{%>
     <jsp:include page="menu_bar.jsp"/>   
@@ -84,7 +87,7 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="row">
-                      <%if(action=="" || sEmail==""){%>
+                      <%if(sEmail==""){%>
                       <div class="mb-4">
                           <h3>Signup to <strong>VEGEFOODS</strong></h3>
                       </div>
@@ -116,7 +119,7 @@
                             <span id="lname_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -132,23 +135,29 @@
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row">
+                    <%if(sEmail!=""){%>
+                    <div class="form-check mt-2">
+                        <input type="checkbox" id="ckbox" class="form-check-input" style="cursor:pointer;">
+                        <label class="form-check-label" for="ckbox" style="color:black;" for="exampleCheck1">Change Password</label>
+                    </div>
+                    <%}%>
+                    <div class="row mt-4">
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
-                                <input type="password" name="pswd" class="form-control" id="pswd" autocomplete="nope">
+                                <input type="password" value="<%=password%>" name="pswd" class="form-control" id="pswd" autocomplete="nope">
                             </div>
                             <span id="pswd_error_message" class="text-danger"></span>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="cpswd">Confirm Password</label>
-                                <input type="password" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
+                                <input type="password" value="<%=password%>" name="cpswd" class="form-control" id="cpswd" autocomplete="nope">
                             </div>
                             <span id="cpswd_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <% if(action!="" && sEmail!=""){%>
+                    <% if(sEmail!=""){%>
                     <div class="mb-3"></div>
                     <div class="row">
                         <div class="col">
@@ -162,7 +171,7 @@
                     <%}%>
                   <div class="mb-5"></div>
                   <input type="submit"
-                         value="<%if (action!="") {%>Save<%} else if(action=="") {%>Register<%}%>" id="submit" class="btn btn-primary" style="width:100%">
+                         value="<%if (sEmail!="") {%>Save<%} else if(sEmail=="") {%>Register<%}%>" id="submit" class="btn btn-primary" style="width:100%">
                 </form>
               </div>
             </div>
@@ -178,19 +187,34 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
   <script>
-    <% if(action!=""){%>
+  </script>
+  <script>
+    <% if(sEmail!=""){%>
         $('input').each(function(){
             var value = $(this).attr('value');
-            if (value!=null){
+            if (value!=null && value!=""){
                 $(this).siblings('label').css('margin-top','-25px');
             }
         });
-        $('input').prop("disabled",true);
+        $('input').on('input',function(){
+                if(!$(this).val()){
+                    $(this).siblings('label').removeAttr("style");
+                }
+        });
+        $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
         $('.editProfile').click(function(){
-            $('input').prop("disabled",false);
+            $('input').not(':password').prop("disabled",false);
+            $('input').not(':password').css('opacity','1');
             $(this).slideUp(1000,function(){
                 $(this).hide();
             });
+        });
+        $('input[type="checkbox"]').click(function(){
+            if($(this).is(':checked')){
+                $('input[type="password"]').prop('disabled',false).css('opacity','1');
+            }else{
+                $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
+            }
         });
     <%}%>
   </script>
