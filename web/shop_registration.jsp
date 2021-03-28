@@ -162,7 +162,7 @@
                         <div class="col" style="width:50%!important;">
                             <div class="file has-name">
                                 <label class="file-label">
-                                    <input class="file-input" id="shopimg" accept="image/*" type="file" name="shopimg">
+                                    <input class="file-input" id="shopimg" style="display:none;" accept="image/*" type="file" name="shopimg">
                                     
                                     <span class="file-cta upload-file">
                                         <span class="file-icon">
@@ -195,7 +195,15 @@
                             <span id="contact_error_message" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row  mb-3">
+                    <%if(role.equals("SHOPKEEPER")){%>
+                    <div class="d-flex mt-2 align-items-center">
+                        <label class="control control--checkbox mb-0"><span class="caption">Change Password</span>
+                            <input type="checkbox" id="ckbox" class="form-check-input" style="display:none">
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                    <%}%>
+                    <div class="row mb-3 mt-4">
                         <div class="col">
                             <div class="form-group">
                                 <label for="pswd">Password</label>
@@ -256,7 +264,7 @@
         <%if (role.equals("SHOPKEEPER")) {%>
             $('input').each(function(){
                 var value = $(this).attr('value');
-                if (value!=null){
+                if (value!=null && value!=""){
                     $(this).siblings('label').css('margin-top','-25px');
                 }   
             });
@@ -265,15 +273,26 @@
                     $(this).siblings('label').removeAttr("style");
                 }
             });
-            $('input').prop("disabled",true);
+            $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
             
             $('.editProfile').click(function(){
-                $('input').prop("disabled",false);
-                $(this).slideUp(1000,function(){
-                    $(this).hide();
+                $(this).text('Cancel');
+                $('input').not(':password').prop("disabled",false).css('opacity','1');
+                $(this).click(function(){
+                    $(this).text('Edit Profile');
+                    $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
+
                 });
             });
-            
+            $('input[type="checkbox"]').click(function(){
+                if($(this).is(':checked')){
+                    $('input[type="password"]').prop('disabled',false).css('opacity','1');
+                    $('input[type="submit"]').prop('disabled',false).css('opacity','1');
+                }else{
+                    $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
+                    $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
+                }
+            });
             $('.preview').show();
         <%} else {%>
             $('.preview').hide();
