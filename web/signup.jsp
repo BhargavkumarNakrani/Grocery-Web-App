@@ -136,9 +136,11 @@
                         </div>
                     </div>
                     <%if(sEmail!=""){%>
-                    <div class="form-check mt-2">
-                        <input type="checkbox" id="ckbox" class="form-check-input" style="cursor:pointer;">
-                        <label class="form-check-label" for="ckbox" style="color:black;" for="exampleCheck1">Change Password</label>
+                    <div class="d-flex mt-2 align-items-center">
+                        <label class="control control--checkbox mb-0"><span class="caption">Change Password</span>
+                            <input type="checkbox" id="ckbox" class="form-check-input" style="display:none">
+                            <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <%}%>
                     <div class="row mt-4">
@@ -203,17 +205,21 @@
         });
         $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
         $('.editProfile').click(function(){
-            $('input').not(':password').prop("disabled",false);
-            $('input').not(':password').css('opacity','1');
-            $(this).slideUp(1000,function(){
-                $(this).hide();
+            $(this).text('Cancel');
+            $('input').not(':password').prop("disabled",false).css('opacity','1');
+            $(this).click(function(){
+                $(this).text('Edit Profile');
+                $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
+                
             });
         });
         $('input[type="checkbox"]').click(function(){
             if($(this).is(':checked')){
                 $('input[type="password"]').prop('disabled',false).css('opacity','1');
+                $('input[type="submit"]').prop('disabled',false).css('opacity','1');
             }else{
                 $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
+                $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
             }
         });
     <%}%>
