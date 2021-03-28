@@ -205,12 +205,16 @@
         });
         $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
         $('.editProfile').click(function(){
-            $(this).text('Cancel');
-            $('input').not(':password').prop("disabled",false).css('opacity','1');
-            $(this).click(function(){
-                $(this).text('Edit Profile');
-                $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
-                
+            $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit profile");
+//            $(this).text('Cancel');
+            $('input').not(':checkbox , :password').prop("disabled",function(){
+                if($(this).is(':disabled')){
+                    $(this).css('opacity','1');
+                    return false;
+                }else{
+                    $(this).css('opacity','0.6');
+                    return true;
+                }
             });
         });
         $('input[type="checkbox"]').click(function(){
