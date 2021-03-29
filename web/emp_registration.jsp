@@ -181,7 +181,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="Address">Address</label>
-                                <input type="text" name="address"  value="<%=address %>" class="form-control" id="address" autocomplete="nope">
+                                <input type="text" name="address"  value="<%=address %>" class="form-control" id="add" autocomplete="nope">
                             </div>
                             <span id="add_error_message" class="text-danger"></span>
                         </div>
