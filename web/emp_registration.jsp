@@ -112,6 +112,7 @@
                       </div>
                       <div class="col-4">
                           <button class="btn btn-primary editProfile">Edit Profile</button>
+                          <button class="btn btn-primary cancelProfile" style="display:none;">Cancel</button>
                       </div>
                       <%}%>
                   </div>
@@ -197,7 +198,7 @@
     </div>
   </div>
     <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <script src="js/signup_validation.js"></script>
+    <script src="js/empValidation.js"></script>
     <script src="js/floating_label.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -217,8 +218,7 @@
             $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
             
             $('.editProfile').click(function(){
-                $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit profile");
-    //            $(this).text('Cancel');
+                $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit Profile");
                 $('input').not(':checkbox , :password').prop("disabled",function(){
                     if($(this).is(':disabled')){
                         $(this).css('opacity','1');
@@ -228,6 +228,9 @@
                         return true;
                     }
                 });
+                if($('input[type="checkbox"]').is(':checked')){
+                    $('input[type="submit"]').prop('disabled',false).css('opacity','1');
+                }
             });
             $('input[type="checkbox"]').click(function(){
                 if($(this).is(':checked')){
@@ -235,7 +238,9 @@
                     $('input[type="submit"]').prop('disabled',false).css('opacity','1');
                 }else{
                     $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
-                    $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
+                    if($('.editProfile').text()==="Edit Profile"){
+                        $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
+                    }
                 }
             });
         <%}%>

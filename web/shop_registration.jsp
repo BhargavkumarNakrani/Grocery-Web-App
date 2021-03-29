@@ -263,7 +263,7 @@
             $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
             
             $('.editProfile').click(function(){
-                $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit profile");
+                $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit Profile");
                 $('input').not(':checkbox , :password').prop("disabled",function(){
                     if($(this).is(':disabled')){
                         $(this).css('opacity','1');
@@ -273,6 +273,9 @@
                         return true;
                     }
                 });
+                if($('input[type="checkbox"]').is(':checked')){
+                    $('input[type="submit"]').prop('disabled',false).css('opacity','1');
+                }
             });
             $('input[type="checkbox"]').click(function(){
                 if($(this).is(':checked')){
@@ -280,7 +283,9 @@
                     $('input[type="submit"]').prop('disabled',false).css('opacity','1');
                 }else{
                     $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
-                    $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
+                    if($('.editProfile').text()==="Edit Profile"){
+                        $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
+                    }
                 }
             });
             $('.preview').show();
