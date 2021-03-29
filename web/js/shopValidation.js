@@ -3,96 +3,123 @@ $("document").ready(function() {
         $("#fname_error_message").hide();
         $("#lname_error_message").hide();
         $("#sname_error_message").hide();
-        $("#email_error_message").hide();
         $("#shopimg_error_message").hide();
+        $("#email_error_message").hide();
         $("#contact_error_message").hide();
         $("#pswd_error_message").hide();
         $("#cpswd_error_message").hide();
         $("#add_error_message").hide();
 
-        var error_pname = false;
-        var error_category = false;
-        var error_stock = false;
-        var error_productimg = false;
-        var error_uom = false;
-        var error_price = false;
+        var error_fname = false;
+        var error_lname = false;
+        var error_sname = false;
+        var error_shopimg = false;
+        var error_email = false;
+        var error_contact = false;
+        var error_pswd = false;
+        var error_cpswd = false;
+        var error_add = false;
         
         
-        $("#pname").keyup(function() {
-            check_pname();
+        $("#fname").keyup(function(){
+            check_fname();
          });
-        $("#category").change(function() {
-            check_category();
+        $("#lname").keyup(function() {
+            check_lname();
          });
-        $("#stock").keyup(function() {
-            check_stock();
+        $("#sname").keyup(function() {
+            check_sname();
          });
-        $('#productimg').on('change',function(){
-            check_productimg();
+        $('#shopimg').on('change',function(){
+            check_shopimg();
          });
-        $("#uom").change(function() {
-            check_uom();
+        $("#email").keyup(function() {
+            check_email();
          });
-        $("#price").keyup(function() {
-            check_price();
+        $("#contact").keyup(function() {
+            check_contact();
+         });
+        $("#pswd").keyup(function() {
+            check_pswd();
+         });
+        $("#cpswd").keyup(function() {
+            check_cpswd();
+         });
+        $("#add").keyup(function(){
+            check_add();
          });
         
-        function check_pname() {
-            var pname = $("#pname").val();
-            if (pname===''){
-               $("#pname_error_message").html("Enter Product Name");
-               $("#pname_error_message").show();
-               $("#pname").css("border-bottom","2px solid #F90A0A");
-               error_pname = true;
+        function check_fname() {
+            var pattern = /^[a-zA-Z]*$/;
+            var fname = $("#fname").val();
+            if (fname===''){
+               $("#fname_error_message").html("Enter First Name");
+               $("#fname_error_message").show();
+               $("#fname").css("border-bottom","2px solid #F90A0A");
+               error_fname = true;
             }else{
-                    $("#pname_error_message").hide();
-                    $("#pname").css("border-bottom","1px solid #82ae41");
+                if (pattern.test(fname)) {
+                    $("#fname_error_message").hide();
+                    $("#fname").css("border-bottom","1px solid #82ae41");
+                } else {
+                    $("#fname_error_message").html("Only Characters is allowed");
+                    $("#fname_error_message").show();
+                    $("#fname").css("border-bottom","2px solid #F90A0A");
+                    error_fname = true;
+                }
             }
             
         }
-        
-        function check_category() {
-            var category = $("#category").val();
-            if (category === 'category'){
-                $("#category_error_message").html("Select Product Category");
-                $("#category_error_message").show();
-                $("#category").css("border-bottom","2px solid #F90A0A");
-                error_stock = true;
+
+        function check_lname() {
+            var pattern = /^[a-zA-Z]*$/;
+            var lname = $("#lname").val();
+            if (lname===''){
+               $("#lname_error_message").html("Enter Last Name");
+               $("#lname_error_message").show();
+               $("#lname").css("border-bottom","2px solid #F90A0A");
+               error_lname = true;
             }else{
-                $("#category_error_message").hide();
-                $("#category").css("border-bottom","1px solid #82ae41");
+                if (pattern.test(lname)) {
+                    $("#lname_error_message").hide();
+                    $("#lname").css("border-bottom","1px solid #82ae41");
+                } else {
+                    $("#lname_error_message").html("Only Characters is allowed");
+                    $("#lname_error_message").show();
+                    $("#lname").css("border-bottom","2px solid #F90A0A");
+                    error_lname = true;
+                }
             }
-         
         }
         
-        function check_stock() {
-            var stock = $("#stock").val();
-            if (stock === ''){
-                $("#stock_error_message").html("Enter Available Stock");
-                $("#stock_error_message").show();
-                $("#stock").css("border-bottom","2px solid #F90A0A");
-                error_stock = true;
+        function check_sname() {
+            var sname = $("#sname").val();
+            if (sname===''){
+                $("#sname_error_message").html("Enter Product Name");
+                $("#sname_error_message").show();
+                $("#sname").css("border-bottom","2px solid #F90A0A");
+                error_sname = true;
             }else{
-                $("#stock_error_message").hide();
-                $("#stock").css("border-bottom","1px solid #82ae41");
+                $("#sname_error_message").hide();
+                $("#sname").css("border-bottom","1px solid #82ae41");
             }
-         
+            
         }
 
-        function check_productimg(){
+        function check_shopimg(){
             var allowedFiles = [".png", ".jpg", ".jpeg"];
-            var fileUpload = $("#productimg");
-            var lblError = $("#productimg_error_message");
+            var fileUpload = $("#shopimg");
+            var lblError = $("#shopimg_error_message");
             var regex = new RegExp("([a-zA-Z0-9 ()\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
             
             if (fileUpload.val()===''){
                 if($('div .preview').is(':visible')){
-                    error_productimg = false;
+                    error_shopimg = false;
                 }else{
                     lblError.html("Upload Image File.");
                     lblError.show();
                     $('.upload-file').addClass("file-hover");
-                    error_productimg = true;
+                    error_shopimg = true;
                 }
             }else{
                 if (!regex.test(fileUpload.val().toLowerCase())) {
@@ -100,7 +127,7 @@ $("document").ready(function() {
                     lblError.html("Upload image file only.");
                     lblError.show();
                     $('.upload-file').addClass("file-hover");
-                    error_productimg = true;
+                    error_shopimg = true;
                 }else{
                     lblError.hide();
                     var fileNameIndex = fileUpload.val().lastIndexOf('\\') + 1;
@@ -111,53 +138,137 @@ $("document").ready(function() {
                 }
             }
         }
-        function check_uom() {
-            var uom = $("#uom").val();
-            if (uom === 'uom'){
-                $("#uom_error_message").html("Select Unit of Measurement");
-                $("#uom_error_message").show();
-                $("#uom").css("border-bottom","2px solid #F90A0A");
-                error_stock = true;
+        
+        function check_pswd() {
+            var pswd_length = $("#pswd").val().length;
+            if (pswd_length === 0){
+                $("#pswd_error_message").html("Enter Strong Password");
+                $("#pswd_error_message").show();
+                $("#pswd").css("border-bottom","2px solid #F90A0A");
+                error_pswd = true;
             }else{
-                $("#uom_error_message").hide();
-                $("#uom").css("border-bottom","1px solid #82ae41");
+                if (pswd_length < 8) {
+                    $("#pswd_error_message").html("Atleast 8 Characters required");
+                    $("#pswd_error_message").show();
+                    $("#pswd").css("border-bottom","2px solid #F90A0A");
+                    error_pswd = true;
+                } else {
+                    $("#pswd_error_message").hide();
+                    $("#pswd").css("border-bottom","1px solid #82ae41");
+                }
             }
-         
         }
         
-        function check_price() {
-            var price = $("#price").val();
-            if (price === ''){
-                $("#price_error_message").html("Enter Product Price");
-                $("#price_error_message").show();
-                $("#price").css("border-bottom","2px solid #F90A0A");
-                error_stock = true;
+        function check_cpswd() {
+            var pswd = $("#pswd").val();
+            var cpswd = $("#cpswd").val();
+            var cpswd_length = cpswd.length;
+            if (cpswd_length === 0){
+                $("#cpswd_error_message").html("Confirm Your Password");
+                $("#cpswd_error_message").show();
+                $("#cpswd").css("border-bottom","2px solid #F90A0A");
+                error_cpswd = true;
             }else{
-                $("#price_error_message").hide();
-                $("#price").css("border-bottom","1px solid #82ae41");
+                if (pswd !== cpswd) {
+                    $("#cpswd_error_message").html("Passwords Did not Matched");
+                    $("#cpswd_error_message").show();
+                    $("#cpswd").css("border-bottom","2px solid #F90A0A");
+                    error_cpswd = true;
+                } else {
+                    $("#cpswd_error_message").hide();
+                    $("#cpswd").css("border-bottom","1px solid #82ae41");
+                }
             }
+        }
+
+        function check_contact() {
+            var pattern = /^[6-9]\d{9}$/;
+            var contact = $("#contact").val();
+            var contact_length = contact.length;
+            if (contact_length === 0){
+                $("#contact_error_message").html("Enter Contact Number");
+                $("#contact_error_message").show();
+                $("#contact").css("border-bottom","2px solid #F90A0A");
+                error_contact = true;
+            }else{
+                if (pattern.test(contact)) {
+                    $("#contact_error_message").hide();
+                    $("#contact").css("border-bottom","1px solid #82ae41");
+                } else {
+                    $("#contact_error_message").html("Enter Valid Contact Number");
+                    $("#contact_error_message").show();
+                    $("#contact").css("border-bottom","2px solid #F90A0A");
+                    error_contact = true;
+                }
+            }
+        }
          
+        function check_email() {
+            var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var email = $("#email").val();
+            if (email === ''){
+                $("#email_error_message").html("Enter Email Address");
+                $("#email_error_message").show();
+                $("#email").css("border-bottom","2px solid #F90A0A");
+                error_email = true;
+            }else{
+                if (pattern.test(email)) {
+                    $("#email_error_message").hide();
+                    $("#email").css("border-bottom","1px solid #82ae41");
+                } else {
+                    $("#email_error_message").html("Invalid Email");
+                    $("#email_error_message").show();
+                    $("#email").css("border-bottom","2px solid #F90A0A");
+                    error_email = true;
+            }
+         }
         }
         
+        function check_add() {
+            var add = $("#add").val();
+            if (add===''){
+               $("#add_error_message").html("Enter Product Name");
+               $("#add_error_message").show();
+               $("#add").css("border-bottom","2px solid #F90A0A");
+               error_sname = true;
+            }else{
+                    $("#add_error_message").hide();
+                    $("#add").css("border-bottom","1px solid #82ae41");
+            }
+            
+        }
         
         $("#submit").click(function(){
             
-            error_pname = false;
-            error_category = false;
-            error_stock = false;
-            error_productimg = false;
-            error_uom = false;
-            error_price = false;
+            error_fname = false;
+            error_lname = false;
+            error_sname = false;
+            error_email = false;
+            error_shopimg = false;
+            error_pswd = false;
+            error_cpswd = false;
+            error_contact = false;
+            error_add = false;
 
-            check_pname();
-            check_category();
-            check_stock();
-            check_productimg();
-            check_uom();
-            check_price();
+            check_fname();
+            check_lname();
+            check_sname();
+            check_shopimg();
+            check_email();
+            check_pswd();
+            check_cpswd();
+            check_contact();
+            check_add();
             
                         
-            if (error_pname === false && error_category === false && error_stock === false && error_productimg === false && error_uom === false && error_price === false) {
+            if (error_fname === false && 
+                error_lname === false && 
+                error_sname === false && 
+                error_shopimg === false && 
+                error_pswd === false && 
+                error_cpswd === false &&
+                error_contact === false &&
+                error_add === false) {
 //               alert("Registration Successfull");
                return true;
             } else {
