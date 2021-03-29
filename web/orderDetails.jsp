@@ -118,11 +118,13 @@
                         
                     </div>
                 </div>
+                <%if(role.equals("DELIVERYBOY")){%>
                 <div class="col-lg-6 ftco-animate">
                     <div class="float-right">
                         <a href="orderDelivered.jsp?id=<%=OId %>" class="btn py-3 px-4 btn-primary">Order Delivered</a>
                     </div>
                 </div>
+                <%}%>
             </div>
             <div id="accordion">
                 <%
