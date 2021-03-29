@@ -215,6 +215,23 @@
     }
     
     %>
+    <div id="confirm-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to Delete this product?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</a>
+                    <a href="" type="button" class="confirm-ok btn btn-primary">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -288,7 +305,7 @@
                                     <a href="addProduct.jsp?productId=<%=product.getPId()%>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fas fa-pencil-alt"></i></span>
                                     </a>
-                                    <a href="deleteProduct.jsp?productId=<%=product.getPId()%>" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a href="deleteProduct.jsp?productId=<%=product.getPId()%>" class="buy-now delete-product d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fas fa-trash-alt"></i></span>
                                     </a>
                                     <a href="product-single.jsp?productId=<%=product.getPId()%>" class="heart d-flex justify-content-center align-items-center ">
@@ -382,8 +399,29 @@
 </script>
 <script>
     $(document).ready(function () {
-        
-        $('a.cart-add').on('click', function(e) {
+    <% if(role.equals("SHOPKEEPER")){%>
+            $('.delete-product').on('click',function(e){
+                e.preventDefault();
+                var href= $(this).attr('href');
+                var card = $(this).parentsUntil('.delete').parent();
+                $('.confirm-ok').attr('href',href);
+                $('#confirm-modal').modal('toggle');
+                $('.confirm-ok').click(function(){
+                    $.ajax({
+                        url:href,
+                        sucess:function(response){
+                            $('#confirm-modal').modal('toggle');
+                            card.fadeOut(1000,function(){
+                                $(this).remove();
+                            });
+                            $('.ftco-section').html(response.find('.ftco-section'));
+                        },
+                        error:function(error){alert(error);}
+                    });
+                });
+            });
+    <%}%>
+    $('a.cart-add').on('click', function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         var anchor = $(this);
@@ -404,7 +442,7 @@
                 },5000);
             },
 
-            error: function (jxhr, text, error) {
+            error: function (error) {
                 alert(error);
             }
         });
