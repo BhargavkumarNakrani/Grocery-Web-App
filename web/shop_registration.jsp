@@ -34,6 +34,7 @@
 //    String StringID = request.getParameter("id");
     if(role.equals("SHOPKEEPER")){
         obj = ShopkeeperDAO.viewSinglebyEmail(semail);
+        id = obj.getSId();
         String name = obj.getName();
         String[] n = name.split(" ", 2);
         fname = n[0];
@@ -128,7 +129,7 @@
                       <%}%>
                   </div>
                   <div class="mb-5 preview">
-                      <img class="card-img-top" src="data:image/jpg;base64,<%=ShopkeeperDAO.viewImage(obj.getSId())%>" alt="Card image" style="width:40%">
+                      <img class="card-img-top" src="data:image/jpg;base64,<%=image%>" alt="Card image" style="width:40%">
                   </div>
                 <form action="SingupController.jsp" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
@@ -224,7 +225,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="Address">Shop Address</label>
-                                <input type="text" name="address" value="<%=address%>" class="form-control" id="address" autocomplete="nope">
+                                <input type="text" name="address" value="<%=address%>" class="form-control" id="add" autocomplete="nope">
                             </div>
                             <span id="add_error_message" class="text-danger"></span>
                         </div>
@@ -247,20 +248,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
-        $('#shopimg').on('change',function(){
-                //get the file name
-                var path = $(this).val();
-                //replace the "Choose a file" label
-                if (path==null){
-                    $('.file-name').html("No file Choosen");
-                }else{
-                    var fileNameIndex = path.lastIndexOf('\\') + 1;
-                    var fileName = path.substr(fileNameIndex);
-                    $('.file-name').html(fileName);
-                }
-            });
-    </script>
-    <script>
         <%if (role.equals("SHOPKEEPER")) {%>
             $('input').each(function(){
                 var value = $(this).attr('value');
@@ -277,7 +264,6 @@
             
             $('.editProfile').click(function(){
                 $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit profile");
-    //            $(this).text('Cancel');
                 $('input').not(':checkbox , :password').prop("disabled",function(){
                     if($(this).is(':disabled')){
                         $(this).css('opacity','1');
