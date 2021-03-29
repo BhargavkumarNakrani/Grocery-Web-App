@@ -269,6 +269,9 @@
         if(categoryId != 0 && product.getCategory().getCategoryId()!=categoryId){
             continue;
         }
+        if(product.getQuantity()<= 0 && !role.equals("SHOPKEEPER")){
+            continue;
+        }
 %>
                 <div class="col-md-6 col-lg-3 ftco-animate delete">
                     <div class="product">

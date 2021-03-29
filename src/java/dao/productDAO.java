@@ -403,5 +403,13 @@ public class productDAO {
         t.commit();
         session.close();
     }
-   
+    public static int updateQuantity(int PId, int quantity) {
+        String hql = "UPDATE Products set quantity = "+1+" where PId="+PId;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        int updatedEntities = session.createQuery(hql).executeUpdate();
+        t.commit();
+        session.close();
+        return updatedEntities;
+    }
 }
