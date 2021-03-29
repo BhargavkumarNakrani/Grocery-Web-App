@@ -183,7 +183,7 @@
                         </div>
                     </div>
                   <div class="mb-5"></div>
-                  <input type="submit" value="Add" id="submit" class="btn btn-primary" style="width:100%">
+                  <input type="submit" value="<%if(id!=0){out.print("Save");}else{out.print("Add");}%>" id="submit" class="btn btn-primary" style="width:100%">
 
                 </form>
               </div>
