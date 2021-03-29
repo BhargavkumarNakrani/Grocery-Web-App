@@ -27,8 +27,8 @@
                     <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=Name%></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <% if(role.equals("CUSTOMER")){%>
-                            <a class="dropdown-item" href="signup.jsp?action=editProfile">My Profile</a>
-                            <a class="dropdown-item" href="orderHistory.jsp">Order history</a>
+                            <a class="dropdown-item" href="signup.jsp">My Profile</a>
+                            <a class="dropdown-item" href="orderHistory.jsp">Order History</a>
                             <%}else if(role.equals("SHOPKEEPER")){%>
                                 <a class="dropdown-item" href="shop_registration.jsp">My Profile</a>
                                 <a class="dropdown-item" href="#category-modal" data-toggle="modal" data-backdrop="static" data-keyboard="false">Add Category</a>
@@ -36,9 +36,9 @@
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
                                 <a class="dropdown-item" href="orderHistory.jsp">Order History</a>
                             <%}else if(role.equals("DELIVERYBOY")){%>
-                                <a class="dropdown-item" href="emp_registration.jsp">Profile</a>
+                                <a class="dropdown-item" href="emp_registration.jsp">My Profile</a>
                                 <a class="dropdown-item" href="orders.jsp">Orders</a>
-                                <a class="dropdown-item" href="orderHistory.jsp">Order history</a>
+                                <a class="dropdown-item" href="orderHistory.jsp">Order History</a>
                         <%}%>
                     </div>
                 </li>
