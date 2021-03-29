@@ -128,7 +128,7 @@
                       <%}%>
                   </div>
                   <div class="mb-5 preview">
-                      <img class="card-img-top" src="data:image/jpg;base64,<%=ShopkeeperDAO.viewImage(obj.getSId())%>" alt="Card image" style="width:40%">
+                      <img class="card-img-top" src="data:image/jpg;base64,<%=image %>" alt="Card image" style="width:40%">
                   </div>
                 <form action="SingupController.jsp" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
