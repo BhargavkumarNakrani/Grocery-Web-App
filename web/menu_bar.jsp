@@ -5,6 +5,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String email = (String) session.getAttribute("email");
    String role = (String) session.getAttribute("role");
+   String search = request.getParameter("s");
+   if(search==null) search="";
    String Name = "";
    if(role == null){role = "";}
         if(role.equals("CUSTOMER")){
@@ -59,7 +61,7 @@
                                 <div class="d-flex">-->
                                 <div class="searchbar">
                                     <form action="shop.jsp" method="GET" >
-                                        <input class="search_input" type="text" name="s" placeholder="Search Product..">
+                                        <input class="search_input" value="<%=search%>" type="text" name="s" placeholder="Search Product..">
                                         <i class="fas fa-search search_icon" type="submit" style="padding-top:0px!important;"></i>
                                     </form>
                                 </div>
@@ -72,7 +74,7 @@
                             <div class="d-flex">
                                 <div class="searchbar">
                                     <form action="shop.jsp" method="get">
-                                    <input class="search_input" type="text" name="s" placeholder="Search Product..">
+                                    <input class="search_input" value="<%=search%>" type="text" name="s" placeholder="Search Product..">
                                     <i class="fas fa-search search_icon" type="submit"></i>
                                     </form>
                                 </div>
