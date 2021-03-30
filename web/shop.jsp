@@ -183,7 +183,11 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<style>.mouse{z-index: -1;}.container-fluid{margin-top: -60px;}</style>
+<style>
+    .mouse{z-index: -1;}.container-fluid{margin-top: -60px;}
+    .product .img-prod .overlay img{width: 100%;height: 100%;}
+    .product .img-prod .overlay,.product:hover .img-prod .overlay{opacity: 0.8;background: none;}
+</style>
 </head>
 <body class="goto-here">
     
@@ -269,14 +273,18 @@
         if(categoryId != 0 && product.getCategory().getCategoryId()!=categoryId){
             continue;
         }
-        if(product.getQuantity()<= 0 && !role.equals("SHOPKEEPER")){
-            continue;
-        }
+        //if(product.getQuantity()<= 0 && !role.equals("SHOPKEEPER")){
+        //    continue;
+        //}
 %>
                 <div class="col-md-6 col-lg-3 ftco-animate delete">
                     <div class="product">
                         <a class="img-prod"><img class="img-fluid" src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>">
-                            <div class="overlay"></div>
+                            <%if(product.getQuantity()<=0){%>
+                            <div class="overlay">
+                                <img src="images/out-of-stock.jpg">
+                            </div>
+                            <%}%>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <h3><a id="pname"><%=product.getName()%></a></h3>
@@ -294,11 +302,13 @@
                                     <a href="product-single.jsp?productId=<%=product.getPId()%>" class="add-to-cart single d-flex justify-content-center align-items-center text-center">
                                         <span><i class="fa fa-bars"></i></span>
                                     </a>
-                                    <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0 && role != "") {%>
+                                    <% if(cartDAO.checkProductInCart(product.getPId(), email) == 0 && role != "") {
+                                        if(product.getQuantity()>0){
+                                    %>
                                     <a href="addToCart.jsp?productId=<%=product.getPId()%>" class="cart-add buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="fa fa-shopping-cart"></i></span>
                                     </a>
-                                    <% }%>
+                                    <%} }%>
                                 </div>
                             </div>
                             <% } else if(role.equalsIgnoreCase("SHOPKEEPER")){                          
