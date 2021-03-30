@@ -173,7 +173,7 @@ $("document").ready(function() {
                $("#add_error_message").html("Enter Product Name");
                $("#add_error_message").show();
                $("#add").css("border-bottom","2px solid #F90A0A");
-               error_sname = true;
+               error_add = true;
             }else{
                     $("#add_error_message").hide();
                     $("#add").css("border-bottom","1px solid #82ae41");
