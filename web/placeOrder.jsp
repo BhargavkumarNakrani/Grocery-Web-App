@@ -79,6 +79,7 @@
                 Products product_bean = productDAO.viewById(c.getProducts().getPId());
                 Shopkeeper shopkeeper_bean = ShopkeeperDAO.viewSinglebyID(product_bean.getShopkeeper().getSId());
                 orderDetail_bean = new OrderDetails(order_bean, product_bean, shopkeeper_bean, c.getPrice(), c.getAmount(), c.getQuantity());
+                orderDetailDAO.save(orderDetail_bean);
                 productDAO.updateQuantity(PId, quantity);
                 cartDAO.delete(c.getId());
             }

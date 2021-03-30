@@ -130,7 +130,7 @@
                         <div id="collapse<%=order.getOId() %>" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
-                                    <% if(order.getStatus()==0 && !role.equals("SHOPKEEPER") && !role.equals("DELIVERYBOY")) {%>
+                                    <% if(order.getStatus()==0 && role.equals("CUSTOMER")) {%>
                                     <div class="cancel-order mb-3"><a href="#confirm-modal" class="btn cancel-btn px-4 btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false">Cancel Order</a></div>
                                     <% }%>
                                     <div class="cart-list">
@@ -162,6 +162,7 @@
                                             }
                                             for(OrderDetails obj : orderDetail) {
                                                 total = obj.getAmount()+total;
+                                                
                                               
                                             %>
                                                 <tr class="text-center">
