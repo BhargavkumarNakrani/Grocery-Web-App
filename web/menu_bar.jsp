@@ -100,7 +100,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link btn btn-primary" id="dropdown04" data-toggle="dropdown" style='padding:15px 0px;' aria-haspopup="true" aria-expanded="true">Register</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                    <a class="dropdown-item" href="shop_registration.jsp">For Shopkeeper</a>
+                                    <a class="dropdown-item" href="shop_registration.jsp">For Shop</a>
                                     <a class="dropdown-item" href="emp_registration.jsp">For Employee</a>
                                 </div>
                             </li>
@@ -114,6 +114,7 @@
             </div>
         </div>
     </nav>
+    <%if(role.equals("SHOPKEEPER")){%>
     <div id="category-modal" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -141,3 +142,4 @@
             </div>
         </div>
     </div>
+    <%}%>
