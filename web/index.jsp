@@ -32,6 +32,9 @@
     <jsp:include page="top_bar.html" />
     <jsp:include page="menu_bar.jsp" />
 
+    <%  String role = (String)session.getAttribute("role");
+        if(role == null){role = "";}
+        if(role.equals("CUSTOMER") || role.equals("")){%>
     <section id="home-section" class="hero">
         <div class="home-slider owl-carousel">
             <div class="slider-item" style="background-image: url(images/bg-1.jpg);">
@@ -108,12 +111,12 @@
             </div>
         </div>
     </section>
+    <%}%>
     <section class="ftco-section ftco-category ftco-no-pt">
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <%  String role = (String)session.getAttribute("role");
-                    if(role == null){role = "";}
+                    <%  
                     if(role.equals("CUSTOMER") || role.equals("")){%>
                         <span class="subheading">Featured Shops</span>
                         <h2 class="mb-4">Shops Near By You</h2>  
@@ -229,17 +232,6 @@
                 %>
               
                      
-            </div>
-        </div>
-    </section>
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center mb-3 pb-3">
-                <div class="col-md-12 heading-section text-center ftco-animate">
-                    <span class="subheading">Featured Products</span>
-                    <h2 class="mb-4">Our Products</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                </div>
             </div>
         </div>
     </section>
