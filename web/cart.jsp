@@ -109,27 +109,28 @@
                                         <div class="input-group d-flex">
                                             <span class="input-group-btn mr-2">
 
-<!--                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" <% //if(c.getQuantity() <= 1){ out.print("disabled");}%> >
-        <i class="ion-ios-remove"></i>  
-    </button>-->
+                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" <% //if(c.getQuantity() <= 1){ out.print("disabled");}%> >
+        <i class="fa fa-minus"></i>  
+    </button>
 
                                             </span>
-                                            <form action="updateCartQuantity.jsp?id=<%=c.getId()%>" method="POST">
-                                                <table>
+<!--                                            <form action="updateCartQuantity.jsp?id=<%//=c.getId()%>" method="POST">
+                                               <table>
                                                     <tr>
-                                                        <td style="border-bottom: 1px solid rgba(0,0,0,0)!important">
+                                                        <td style="border-bottom: 1px solid rgba(0,0,0,0)!important">-->
+                                                            <span class="product-id" id="<%=c.getId()%>"></span>
                                                             <input type="text" id="quantity" name="quantity" class="form-control input-number" value="<%=c.getQuantity()%>" min="1" required>
-                                                        </td>
-                                                        <td style="border-bottom: 1px solid rgba(0,0,0,0)!important">
+<!--                                                        </td>
+                                                        <td style="border-bottom: 1px solid rgba(0,0,0,0)!important">-->
                                                             <span class="input-group-btn ml-2">
-                                                                <button type="submit" class="quantity-right-plus btn" data-type="plus" data-field="" <% //if(productDAO.viewById(c.getProducts().getPId()).getQuantity() <= c.getQuantity()){ out.print("disabled");}%> >
-                                                                    <i class="ion-ios-refresh"></i>
+                                                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" <% //if(productDAO.viewById(c.getProducts().getPId()).getQuantity() <= c.getQuantity()){ out.print("disabled");}%> >
+                                                                    <i class="fa fa-plus"></i>
                                                                 </button>
                                                             </span>
-                                                        </td>
+<!--                                                        </td>
                                                     </tr>
                                                 </table>
-                                            </form>
+                                            </form>-->
                                         </div>
                                     </td>
                                     <td class="total"><%=c.getPrice() * c.getQuantity()%></td>
@@ -141,40 +142,6 @@
                 </div>
             </div>
             <div class="row justify-content-end">
-                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                    <div class="cart-total mb-3">
-                        <h3>Coupon Code</h3>
-                        <p>Enter your coupon code if you have one</p>
-                        <form action="#" class="info">
-                            <div class="form-group">
-                                <label for="">Coupon code</label>
-                                <input type="text" class="form-control text-left px-3" placeholder="">
-                            </div>
-                        </form>
-                    </div>
-                    <p><a href="checkout.jsp" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
-                </div>
-                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                    <div class="cart-total mb-3">
-                        <h3>Estimate shipping and tax</h3>
-                        <p>Enter your destination to get a shipping estimate</p>
-                        <form action="#" class="info">
-                            <div class="form-group">
-                                <label for="">Country</label>
-                                <input type="text" class="form-control text-left px-3" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="country">State/Province</label>
-                                <input type="text" class="form-control text-left px-3" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="country">Zip/Postal Code</label>
-                                <input type="text" class="form-control text-left px-3" placeholder="">
-                            </div>
-                        </form>
-                    </div>
-                    <p><a href="checkout.jsp" class="btn btn-primary py-3 px-4">Estimate</a></p>
-                </div>
                 <%
                     long subTotal = 0;
                     int Delivery = 0;
@@ -235,6 +202,23 @@
 <script>
     $(document).ready(function(){
         
+        function cartQuantityUpdate(productId,quantity){
+            $.ajax({
+                url: "updateCartQuantity.jsp?id=" + productId + "&quantity=" + quantity,
+                success: function (response) {
+                    var total = $(response).find('#'+productId).parents('.quantity').siblings('.total').text();
+                    $('#' +productId).parents('.quantity').siblings('.total').text(total);
+                    totalCart(response);
+                },
+                error:function(error){
+                    alert(error);
+                }
+            });
+        }
+        function totalCart(response){
+            var cartTotal = $(response).find('.cart-total').html();
+            $('.cart-total').html(cartTotal);
+        }
         $('.product-remove').find('a').on('click',function(e){
             e.preventDefault();
             var href = $(this).attr('href');
@@ -247,12 +231,57 @@
                     tbody.animate({opacity:'0'},500,function(){
                         tbody.remove();
                     });
+                    totalCart(response);
                 },
-                error: function (jxhr, text, error) {
-                                alert(error);
-                            }
+                error: function (error) {
+                    alert(error);
+                }
             });
         });
+        $('.quantity-right-plus').click(function(e){
+            e.preventDefault();
+            var inputGrp = $(this).parents('.input-group');
+            var closestInput = inputGrp.find('.input-number');
+            var productId = inputGrp.find('span.product-id').attr('id');
+            var quantity = parseInt(closestInput.val());
+
+                if(quantity<5){
+                    quantity = quantity + 1;
+                    closestInput.val(quantity);
+                    cartQuantityUpdate(productId,quantity);
+                    if(quantity===5){
+                        $(this).prop("disabled",true).css('opacity','0.6');
+                    }else{
+                        $(this).parent().parent().find('.quantity-left-minus').prop("disabled",false).css('opacity','1');
+                    }
+                }
+        });
+
+         $('.quantity-left-minus').click(function(e){
+            e.preventDefault();
+            var inputGrp = $(this).parents('.input-group');
+            var closestInput = inputGrp.find('.input-number');
+            var productId = inputGrp.find('span.product-id').attr('id');
+            var quantity = parseInt(closestInput.val());
+                if(quantity>1){
+                    quantity = quantity - 1;
+                    closestInput.val(quantity);
+                    cartQuantityUpdate(productId,quantity);
+                    if(quantity===1){
+                        $(this).prop("disabled",true).css('opacity','0.6');
+                    }else{
+                        $(this).parent().parent().find('.quantity-right-plus').prop("disabled",false).css('opacity','1');
+                    }
+                }
+        });
+//        $('.input-number').keyup(function(e){
+//            if ($(this).val() > 5 
+//                    && e.keyCode !== 46 // keycode for delete
+//                    && e.keyCode !== 8 // keycode for backspace
+//                ) {
+//                e.preventDefault();
+//            }
+//        });
     });
 </script>
 <!--<script>
