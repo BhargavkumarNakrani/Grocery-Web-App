@@ -1,7 +1,7 @@
 $('#category_error_message').hide();
+    var noError = true;
 function validate(){
     
-    var noError = true;
     var pattern = /^[a-zA-Z]*$/;
     var categoryName = $("#category").val();
     if (categoryName === '') {
@@ -22,11 +22,12 @@ function validate(){
         }
     }
 
-    return noError;
 }
 $('#category').keyup(function(){
     validate(); 
 });
 $('.modal-footer .confirm-ok').click(function () {
+    noError = true;
     validate();
+    return noError=== true ? true : false;
 });
