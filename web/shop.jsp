@@ -99,13 +99,13 @@
         } else{
             if (shop_id > 0) {
                 if (role.equalsIgnoreCase("SHOPKEEPER")) {
-                    i = (int) productDAO.getSearchCount(search, email);
+                    i = (int) productDAO.getSearchCount(search, email,categoryId);
                 } else {
                     i = (int) productDAO.getSearchCount(search, shop_id);
                 }
             } else {
                 if (role.equalsIgnoreCase("SHOPKEEPER")) {
-                    i = (int) productDAO.getSearchCount(search, email);
+                    i = (int) productDAO.getSearchCount(search, email,categoryId);
                     out.print("Hello");
                 }else {
                     i = (int) productDAO.getSearchCount(search);
