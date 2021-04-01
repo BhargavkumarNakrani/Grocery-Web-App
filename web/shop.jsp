@@ -41,14 +41,12 @@
                 }
             }
         } else {
-            if(search != ""){
-                i = (int) productDAO.getSearchCount(search,categoryId);
-            } else if(role.equalsIgnoreCase("SHOPKEEPER")){    
-                if(search != null || search != ""){
-                    i = (int) productDAO.getSearchCount(search,email,categoryId);
-                } else{
-                    i = (int) productDAO.getCount(email,categoryId);
-                }
+            if(role.equalsIgnoreCase("SHOPKEEPER")){    
+            if(search != null || search != ""){
+                i = (int) productDAO.getSearchCount(search,email,categoryId);
+            } else{
+                i = (int) productDAO.getCount(email,categoryId);
+            }
             } else {
                 i = (int) productDAO.getCount(categoryId);
             }
@@ -99,14 +97,13 @@
         } else{
             if (shop_id > 0) {
                 if (role.equalsIgnoreCase("SHOPKEEPER")) {
-                    i = (int) productDAO.getSearchCount(search, email,categoryId);
+                    i = (int) productDAO.getSearchCount(search, email);
                 } else {
                     i = (int) productDAO.getSearchCount(search, shop_id);
                 }
             } else {
                 if (role.equalsIgnoreCase("SHOPKEEPER")) {
-                    i = (int) productDAO.getSearchCount(search, email,categoryId);
-                    out.print("Hello");
+                    i = (int) productDAO.getSearchCount(search, email);
                 }else {
                     i = (int) productDAO.getSearchCount(search);
                 }
@@ -366,7 +363,7 @@
                         <ul>
                             <% if(i != 0) {
                                 if (p > 1) {%>
-                            <li><a href="<%="?page=" + (p - 1)%>">&lt;</a></li>
+                            <li><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=categoryId %>&page=<%=p - 1%>">&lt;</a></li>
                                 <% } %>
                                 <%for (i = 0; i <= pages; i++) { %>
                             <li <% if (p == (i + 1)) {%> class="active" <% }%>><a href="?s=<%=search%>&id=<%=shop_id %>&categoryId=<%=categoryId %>&page=<%=i + 1%>"><%=i + 1%></a></li>
