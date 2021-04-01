@@ -9,6 +9,7 @@ import entity.Category;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
@@ -38,5 +39,13 @@ public class categoryDAO {
         if(!category.isEmpty())
             obj = category.get(0);
         return obj;
+    }
+     public static int save(Category bean) {
+        session = HibernateUtil.getSessionFactory().openSession();
+         Transaction t = session.beginTransaction();
+        int i = (int) session.save(bean);
+        t.commit();
+        session.close();
+        return i;
     }
 }

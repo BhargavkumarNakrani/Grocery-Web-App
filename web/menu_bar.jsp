@@ -122,7 +122,11 @@
                     <h5 class="modal-title">Add Category</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="" method="">
+            <%
+                String uri = request.getRequestURI();
+                String pageName = uri.substring(uri.lastIndexOf("/") + 1);
+            %>
+                <form action="addCategory.jsp?pageName=<%=pageName%>" method="POST">
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col">
