@@ -105,9 +105,12 @@
                         <h3>Shop Details</h3>
                         <% 
                         for(Object obj : shopId)
-                        { 
+                        {
                             int o = Integer.parseInt(obj.toString());
                             Shopkeeper shop= ShopkeeperDAO.viewSinglebyID(o);
+                            if(!shop.getEmail().equals(email) && role.equals("SHOPKEEPER")){
+                                continue;
+                            }
                             %>
                         <p class="d-flex">
                             <span><%=shop.getShopName()%></span>
