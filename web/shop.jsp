@@ -28,49 +28,62 @@
     if(categoryId > 0){
         if(shop_id > 0){
             if(role.equalsIgnoreCase("SHOPKEEPER")){    
-                if(search != null || search != ""){
+                if(search != ""){
                     i = (int) productDAO.getSearchCount(search,email,categoryId);
                 } else{
                     i = (int) productDAO.getCount(email,categoryId);
                 }
             } else {
-                if(search != null || search != ""){
+                if(search != ""){
                     i = (int) productDAO.getSearchCount(search,categoryId,shop_id);
                 } else {
                     i = (int) productDAO.getCount(categoryId,shop_id);
                 }
             }
         } else {
-            if(search != null || search != ""){
+            if(search != ""){
                 i = (int) productDAO.getSearchCount(search,categoryId);
+            } else if(role.equalsIgnoreCase("SHOPKEEPER")){    
+                if(search != null || search != ""){
+                    i = (int) productDAO.getSearchCount(search,email,categoryId);
+                } else{
+                    i = (int) productDAO.getCount(email,categoryId);
+                }
             } else {
                 i = (int) productDAO.getCount(categoryId);
             }
         }
     } else if(role.equalsIgnoreCase("SHOPKEEPER")){    
-        i = (int) productDAO.getCount(email);
         if(categoryId > 0){
             if(shop_id > 0){
                 if(role.equalsIgnoreCase("SHOPKEEPER")){  
-                    if(search != null || search != ""){
+                    if(search != ""){
                         i = (int) productDAO.getSearchCount(search,email,categoryId);
                     } else {
                         i = (int) productDAO.getCount(email,categoryId);
                     }
                 } else{
-                    if(search != null || search != ""){
+                    if(search != ""){
                         i = (int) productDAO.getSearchCount(search,categoryId,shop_id);
                     } else{
                         i = (int) productDAO.getCount(categoryId,shop_id);
                     }
                 }
             } else{
-                if(search != null || search != ""){
+                if(search != ""){
                     i = (int) productDAO.getSearchCount(search,email,categoryId);
+                } else if(role.equalsIgnoreCase("SHOPKEEPER")){  
+                    if(search != ""){
+                        i = (int) productDAO.getSearchCount(search,email,categoryId);
+                    } else {
+                        i = (int) productDAO.getCount(email,categoryId);
+                    }
                 } else {
                     i = (int) productDAO.getCount(email,categoryId);
                 }
             }
+        } else {
+            i = (int) productDAO.getCount(email);
         }   
     } else if(search != ""){
         if (categoryId > 0) {
@@ -84,7 +97,20 @@
                     i = (int) productDAO.getSearchCount(search,email, categoryId);
                 }
         } else{
-            i = (int) productDAO.getSearchCount(search);
+            if (shop_id > 0) {
+                if (role.equalsIgnoreCase("SHOPKEEPER")) {
+                    i = (int) productDAO.getSearchCount(search, email);
+                } else {
+                    i = (int) productDAO.getSearchCount(search, shop_id);
+                }
+            } else {
+                if (role.equalsIgnoreCase("SHOPKEEPER")) {
+                    i = (int) productDAO.getSearchCount(search, email);
+                    out.print("Hello");
+                }else {
+                    i = (int) productDAO.getSearchCount(search);
+                }
+            }
         }
     } else{
         if(shop_id > 0  ) {
