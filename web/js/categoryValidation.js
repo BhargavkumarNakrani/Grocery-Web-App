@@ -15,10 +15,10 @@ function validate(){
             $("#category").css("border-bottom", "1px solid #82ae41");
             noError = true;
         } else {
-            $("#category_error_message").html("Only Characters is allowed");
-            $("#category_error_message").show();
-            $("#category").css("border-bottom", "2px solid #F90A0A");
-            noError = false;
+//            $("#category_error_message").html("Only Characters is allowed");
+//            $("#category_error_message").show();
+//            $("#category").css("border-bottom", "2px solid #F90A0A");
+//            noError = false;
         }
     }
 
