@@ -136,7 +136,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="stock">Available Stock</label>
-                                <input type="number" name="stock" value="<%if(role.equals("SHOPKEEPER")) out.print(quantity);  %>" class="form-control" id="stock">
+                                <input type="number" name="stock" value="<%if(role.equals("SHOPKEEPER") && quantity != 0) out.print(quantity);  %>" class="form-control" id="stock">
                             </div>
                             <span id="stock_error_message" class="text-danger"></span>
                         </div>
