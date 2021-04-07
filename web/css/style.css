@@ -2779,8 +2779,8 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;fo
 .product{display:block;width:100%;margin-bottom:30px;position:relative;-moz-transition:all .3s ease;-o-transition:all .3s ease;-webkit-transition:all .3s ease;-ms-transition:all .3s ease;transition:all .3s ease;border:1px solid #f0f0f0}
 @media(max-width:991.98px){.product{margin-bottom:30px}
 }
-.product .card-body .shop-name{display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
-.product .card-body .shop-name:hover{overflow:visible;white-space:break-spaces;}
+.product .card-body .shop-name,.product .card-body .shop-add{display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.product .card-body .shop-name:hover,.product .card-body .shop-add:hover{overflow:visible;white-space:break-spaces;}
 .product .card-body .shop-add{font-size:14px;padding-top:5px;font-weight:400;margin-bottom:15px;}
 .product .card-body .phone{font-size:14px;padding-top:5px;font-weight:400;margin-bottom:25px;}
 .product .card-body .shop-add:before{content: '\f041';font-family: fontAwesome;float: left;margin-right: 10px;font-size: 15px;}
