@@ -22,7 +22,7 @@
         if(productID != null){
     %>
     <head>
-        <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+        <title>Product - Vegefoods</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&amp;display=swap" rel="stylesheet">
@@ -41,6 +41,9 @@
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <style>
+            .product-details h3, .product-details h5{text-transform: capitalize;}
+        </style>
     </head>
     <body class="goto-here">
 
@@ -59,9 +62,9 @@
         <section class="ftco-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 mb-5 ftco-animate">
+                    <div class="col-lg-6 mb-5 ftco-animate" style="text-align: center;">
                         <% if(productID != null) {%>
-                        <a href="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>" class="image-popup"><img src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>" class="img-fluid" alt="Colorlib Template"></a>
+                        <a href="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>" class="image-popup"><img src="data:image/jpg;base64,<%=productDAO.viewImage(product.getPId())%>" class="img-fluid"></a>
                         <% }%>
                     </div>
                     <div class="col-lg-6 product-details pl-md-5 ftco-animate">
@@ -104,7 +107,8 @@
                                 </div>-->
                                 <div class="w-100"></div>
                                 <% if(role.equals("CUSTOMER")){
-                                    if(cartDAO.checkCartByProductId(PId, email) <= 0 ){ %>
+                                    if(cartDAO.checkCartByProductId(PId, email) <= 0 ){
+                                        if (product.getQuantity()>0){%>
                                     <div class="input-group col-md-6 d-flex mb-3">
                                     <span class="input-group-btn mr-2">
                                         <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" >
@@ -118,7 +122,7 @@
                                         </button>
                                     </span>
                                 </div>                               
-                            <% } else{ %>
+                            <% }} else{ %>
                             <div class="col-md-6 d-flex mb-3">
                                 <p><i>Product already into the cart</i></p>
                             </div>
@@ -129,9 +133,11 @@
                                     <p style="color: #000;"><%=product.getQuantity()%> <%=uomDAO.getName(product.getUom().getUomId())%> available</p>
                                 </div>
                             </div>
-                            <% if(role.equals("CUSTOMER") || role.equals("")){%>
-                            <% if(cartDAO.checkCartByProductId(PId, email) > 0 ){ %>
-                                    <p><a type="submit" href="cart.jsp" class="btn btn-black py-3 px-5">Go to Cart</a></p>                               
+                            <% if(role.equals("CUSTOMER") || role.equals("")){
+                                if(product.getQuantity()<1){%>
+                               <p><a href="" class="btn btn-primary py-3 px-5">Out of Stock</a></p>
+                            <% }else if(cartDAO.checkCartByProductId(PId, email) > 0 ){ %>
+                                    <p><a type="submit" href="cart.jsp" class="btn btn-primary py-3 px-5">Go to Cart</a></p>
                             <% } else {%>
                             <p><a type="submit" href="addToCart.jsp?productId=<%=product.getPId()%>" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
                             <% }}else if(role.equals("SHOPKEEPER")){%>
@@ -160,8 +166,6 @@
         <script src="js/jquery.animateNumber.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-        <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
         <script>
             $(document).ready(function () {
@@ -223,4 +227,3 @@
 
     }
 </script>
-<script src="js/jquery-3.2.1.min.js"></script>
