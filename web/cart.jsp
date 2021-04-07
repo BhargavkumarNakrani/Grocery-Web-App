@@ -99,7 +99,7 @@
                             <tbody>
                                 <tr class="text-center">
                                     <td class="product-remove"><a href="deleteCartItem.jsp?id=<%=c.getId()%>"><span class="ion-ios-close"></span></a></td>
-                                    <td class="image-prod"><div class="img"><img class="card-img-top" src="data:image/jpg;base64,<%=productDAO.viewImage(c.getProducts().getPId())%>"  alt="Card image" style="width:100%"></div></td>
+                                    <td class="image-prod"><div class="img"><img class="card-img-top" src="data:image/jpg;base64,<%=productDAO.viewImage(c.getProducts().getPId())%>"  alt="Card image" style="width:auto;height:100%"></div></td>
                                     <td class="product-name">
                                         <h3><%=productDAO.viewById(c.getProducts().getPId()).getName()%></h3>
                                         <h3>from - <%=ShopkeeperDAO.viewSinglebyID(productDAO.viewById(c.getProducts().getPId()).getShopkeeper().getSId()).getShopName()%></h3>
@@ -107,30 +107,22 @@
                                     <td class="price"><%=c.getPrice()%></td>
                                     <td class="quantity">
                                         <div class="input-group d-flex">
+                                            
                                             <span class="input-group-btn mr-2">
-
-                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" <% //if(c.getQuantity() <= 1){ out.print("disabled");}%> >
-        <i class="fa fa-minus"></i>  
-    </button>
-
+                                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                                    <i class="fa fa-minus"></i>  
+                                                </button>
                                             </span>
-<!--                                            <form action="updateCartQuantity.jsp?id=<%//=c.getId()%>" method="POST">
-                                               <table>
-                                                    <tr>
-                                                        <td style="border-bottom: 1px solid rgba(0,0,0,0)!important">-->
-                                                            <span class="product-id" id="<%=c.getId()%>"></span>
-                                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="<%=c.getQuantity()%>" min="1" required>
-<!--                                                        </td>
-                                                        <td style="border-bottom: 1px solid rgba(0,0,0,0)!important">-->
-                                                            <span class="input-group-btn ml-2">
-                                                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" <% //if(productDAO.viewById(c.getProducts().getPId()).getQuantity() <= c.getQuantity()){ out.print("disabled");}%> >
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                            </span>
-<!--                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </form>-->
+                                            
+                                            <span class="product-id" id="<%=c.getId()%>" qty="<%=productDAO.viewById(c.getProducts().getPId()).getQuantity()%>"></span>
+                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="<%=c.getQuantity()%>" min="1" required>
+                                            
+                                            <span class="input-group-btn ml-2">
+                                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                            
                                         </div>
                                     </td>
                                     <td class="total"><%=c.getPrice() * c.getQuantity()%></td>
@@ -201,7 +193,7 @@
 <script src="js/main.js"></script>
 <script>
     $(document).ready(function(){
-        
+        $('.input-number').attr('disabled',true);
         function cartQuantityUpdate(productId,quantity){
             $.ajax({
                 url: "updateCartQuantity.jsp?id=" + productId + "&quantity=" + quantity,
@@ -244,12 +236,13 @@
             var closestInput = inputGrp.find('.input-number');
             var productId = inputGrp.find('span.product-id').attr('id');
             var quantity = parseInt(closestInput.val());
-
-                if(quantity<5){
+            var limit =  parseInt(inputGrp.find('span.product-id').attr('qty'));
+            limit = limit > 5 ? 5 : limit;
+                if(quantity<limit){
                     quantity = quantity + 1;
                     closestInput.val(quantity);
                     cartQuantityUpdate(productId,quantity);
-                    if(quantity===5){
+                    if(quantity===limit){
                         $(this).prop("disabled",true).css('opacity','0.6');
                     }else{
                         $(this).parent().parent().find('.quantity-left-minus').prop("disabled",false).css('opacity','1');
@@ -284,64 +277,6 @@
 //        });
     });
 </script>
-<!--<script>
-		$(document).ready(function(){
-                    
-                    
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		            if(quantity<5){
-                                quantity = quantity + 1;
-                                $('#quantity').val(quantity);
-                                if(quantity==5){
-                                    $('.quantity-right-plus').prop("disabled",true);
-                                }else{
-                                    $('.quantity-left-minus').prop("disabled",false);
-                                }
-                            }
-		          
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		      
-		            // Increment
-		            if(quantity>1){
-                                quantity = quantity - 1;
-                                $('#quantity').val(quantity);
-                                if(quantity==1){
-                                    $('.quantity-left-minus').prop("disabled",true);
-                                }else{
-                                    $('.quantity-right-plus').prop("disabled",false);
-                                }
-                            }
-                            
-//                        $('.').on('keydown keyup change', function(e){
-//                            if ($(this).val() > 5 
-//                                    && e.keyCode !== 46 // keycode for delete
-//                                    && e.keyCode !== 8 // keycode for backspace
-//                                ) {
-//                                e.preventDefault();
-//                                $(this).val(100);
-//                            }
-//                        });
-		    });
-		    
-		});
-	</script>-->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
