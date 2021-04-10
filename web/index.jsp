@@ -253,7 +253,7 @@
 <script src="js/scrollax.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/searchJS.js"></script>
-<script src="js/categoryValidation.js"></script>
+<% if (role.equals("SHOPKEEPER"))%><script src="js/categoryValidation.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 </body>
 <script>

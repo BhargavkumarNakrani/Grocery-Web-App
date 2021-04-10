@@ -210,6 +210,7 @@
     .mouse{z-index: -1;}.container-fluid{margin-top: -60px;}
     .product .img-prod .overlay img{width: 100%;height: 100%;}
     .product .img-prod .overlay,.product:hover .img-prod .overlay{opacity: 0.8;background: none;}
+    .product-category{text-transform: capitalize;}
 </style>
 </head>
 <body class="goto-here">
@@ -227,19 +228,19 @@
     //                out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
     //                out.print("</div>");
     //}
-    if(productSingle != null){
-                    out.print("<div class=\"alert alert-info alert-dismissible fade show\">");
-                    out.print("<strong>"+ productSingle +"</strong>");
-                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
-                    out.print("</div>");
-    }
-    
-    if(deleteProduct != null){
-                    out.print("<div class=\"alert alert-danger alert-dismissible fade show\">");
-                    out.print("<strong>"+ deleteProduct +"</strong>");
-                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
-                    out.print("</div>");
-    }
+//    if(productSingle != null){
+//                    out.print("<div class=\"alert alert-info alert-dismissible fade show\">");
+//                    out.print("<strong>"+ productSingle +"</strong>");
+//                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+//                    out.print("</div>");
+//    }
+//    
+//    if(deleteProduct != null){
+//                    out.print("<div class=\"alert alert-danger alert-dismissible fade show\">");
+//                    out.print("<strong>"+ deleteProduct +"</strong>");
+//                    out.print("<button type=\"button\" class=\"close\" onclick=\"alert_dismiss()\" data-dismiss=\"alert\">&times;</button>");
+//                    out.print("</div>");
+//    }
     
     %>
     <div id="confirm-modal" class="modal fade" tabindex="-1">
@@ -414,6 +415,7 @@
 <script src="js/scrollax.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/searchJS.js"></script>
+<% if (role.equals("SHOPKEEPER"))%><script src="js/categoryValidation.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -435,6 +437,19 @@
 </script>
 <script>
     $(document).ready(function () {
+        var snackbar = $('#snackbar');
+    <% if (cartMessage != null) {%>
+        snackbar.text("<%=cartMessage%>");
+    <%} else if (productSingle!= null) {%>
+        snackbar.text("<%=productSingle%>");
+    <%} else if (deleteProduct!=null){%>
+        snackbar.text("<%=deleteProduct%>");
+    <%} if (productSingle != null || cartMessage != null || deleteProduct!=null) {%>
+        snackbar.addClass('show');
+        setTimeout(function(){
+            snackbar.removeClass('show');
+        },5000);
+    <%}%>
     <% if(role.equals("SHOPKEEPER")){%>
             $('.delete-product').on('click',function(e){
                 e.preventDefault();

@@ -240,6 +240,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/searchJS.js"></script>
         <script>
             $(document).ready(function () {
 
