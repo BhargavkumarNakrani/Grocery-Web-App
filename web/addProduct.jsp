@@ -177,7 +177,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="price">Price per quantity</label>
-                                <input type="number" name="price" value="<% if(role.equals("SHOPKEEPER")) out.print(price);%>" class="form-control" id="price" >
+                                <input type="number" name="price" value="<% if(role.equals("SHOPKEEPER") && id!=0) out.print(price);%>" class="form-control" id="price" >
                             </div>
                             <span id="price_error_message" class="text-danger"></span>
                         </div>
