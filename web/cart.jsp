@@ -98,7 +98,7 @@
                             %>
                             <tbody>
                                 <tr class="text-center">
-                                    <td class="product-remove"><a href="deleteCartItem.jsp?id=<%=c.getId()%>"><span class="ion-ios-close"></span></a></td>
+                                    <td class="product-remove"><a href="deleteCartItem.jsp?id=<%=c.getId()%>"><span><i class="fa fa-times"></i></span></a></td>
                                     <td class="image-prod"><div class="img"><img class="card-img-top" src="data:image/jpg;base64,<%=productDAO.viewImage(c.getProducts().getPId())%>"  alt="Card image" style="width:auto;height:100%"></div></td>
                                     <td class="product-name">
                                         <h3><%=productDAO.viewById(c.getProducts().getPId()).getName()%></h3>
