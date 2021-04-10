@@ -1,7 +1,3 @@
-<%
-    String role = (String) session.getAttribute("role");
-    if (role==null) role="";
-%>
 <html lang="en">
 
     <head>
@@ -117,9 +113,7 @@
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
-        <script src="js/searchJS.js"></script>
-        <% if (role.equals("SHOPKEEPER"))%><script src="js/categoryValidation.js"></script>
-        
+
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
