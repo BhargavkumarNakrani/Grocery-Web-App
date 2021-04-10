@@ -61,8 +61,8 @@
                                 <div class="d-flex">-->
                                 <div class="searchbar">
                                     <form action="shop.jsp" method="GET" >
-                                        <input class="search_input" value="<%=search%>" type="text" name="s" placeholder="Search Product..">
-                                        <i class="fas fa-search search_icon" type="submit" style="padding-top:0px!important;"></i>
+                                        <input class="search_input" value="<%=search%>" type="text" name="s" placeholder="Search...">
+                                        <button class="fas fa-search search_icon" type="submit" style="padding-top:0px!important;border: none;"></button>
                                     </form>
                                 </div>
 <!--                            </div>
@@ -74,8 +74,8 @@
                             <div class="d-flex">
                                 <div class="searchbar">
                                     <form action="shop.jsp" method="get">
-                                    <input class="search_input" value="<%=search%>" type="text" name="s" placeholder="Search Product..">
-                                    <i class="fas fa-search search_icon" type="submit"></i>
+                                    <input class="search_input" value="<%=search%>" type="text" name="s" placeholder="Search...">
+                                    <button class="fas fa-search search_icon" type="submit" style="border: none;"></button>
                                     </form>
                                 </div>
                             </div>
