@@ -203,10 +203,11 @@
                     $(this).siblings('label').removeAttr("style");
                 }
         });
-        $('input').not(':checkbox').prop("disabled",true).css('opacity','0.6');
+        $('input').prop("disabled",true).css('opacity','0.6');
+        $('input[type="password"]').parentsUntil('.row').slideUp(0);
         $('.editProfile').click(function(){
-            $(this).text($(this).text()== "Edit Profile" ? "Cancel" : "Edit Profile");
-            $('input').not(':checkbox , :password').prop("disabled",function(){
+            $(this).text($(this).text()=== "Edit Profile" ? "Cancel" : "Edit Profile");
+            $('input').prop("disabled",function(){
                 if($(this).is(':disabled')){
                     $(this).css('opacity','1');
                     return false;
@@ -222,9 +223,11 @@
         $('input[type="checkbox"]').click(function(){
             if($(this).is(':checked')){
                 $('input[type="password"]').prop('disabled',false).css('opacity','1');
+                $('input[type="password"]').parentsUntil('.row').slideDown(500);
                 $('input[type="submit"]').prop('disabled',false).css('opacity','1');
             }else{
                 $('input[type="password"]').prop('disabled',true).css('opacity','0.6');
+                $('input[type="password"]').parentsUntil('.row').slideUp(500);
                 if($('.editProfile').text()==="Edit Profile"){
                     $('input[type="submit"]').prop('disabled',true).css('opacity','0.6');
                 }
