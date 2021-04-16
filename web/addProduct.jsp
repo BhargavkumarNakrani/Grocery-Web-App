@@ -212,7 +212,7 @@
                 reader.onload = function(e) {
                   $('.preview img').attr('src', e.target.result);
                   $('.preview').show();
-                }
+                };
 
             reader.readAsDataURL(this.files[0]); // convert to base64 string
           }
