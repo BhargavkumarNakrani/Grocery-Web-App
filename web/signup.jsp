@@ -41,7 +41,11 @@
     <style>
         @media(max-width:991.98px){.content{padding-top:2rem;}}
     </style>
+    <%if(role=="CUSTOMER"){%>
     <title>Signup - Vegefoods</title>
+    <%}else{%>
+    <title>Profile - Vegefoods</title>
+    <%}%>
   </head>
   <%
         String fname = "";
