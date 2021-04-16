@@ -54,7 +54,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from preview.colorlib.com/theme/vegefoods/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 18 Feb 2021 10:05:08 GMT -->
     <head>
         <title>Order History - Vegefoods</title>
         <meta charset="utf-8">

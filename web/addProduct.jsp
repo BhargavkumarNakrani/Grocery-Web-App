@@ -103,7 +103,7 @@
                       </style>
                    <%}%>
                       <div id="div" class="mb-5 preview">
-                          <img src="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" style="width:40%;" class="img-fluid" alt="Colorlib Template">
+                          <img src="data:image/jpg;base64,<%=productDAO.viewImage(id)%>" style="width:40%;" class="img-fluid">
                       </div>
                 <form action="saveProduct.jsp" method="post" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="SHOPKEEPER" id="role">
