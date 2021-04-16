@@ -84,9 +84,9 @@
         }
     </style>
     <%if (role.equals("DELIVERYBOY")) {%>
-    <title>Employee Registration - Vegefoods</title>
-    <%} else {%>
     <title>Employee Profile - Vegefoods</title>
+    <%} else {%>
+    <title>Employee Registration - Vegefoods</title>
     <%}%>
   </head>
 <body class="goto-here">
