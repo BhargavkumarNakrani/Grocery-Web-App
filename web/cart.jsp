@@ -192,6 +192,17 @@
 <script>
     $(document).ready(function(){
         $('.input-number').attr('disabled',true);
+        
+        $('.input-number').each(function(){
+            var qty = $(this).val();
+            if(qty==1){
+                $(this).parent().find('.quantity-left-minus').prop('disabled',true).css('opacity','0.6');
+            }
+            if(qty==$(this).siblings('.product-id').attr('qty')){
+                $(this).parent().find('.quantity-right-plus').prop('disabled',true).css('opacity','0.6');
+            }
+        });
+        
         function cartQuantityUpdate(productId,quantity){
             $.ajax({
                 url: "updateCartQuantity.jsp?id=" + productId + "&quantity=" + quantity,

@@ -86,7 +86,7 @@
                         <p class="price"><span>&#8360; <%=product.getPrice()%></span></p>
                         <!--<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until.
                         </p>-->
-                        <form>
+                        <form action="addToCart.jsp" method="post">
                             <div class="row mt-4">
                                 <!--<div class="col-md-6">
                                 <div class="form-group d-flex">
@@ -111,6 +111,7 @@
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </span>
+                                    <input type="hidden" name="productId" value="<%=product.getPId()%>" />
                                     <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
                                     <span class="input-group-btn ml-2">
                                         <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" >
@@ -133,11 +134,11 @@
                                 if(product.getQuantity()<1){%>
                                <p><a href="" class="btn btn-primary py-3 px-5">Out of Stock</a></p>
                             <% }else if(cartDAO.checkCartByProductId(PId, email) > 0 ){ %>
-                                    <p><a type="submit" href="cart.jsp" class="btn btn-primary py-3 px-5">Go to Cart</a></p>
+                                    <p><a href="cart.jsp" class="btn btn-primary py-3 px-5">Go to Cart</a></p>
                             <% } else {%>
-                            <p><a type="submit" href="addToCart.jsp?productId=<%=product.getPId()%>" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+                            <p><input type="submit" value="Add To Cart" class="btn btn-primary py-3 px-5"></p>
                             <% }}else if(role.equals("SHOPKEEPER")){%>
-                            <p><a type="submit" href="addProduct.jsp?productId=<%=product.getPId()%>" class="btn btn-primary py-3 px-5">Edit Product</a></p>
+                            <p><a href="addProduct.jsp?productId=<%=product.getPId()%>" class="btn btn-primary py-3 px-5">Edit Product</a></p>
                             <%}%>
                         </form>
 
@@ -164,38 +165,48 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/searchJS.js"></script>
-        <% if (role.equals("SHOPKEEPER"))%><script src="js/categoryValidation.js"></script>
+        <% if (role.equals("SHOPKEEPER")){%><script src="js/categoryValidation.js"></script><%}%>
         <script>
             $(document).ready(function () {
-
+                $('#quantity').prop('disabled',true);
                 var quantitiy = 0;
+                var limit = <%=product.getQuantity()%>;
+                limit = limit > 5 ? 5 : limit;
+                console.log(limit);
+                if($('#quantity').val()==1){
+                    $('.quantity-left-minus').prop('disabled',true).css('opacity','0.6');
+                }
+                if($('#quantity').val()==limit){
+                    $('.quantity-right-plus').prop('disabled',true).css('opacity','0.6'); 
+                }
+                
                 $('.quantity-right-plus').click(function (e) {
-
-                    // Stop acting like a button
                     e.preventDefault();
-                    // Get the field name
                     var quantity = parseInt($('#quantity').val());
-
-                    // If is not undefined
-
-                    $('#quantity').val(quantity + 1);
-
-
-                    // Increment
-
+                    
+                    if(quantity<limit){
+                        quantity = quantity + 1;
+                        $('#quantity').val(quantity);
+                        if(quantity===limit){
+                            $(this).prop("disabled",true).css('opacity','0.6');
+                        }else{
+                            $(this).parent().parent().find('.quantity-left-minus').prop("disabled",false).css('opacity','1');
+                    }
+                    }
                 });
 
                 $('.quantity-left-minus').click(function (e) {
-                    // Stop acting like a button
                     e.preventDefault();
-                    // Get the field name
                     var quantity = parseInt($('#quantity').val());
-
-                    // If is not undefined
-
-                    // Increment
-                    if (quantity > 0) {
-                        $('#quantity').val(quantity - 1);
+                    
+                    if (quantity > 1) {
+                        quantity = quantity - 1;
+                        $('#quantity').val(quantity);
+                        if(quantity===1){
+                            $(this).prop("disabled",true).css('opacity','0.6');
+                        }else{
+                            $(this).parent().parent().find('.quantity-right-plus').prop("disabled",false).css('opacity','1');
+                        }
                     }
                 });
 
