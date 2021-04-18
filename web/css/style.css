@@ -2653,7 +2653,7 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{line-height:1.5;font-weight:400;color:#000;fo
 .hero-wrap .slider-text .btn-primary{border:1px solid rgba(255,255,255,.4);-webkit-border-radius:30px;-moz-border-radius:30px;-ms-border-radius:30px;border-radius:30px}
 .hero-wrap .slider-text .btn-primary:hover,.hero-wrap .slider-text .btn-primary:focus{background:#fff!important;color:#000}
 .hero-wrap.hero-bread{padding:10em 0}
-.mouse{position:absolute;left:0;right:0;top:-30px;z-index:99}
+.mouse{position:absolute;left:0;right:0;top:-30px;z-index:0}
 .mouse-icon{width:60px;height:60px;border:1px solid rgba(255,255,255,.7);-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;border-radius:50%;background:#82ae46;cursor:pointer;position:relative;text-align:center;margin:0 auto;display:block}
 .mouse-wheel{height:30px;margin:2px auto 0;display:block;width:30px;background:0 0;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;border-radius:50%;-webkit-animation:1.6s ease infinite wheel-up-down;-moz-animation:1.6s ease infinite wheel-up-down;animation:1.6s ease infinite wheel-up-down;color:#fff;font-size:20px}
 @-webkit-keyframes wheel-up-down{100%{margin-top:2px;opacity:1}
