@@ -108,13 +108,13 @@
                                     <div class="input-group col-md-6 d-flex mb-3">
                                     <span class="input-group-btn mr-2">
                                         <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" >
-                                            <i class="ion-ios-remove"></i>
+                                            <i class="fa fa-minus"></i>
                                         </button>
                                     </span>
                                     <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
                                     <span class="input-group-btn ml-2">
                                         <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" >
-                                            <i class="ion-ios-add"></i>
+                                            <i class="fa fa-plus"></i>
                                         </button>
                                     </span>
                                 </div>                               
